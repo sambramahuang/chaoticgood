@@ -27,6 +27,18 @@ const Index = () => {
           </p>
         </div>
 
+        {/* Add Custom Questions Button */}
+        <div className="text-center">
+          <Button 
+            variant="outline" 
+            size="lg"
+            onClick={() => navigate("/custom-questions")}
+            className="border-electric/30 hover:border-electric hover:bg-electric/10"
+          >
+            ✏️ Manage Custom Questions
+          </Button>
+        </div>
+
         {/* Game Mode Cards */}
         <div className="grid md:grid-cols-2 gap-8">
           {/* Burning Bridges Card */}
