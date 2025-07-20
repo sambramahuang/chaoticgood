@@ -40,7 +40,7 @@ const Index = () => {
         </div>
 
         {/* Game Mode Cards */}
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
           {/* Burning Bridges Card */}
           <Card className="bg-gradient-surface border-border shadow-card p-8 hover:shadow-electric transition-all duration-500 hover:scale-105 cursor-pointer group"
                 onClick={() => navigate("/game/burning-bridges")}>
@@ -75,6 +75,25 @@ const Index = () => {
               </div>
               <Button variant="gaming" size="lg" className="w-full">
                 Start Truth or Dare
+              </Button>
+            </div>
+          </Card>
+
+          {/* Wavelength Card */}
+          <Card className="bg-gradient-surface border-border shadow-card p-8 hover:shadow-electric transition-all duration-500 hover:scale-105 cursor-pointer group"
+                onClick={() => navigate("/wavelength")}>
+            <div className="text-center space-y-6">
+              <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto group-hover:animate-pulse-electric">
+                <span className="text-4xl">📊</span>
+              </div>
+              <div className="space-y-3">
+                <h2 className="text-3xl font-bold text-foreground">Wavelength</h2>
+                <p className="text-muted-foreground text-lg">
+                  A social guessing game where teams sync their wavelengths through creative examples
+                </p>
+              </div>
+              <Button variant="gaming" size="lg" className="w-full">
+                Start Wavelength
               </Button>
             </div>
           </Card>
