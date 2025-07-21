@@ -21,8 +21,10 @@ const Game = () => {
   const [useCustomQuestions, setUseCustomQuestions] = useState(false);
   const [customQuestions, setCustomQuestions] = useState<CustomQuestion[]>([]);
   const [usedQuestionIds, setUsedQuestionIds] = useState<string[]>([]);
+  const [coinResult, setCoinResult] = useState<"TELL" | "SAFE" | null>(null);
+  const [isFlipping, setIsFlipping] = useState(false);
 
-  const gameTitle = mode === "burning-bridges" ? "Burning Bridges" : "Truth or Dare";
+  const gameTitle = mode === "bridges" ? "Bridges" : "Truth or Dare";
 
   // Load custom questions from localStorage
   useEffect(() => {
@@ -56,13 +58,18 @@ const Game = () => {
         }
       } else {
         // Use AI-generated questions (placeholder for now)
-        const questions = mode === "burning-bridges" 
+        const questions = mode === "bridges" 
           ? [
-              "What's something you've done that you've never told anyone about?",
-              "If you could erase one memory from someone's mind, what would it be?",
-              "What's the most manipulative thing you've ever done?",
-              "Who in this room do you trust the least and why?",
-              "What's a secret that could ruin someone's relationship if revealed?"
+              "Who here is the best looking?",
+              "Who here do you hate the most?",
+              "Who here do you think will end up being a stripper?",
+              "Who here do you think will impress your parents the most?",
+              "Who here would survive the longest in a zombie apocalypse?",
+              "Who here is most likely to become famous?",
+              "Who here would you trust with your biggest secret?",
+              "Who here is most likely to get arrested?",
+              "Who here would make the worst roommate?",
+              "Who here is most likely to marry for money?"
             ]
           : [
               "Truth: What's the most embarrassing thing you've ever done?",
@@ -79,6 +86,11 @@ const Game = () => {
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       setCurrentQuestion(selectedQuestion);
+      
+      // For bridges mode, automatically flip the coin
+      if (mode === "bridges") {
+        flipCoin();
+      }
     } catch (error) {
       toast({
         title: "Error",
@@ -88,6 +100,18 @@ const Game = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const flipCoin = async () => {
+    setIsFlipping(true);
+    setCoinResult(null);
+    
+    // Simulate coin flip animation
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    const result = Math.random() < 0.5 ? "TELL" : "SAFE";
+    setCoinResult(result);
+    setIsFlipping(false);
   };
 
   return (
@@ -164,12 +188,45 @@ const Game = () => {
                   {currentQuestion}
                 </p>
               </div>
+              
+              {/* Coin Flip for Bridges Mode */}
+              {mode === "bridges" && (
+                <div className="space-y-4 mt-8">
+                  <div className="flex flex-col items-center space-y-4">
+                    <div className={`w-20 h-20 rounded-full border-4 border-primary flex items-center justify-center text-2xl font-bold ${
+                      isFlipping ? 'animate-spin' : ''
+                    } ${coinResult === 'TELL' ? 'bg-red-500 text-white' : coinResult === 'SAFE' ? 'bg-green-500 text-white' : 'bg-gradient-primary text-white'}`}>
+                      {isFlipping ? "?" : coinResult || "?"}
+                    </div>
+                    
+                    {coinResult && !isFlipping && (
+                      <div className="text-center space-y-2">
+                        <p className="text-lg font-semibold">
+                          {coinResult === "TELL" ? "🗣️ TELL" : "🛡️ SAFE"}
+                        </p>
+                        <p className="text-sm text-muted-foreground max-w-sm">
+                          {coinResult === "TELL" 
+                            ? "You must tell the person you pointed at about the question!" 
+                            : "You're safe! No need to reveal anything."
+                          }
+                        </p>
+                      </div>
+                    )}
+                    
+                    {isFlipping && (
+                      <p className="text-lg text-muted-foreground animate-pulse">
+                        Flipping coin...
+                      </p>
+                    )}
+                  </div>
+                </div>
+              )}
             </>
           ) : (
             <div className="space-y-4">
               <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto animate-float">
                 <span className="text-3xl">
-                  {mode === "burning-bridges" ? "🔥" : "🎲"}
+                  {mode === "bridges" ? "🌉" : "🎲"}
                 </span>
               </div>
               <p className="text-xl text-muted-foreground">
@@ -181,14 +238,17 @@ const Game = () => {
 
         <div className="flex justify-center">
           <Button
-            onClick={generateQuestion}
-            disabled={isLoading}
+            onClick={() => {
+              generateQuestion();
+              setCoinResult(null);
+            }}
+            disabled={isLoading || isFlipping}
             className="bg-gradient-primary hover:shadow-electric transition-all duration-300 text-lg px-8 py-6 rounded-xl font-semibold"
           >
-            {isLoading ? (
+            {isLoading || isFlipping ? (
               <>
                 <RefreshCw className="h-5 w-5 mr-2 animate-spin" />
-                Generating...
+                {isFlipping ? "Flipping..." : "Generating..."}
               </>
             ) : (
               <>

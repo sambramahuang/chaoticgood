@@ -41,21 +41,21 @@ const Index = () => {
 
         {/* Game Mode Cards */}
         <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
-          {/* Burning Bridges Card */}
+          {/* Bridges Card */}
           <Card className="bg-gradient-surface border-border shadow-card p-8 hover:shadow-electric transition-all duration-500 hover:scale-105 cursor-pointer group"
-                onClick={() => navigate("/game/burning-bridges")}>
+                onClick={() => navigate("/game/bridges")}>
             <div className="text-center space-y-6">
               <div className="w-20 h-20 bg-gradient-primary rounded-full flex items-center justify-center mx-auto group-hover:animate-pulse-electric">
-                <span className="text-4xl">🔥</span>
+                <span className="text-4xl">🌉</span>
               </div>
               <div className="space-y-3">
-                <h2 className="text-3xl font-bold text-foreground">Burning Bridges</h2>
+                <h2 className="text-3xl font-bold text-foreground">Bridges</h2>
                 <p className="text-muted-foreground text-lg">
-                  Deep, thought-provoking questions that reveal hidden truths and create intense conversations
+                  "Who here..." questions with coin flip - TELL means reveal your answer, SAFE means you're protected
                 </p>
               </div>
               <Button variant="gaming" size="lg" className="w-full">
-                Start Burning Bridges
+                Start Bridges
               </Button>
             </div>
           </Card>
