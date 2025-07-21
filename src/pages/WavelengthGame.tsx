@@ -19,6 +19,7 @@ const WavelengthGame = () => {
   const [guessedNumber, setGuessedNumber] = useState<number | null>(null);
   const [showGuessDialog, setShowGuessDialog] = useState(false);
   const [drinkingMode, setDrinkingMode] = useState(false);
+  const [numberOfPlayers, setNumberOfPlayers] = useState(4);
 
   const categories = [
     "Basketball Players",
@@ -111,6 +112,8 @@ const WavelengthGame = () => {
     setShowNumber(true);
   };
 
+  const requiredRounds = numberOfPlayers - 1;
+
   const getScoreText = () => {
     if (guessedNumber === null) return "";
     
@@ -186,6 +189,42 @@ const WavelengthGame = () => {
                   checked={drinkingMode}
                   onCheckedChange={setDrinkingMode}
                 />
+              </div>
+            </Card>
+
+            {/* Number of Players */}
+            <Card className="bg-gradient-surface border-border shadow-card p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Users className="h-5 w-5 text-electric" />
+                  <div>
+                    <Label htmlFor="players" className="text-foreground font-medium">
+                      Number of Players
+                    </Label>
+                    <p className="text-sm text-muted-foreground">
+                      Total players including the guesser ({numberOfPlayers - 1} rounds)
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setNumberOfPlayers(Math.max(2, numberOfPlayers - 1))}
+                    disabled={numberOfPlayers <= 2}
+                  >
+                    -
+                  </Button>
+                  <span className="text-xl font-bold min-w-[2rem] text-center">{numberOfPlayers}</span>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setNumberOfPlayers(Math.min(10, numberOfPlayers + 1))}
+                    disabled={numberOfPlayers >= 10}
+                  >
+                    +
+                  </Button>
+                </div>
               </div>
             </Card>
 
@@ -278,16 +317,16 @@ const WavelengthGame = () => {
               <Button
                 onClick={startGuessing}
                 variant="electric"
-                disabled={roundNumber < 3}
+                disabled={roundNumber < requiredRounds}
                 className="flex-1"
               >
                 Start Guessing Phase
               </Button>
             </div>
             
-            {roundNumber < 3 && (
+            {roundNumber < requiredRounds && (
               <p className="text-center text-sm text-muted-foreground">
-                Complete at least 3 rounds before guessing
+                Complete {requiredRounds} rounds before guessing ({roundNumber}/{requiredRounds} done)
               </p>
             )}
           </>
@@ -301,7 +340,7 @@ const WavelengthGame = () => {
               </div>
               <h2 className="text-2xl font-bold text-foreground">Guesser's Turn!</h2>
               <p className="text-muted-foreground max-w-md mx-auto">
-                Based on the {roundNumber - 1} examples you heard, what do you think the secret number was?
+                Based on the {requiredRounds} examples you heard, what do you think the secret number was?
               </p>
               <p className="text-sm text-muted-foreground">
                 Remember: 1 = worst/weakest, 10 = best/strongest
