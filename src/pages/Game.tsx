@@ -86,11 +86,6 @@ const Game = () => {
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       setCurrentQuestion(selectedQuestion);
-      
-      // For bridges mode, automatically flip the coin
-      if (mode === "bridges") {
-        flipCoin();
-      }
     } catch (error) {
       toast({
         title: "Error",
@@ -106,8 +101,10 @@ const Game = () => {
     setIsFlipping(true);
     setCoinResult(null);
     
-    // Simulate coin flip animation
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    // Multiple animation phases for suspense
+    await new Promise(resolve => setTimeout(resolve, 800)); // Initial spin
+    await new Promise(resolve => setTimeout(resolve, 600)); // Slowing down
+    await new Promise(resolve => setTimeout(resolve, 400)); // Final suspense
     
     const result = Math.random() < 0.5 ? "TELL" : "SAFE";
     setCoinResult(result);
@@ -193,15 +190,34 @@ const Game = () => {
               {mode === "bridges" && (
                 <div className="space-y-4 mt-8">
                   <div className="flex flex-col items-center space-y-4">
-                    <div className={`w-20 h-20 rounded-full border-4 border-primary flex items-center justify-center text-2xl font-bold ${
-                      isFlipping ? 'animate-spin' : ''
-                    } ${coinResult === 'TELL' ? 'bg-red-500 text-white' : coinResult === 'SAFE' ? 'bg-green-500 text-white' : 'bg-gradient-primary text-white'}`}>
-                      {isFlipping ? "?" : coinResult || "?"}
+                    <div 
+                      onClick={!isFlipping ? flipCoin : undefined}
+                      className={`w-24 h-24 rounded-full border-4 border-primary flex items-center justify-center text-2xl font-bold cursor-pointer transition-all duration-300 ${
+                        isFlipping 
+                          ? 'animate-spin border-electric shadow-lg shadow-electric/50' 
+                          : coinResult === 'TELL' 
+                            ? 'bg-red-500 text-white border-red-400 shadow-lg shadow-red-500/50 animate-pulse' 
+                            : coinResult === 'SAFE' 
+                              ? 'bg-green-500 text-white border-green-400 shadow-lg shadow-green-500/50 animate-pulse' 
+                              : 'bg-gradient-primary text-white hover:scale-110 hover:shadow-lg hover:shadow-primary/50'
+                      }`}
+                    >
+                      {isFlipping ? (
+                        <span className="animate-bounce">🪙</span>
+                      ) : (
+                        coinResult || "🪙"
+                      )}
                     </div>
                     
+                    {!coinResult && !isFlipping && (
+                      <p className="text-sm text-muted-foreground animate-pulse">
+                        👆 Tap the coin to flip!
+                      </p>
+                    )}
+                    
                     {coinResult && !isFlipping && (
-                      <div className="text-center space-y-2">
-                        <p className="text-lg font-semibold">
+                      <div className="text-center space-y-2 animate-fade-in">
+                        <p className="text-2xl font-bold">
                           {coinResult === "TELL" ? "🗣️ TELL" : "🛡️ SAFE"}
                         </p>
                         <p className="text-sm text-muted-foreground max-w-sm">
@@ -214,9 +230,16 @@ const Game = () => {
                     )}
                     
                     {isFlipping && (
-                      <p className="text-lg text-muted-foreground animate-pulse">
-                        Flipping coin...
-                      </p>
+                      <div className="text-center space-y-2">
+                        <p className="text-lg text-electric font-semibold animate-pulse">
+                          Flipping coin...
+                        </p>
+                        <div className="flex justify-center space-x-1">
+                          <div className="w-2 h-2 bg-electric rounded-full animate-bounce" style={{animationDelay: '0ms'}}></div>
+                          <div className="w-2 h-2 bg-electric rounded-full animate-bounce" style={{animationDelay: '150ms'}}></div>
+                          <div className="w-2 h-2 bg-electric rounded-full animate-bounce" style={{animationDelay: '300ms'}}></div>
+                        </div>
+                      </div>
                     )}
                   </div>
                 </div>
