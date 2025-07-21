@@ -3,7 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { ArrowLeft, RefreshCw, Eye, EyeOff, Users, Target } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
+import { ArrowLeft, RefreshCw, Eye, EyeOff, Users, Target, Wine } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 const WavelengthGame = () => {
@@ -16,6 +18,7 @@ const WavelengthGame = () => {
   const [roundNumber, setRoundNumber] = useState(1);
   const [guessedNumber, setGuessedNumber] = useState<number | null>(null);
   const [showGuessDialog, setShowGuessDialog] = useState(false);
+  const [drinkingMode, setDrinkingMode] = useState(false);
 
   const categories = [
     "Basketball Players",
@@ -119,6 +122,15 @@ const WavelengthGame = () => {
     return "🤔 Keep practicing!";
   };
 
+  const getDrinkingText = () => {
+    if (guessedNumber === null || !drinkingMode) return "";
+    
+    const difference = Math.abs(secretNumber - guessedNumber);
+    if (difference === 0) return "🍻 No shots! Perfect guess!";
+    if (difference === 1) return `🥃 1 shot for being off by ${difference}!`;
+    return `🥃 ${difference} shots for being off by ${difference}!`;
+  };
+
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-2xl space-y-8">
@@ -154,6 +166,29 @@ const WavelengthGame = () => {
                 <p>5. After several rounds, the guesser tries to guess the number!</p>
               </div>
             </div>
+
+            {/* Drinking Mode Toggle */}
+            <Card className="bg-gradient-surface border-border shadow-card p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <Wine className="h-5 w-5 text-electric" />
+                  <div>
+                    <Label htmlFor="drinking-mode" className="text-foreground font-medium">
+                      Drinking Game Mode
+                    </Label>
+                    <p className="text-sm text-muted-foreground">
+                      Wrong guesses = shots (difference between numbers)
+                    </p>
+                  </div>
+                </div>
+                <Switch
+                  id="drinking-mode"
+                  checked={drinkingMode}
+                  onCheckedChange={setDrinkingMode}
+                />
+              </div>
+            </Card>
+
             <Button onClick={startNewRound} variant="gaming" size="lg" className="w-full">
               Start New Round
             </Button>
@@ -303,6 +338,17 @@ const WavelengthGame = () => {
               </div>
               
               <div className="text-2xl">{getScoreText()}</div>
+              
+              {drinkingMode && (
+                <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-4">
+                  <div className="text-xl font-bold text-red-400">{getDrinkingText()}</div>
+                  {guessedNumber !== null && Math.abs(secretNumber - guessedNumber) > 0 && (
+                    <p className="text-sm text-red-300 mt-2">
+                      🍻 Time to drink! Difference: {Math.abs(secretNumber - guessedNumber)}
+                    </p>
+                  )}
+                </div>
+              )}
             </div>
             
             <div className="flex gap-4">
