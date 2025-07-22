@@ -18,6 +18,11 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				sans: ["var(--font-sans)", ...fontFamily.sans],
+				pixel: ["Press Start 2P", "monospace"],
+				retro: ["Orbitron", "monospace"],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -65,17 +70,29 @@ export default {
 				electric: 'hsl(var(--electric))',
 				'electric-secondary': 'hsl(var(--electric-secondary))',
 				'gaming-dark': 'hsl(var(--gaming-dark))',
-				'gaming-surface': 'hsl(var(--gaming-surface))'
+				'gaming-surface': 'hsl(var(--gaming-surface))',
+				'neon-cyan': 'hsl(var(--neon-cyan))',
+				'neon-pink': 'hsl(var(--neon-pink))',
+				'neon-yellow': 'hsl(var(--neon-yellow))',
+				'neon-green': 'hsl(var(--neon-green))',
+				'retro-dark': 'hsl(var(--retro-dark))',
+				'retro-surface': 'hsl(var(--retro-surface))',
+				'retro-grid': 'hsl(var(--retro-grid))'
 			},
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',
 				'gradient-surface': 'var(--gradient-surface)',
-				'gradient-electric': 'var(--gradient-electric)'
+				'gradient-electric': 'var(--gradient-electric)',
+				'gradient-neon': 'var(--gradient-neon)',
+				'gradient-retro': 'var(--gradient-retro)'
 			},
 			boxShadow: {
 				'electric': 'var(--shadow-electric)',
 				'glow': 'var(--shadow-glow)',
-				'card': 'var(--shadow-card)'
+				'card': 'var(--shadow-card)',
+				'neon': 'var(--shadow-neon)',
+				'pink': 'var(--shadow-pink)',
+				'retro': 'var(--shadow-retro)'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

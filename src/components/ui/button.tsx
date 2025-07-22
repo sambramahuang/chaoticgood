@@ -18,8 +18,9 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        gaming: "bg-gradient-primary text-primary-foreground hover:shadow-glow hover:scale-105 transform transition-all duration-300",
-        electric: "bg-electric text-primary-foreground hover:bg-electric/90 shadow-glow hover:shadow-electric transform hover:scale-105 transition-all duration-300",
+        gaming: "retro-button bg-gradient-neon border-neon-cyan text-retro-dark font-bold font-retro shadow-neon hover:shadow-pink transition-all duration-100",
+        electric: "retro-button bg-neon-cyan text-retro-dark font-retro font-bold shadow-neon hover:bg-neon-pink transition-all duration-100",
+        retro: "retro-button bg-gradient-retro border-neon-pink text-retro-dark font-pixel text-xs shadow-pink hover:shadow-neon transition-all duration-100",
       },
       size: {
         default: "h-10 px-4 py-2",
