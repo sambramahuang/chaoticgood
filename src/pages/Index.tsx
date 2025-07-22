@@ -127,37 +127,6 @@ const Index = () => {
             </div>
           </Card>
         </div>
-
-        {/* Features */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
-          <div className="text-center space-y-3 retro-button bg-retro-surface border border-orange-500 p-4">
-            <div className="w-12 h-12 bg-orange-500/20 border border-orange-500 flex items-center justify-center mx-auto">
-              <span className="text-2xl filter drop-shadow-[0_0_4px_#f97316]">🤖</span>
-            </div>
-            <h3 className="text-sm font-pixel text-orange-400 uppercase">AI-Generated</h3>
-            <p className="text-xs text-neon-yellow font-retro">
-              Fresh questions every time powered by artificial intelligence
-            </p>
-          </div>
-          <div className="text-center space-y-3 retro-button bg-retro-surface border border-orange-500 p-4">
-            <div className="w-12 h-12 bg-orange-500/20 border border-orange-500 flex items-center justify-center mx-auto">
-              <span className="text-2xl filter drop-shadow-[0_0_4px_#f97316]">👥</span>
-            </div>
-            <h3 className="text-sm font-pixel text-orange-400 uppercase">Party Ready</h3>
-            <p className="text-xs text-neon-yellow font-retro">
-              Perfect for groups, parties, and social gatherings
-            </p>
-          </div>
-          <div className="text-center space-y-3 retro-button bg-retro-surface border border-orange-500 p-4">
-            <div className="w-12 h-12 bg-orange-500/20 border border-orange-500 flex items-center justify-center mx-auto">
-              <span className="text-2xl filter drop-shadow-[0_0_4px_#f97316]">⚡</span>
-            </div>
-            <h3 className="text-sm font-pixel text-orange-400 uppercase">Instant Fun</h3>
-            <p className="text-xs text-neon-yellow font-retro">
-              No setup required - just pick a mode and start playing
-            </p>
-          </div>
-        </div>
       </div>
     </div>
   );
