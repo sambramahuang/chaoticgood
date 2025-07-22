@@ -19,7 +19,7 @@ const Index = () => {
       <div className="w-full max-w-4xl space-y-12">
         {/* Header */}
         <div className="text-center space-y-4 retro-scan relative">
-          <h1 className="text-6xl font-pixel font-bold text-neon-cyan neon-text uppercase tracking-wider">
+          <h1 className="text-6xl font-bungee font-bold text-neon-cyan neon-text uppercase tracking-wider">
             CHAOTIC GOOD
           </h1>
           <div className="text-xl text-neon-yellow font-retro max-w-2xl mx-auto">

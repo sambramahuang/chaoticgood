@@ -23,6 +23,7 @@ export default {
 				sans: ["var(--font-sans)", ...fontFamily.sans],
 				pixel: ["Press Start 2P", "monospace"],
 				retro: ["Orbitron", "monospace"],
+				bungee: ['"Bungee"', 'cursive'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
