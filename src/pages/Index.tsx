@@ -27,7 +27,7 @@ const Index = () => {
               className="w-[250px] md:w-[350px] lg:w-[450px] !shadow-none !filter-none !drop-shadow-none" 
             />
           </div> 
-          <div className="text-xl text-neon-yellow font-chaotic max-w-2xl mx-auto">
+          <div className="text-xl text-neon-yellow font-retro max-w-2xl mx-auto">
             <span className="inline-block animate-pulse">▶</span> Choose your game mode <span className="inline-block animate-pulse">◀</span>
           </div>
         </div>
@@ -38,7 +38,7 @@ const Index = () => {
             variant="retro" 
             size="lg"
             onClick={() => navigate("/custom-questions")}
-            className="retro-button border-2 border-orange-400 bg-orange-500 text-black hover:bg-orange-600 hover:text-white font-chaotic text-xs drop-shadow-[0_0_6px_#f97316] hover:drop-shadow-[0_0_10px_#f97316]"
+            className="retro-button border-2 border-orange-400 bg-orange-500 text-black hover:bg-orange-600 hover:text-white font-pixel text-xs drop-shadow-[0_0_6px_#f97316] hover:drop-shadow-[0_0_10px_#f97316]"
           >
             [EDIT] Custom Questions
           </Button>
@@ -51,18 +51,22 @@ const Index = () => {
             <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div className="text-center space-y-6 relative z-10" onClick={() => navigate("/game/bridges")}>
               <div className="w-20 h-20 bg-orange-900 border-2 border-orange-500 flex items-center justify-center mx-auto group-hover:animate-pulse">
-                <span className="text-4xl text-orange-300">🌉</span>
+                <img 
+                  src="/bridgesicon.png" 
+                  alt="Bridges icon" 
+                  className="w-12 h-12 mx-auto"
+                />
               </div>
               <div className="space-y-3">
-                <h2 className="text-2xl font-chaotic font-bold text-orange-400 uppercase tracking-wider">Bridges</h2>
-                <p className="text-neon-yellow font-chaotic text-sm leading-relaxed">
+                <h2 className="text-2xl font-retro font-bold text-orange-400 uppercase tracking-wider">Bridges</h2>
+                <p className="text-neon-yellow font-retro text-sm leading-relaxed">
                   [WHO HERE...] questions with coin flip - TELL means reveal your answer, SAFE means you're protected
                 </p>
               </div>
               <Button
                 variant="gaming"
                 size="lg"
-                className="w-full font-chaotic text-xs bg-orange-500 text-black border-2 border-orange-400 hover:bg-orange-600 hover:text-white transition !shadow-none !filter-none drop-shadow-[0_0_6px_#f97316] hover:drop-shadow-[0_0_10px_#f97316]"
+                className="w-full font-pixel text-xs bg-orange-500 text-black border-2 border-orange-400 hover:bg-orange-600 hover:text-white transition !shadow-none !filter-none drop-shadow-[0_0_6px_#f97316] hover:drop-shadow-[0_0_10px_#f97316]"
               >
                 START
               </Button>
@@ -74,18 +78,22 @@ const Index = () => {
             <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div className="text-center space-y-6 relative z-10" onClick={() => navigate("/game/truth-or-dare")}>
               <div className="w-20 h-20 bg-orange-900 border-2 border-orange-500 flex items-center justify-center mx-auto group-hover:animate-pulse">
-                <span className="text-4xl text-orange-300">🎲</span>
+                <img 
+                  src="/todicon.png" 
+                  alt="Truth or Dare icon" 
+                  className="w-12 h-12 mx-auto"
+                />
               </div>
               <div className="space-y-3">
-                <h2 className="text-2xl font-chaotic font-bold text-orange-400 uppercase tracking-wider">Truth or Dare</h2>
-                <p className="text-neon-yellow font-chaotic text-sm leading-relaxed">
+                <h2 className="text-2xl font-retro font-bold text-orange-400 uppercase tracking-wider">Truth or Dare</h2>
+                <p className="text-neon-yellow font-retro text-sm leading-relaxed">
                   [CLASSIC] party game with a modern twist - AI-generated truths and dares for endless fun
                 </p>
               </div>
               <Button
                 variant="gaming"
                 size="lg"
-                className="w-full font-chaotic text-xs bg-orange-500 text-black border-2 border-orange-400 hover:bg-orange-600 hover:text-white transition !shadow-none !filter-none drop-shadow-[0_0_6px_#f97316] hover:drop-shadow-[0_0_10px_#f97316]"
+                className="w-full font-pixel text-xs bg-orange-500 text-black border-2 border-orange-400 hover:bg-orange-600 hover:text-white transition !shadow-none !filter-none drop-shadow-[0_0_6px_#f97316] hover:drop-shadow-[0_0_10px_#f97316]"
               >
                 START
               </Button>
@@ -97,18 +105,22 @@ const Index = () => {
             <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div className="text-center space-y-6 relative z-10" onClick={() => navigate("/wavelength")}>
               <div className="w-20 h-20 bg-orange-900 border-2 border-orange-500 flex items-center justify-center mx-auto group-hover:animate-pulse">
-                <span className="text-4xl text-orange-300">📊</span>
+                <img 
+                  src="/wavelengthicon.png" 
+                  alt="Wavelength icon" 
+                  className="w-12 h-12 mx-auto"
+                />
               </div>
               <div className="space-y-3">
-                <h2 className="text-2xl font-chaotic font-bold text-orange-400 uppercase tracking-wider">Wavelength</h2>
-                <p className="text-neon-yellow font-chaotic text-sm leading-relaxed">
+                <h2 className="text-2xl font-retro font-bold text-orange-400 uppercase tracking-wider">Wavelength</h2>
+                <p className="text-neon-yellow font-retro text-sm leading-relaxed">
                   [SOCIAL] guessing game where teams sync their wavelengths through creative examples
                 </p>
               </div>
               <Button
                 variant="gaming"
                 size="lg"
-                className="w-full font-chaotic text-xs bg-orange-500 text-black border-2 border-orange-400 hover:bg-orange-600 hover:text-white transition !shadow-none !filter-none drop-shadow-[0_0_6px_#f97316] hover:drop-shadow-[0_0_10px_#f97316]"
+                className="w-full font-pixel text-xs bg-orange-500 text-black border-2 border-orange-400 hover:bg-orange-600 hover:text-white transition !shadow-none !filter-none drop-shadow-[0_0_6px_#f97316] hover:drop-shadow-[0_0_10px_#f97316]"
               >
                 START
               </Button>
@@ -122,8 +134,8 @@ const Index = () => {
             <div className="w-12 h-12 bg-orange-500/20 border border-orange-500 flex items-center justify-center mx-auto">
               <span className="text-2xl filter drop-shadow-[0_0_4px_#f97316]">🤖</span>
             </div>
-            <h3 className="text-sm font-chaotic text-orange-400 uppercase">AI-Generated</h3>
-            <p className="text-xs text-neon-yellow font-chaotic">
+            <h3 className="text-sm font-pixel text-orange-400 uppercase">AI-Generated</h3>
+            <p className="text-xs text-neon-yellow font-retro">
               Fresh questions every time powered by artificial intelligence
             </p>
           </div>
@@ -131,8 +143,8 @@ const Index = () => {
             <div className="w-12 h-12 bg-orange-500/20 border border-orange-500 flex items-center justify-center mx-auto">
               <span className="text-2xl filter drop-shadow-[0_0_4px_#f97316]">👥</span>
             </div>
-            <h3 className="text-sm font-chaotic text-orange-400 uppercase">Party Ready</h3>
-            <p className="text-xs text-neon-yellow font-chaotic">
+            <h3 className="text-sm font-pixel text-orange-400 uppercase">Party Ready</h3>
+            <p className="text-xs text-neon-yellow font-retro">
               Perfect for groups, parties, and social gatherings
             </p>
           </div>
@@ -140,8 +152,8 @@ const Index = () => {
             <div className="w-12 h-12 bg-orange-500/20 border border-orange-500 flex items-center justify-center mx-auto">
               <span className="text-2xl filter drop-shadow-[0_0_4px_#f97316]">⚡</span>
             </div>
-            <h3 className="text-sm font-chaotic text-orange-400 uppercase">Instant Fun</h3>
-            <p className="text-xs text-neon-yellow font-chaotic">
+            <h3 className="text-sm font-pixel text-orange-400 uppercase">Instant Fun</h3>
+            <p className="text-xs text-neon-yellow font-retro">
               No setup required - just pick a mode and start playing
             </p>
           </div>
