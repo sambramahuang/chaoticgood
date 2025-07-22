@@ -24,11 +24,13 @@ const Index = () => {
             <img 
               src="/chaoticlogo.png" 
               alt="Chaotic Good" 
-              className="w-[250px] md:w-[350px] lg:w-[450px] !shadow-none !filter-none !drop-shadow-none" 
+              className="w-[175px] md:w-[245px] lg:w-[315px] !shadow-none !filter-none !drop-shadow-none" 
             />
           </div> 
-          <div className="text-xl text-neon-yellow font-retro max-w-2xl mx-auto">
-            <span className="inline-block animate-pulse">▶</span> Choose your game mode <span className="inline-block animate-pulse">◀</span>
+          <div className="text-xl font-arcade max-w-2xl mx-auto">
+            <span className="bg-gradient-to-r from-orange-700 via-orange-600 to-yellow-500 bg-clip-text text-transparent">
+              <span style={{ fontFamily: 'monospace' }}>&gt;</span> CHOOSE YOUR GAME MODE <span style={{ fontFamily: 'monospace' }}>&lt;</span>
+            </span>
           </div>
         </div>
 
@@ -38,7 +40,7 @@ const Index = () => {
             variant="retro" 
             size="lg"
             onClick={() => navigate("/custom-questions")}
-            className="retro-button border-2 border-orange-400 bg-orange-500 text-black hover:bg-orange-600 hover:text-white font-pixel text-xs drop-shadow-[0_0_6px_#f97316] hover:drop-shadow-[0_0_10px_#f97316]"
+            className="retro-button border-2 border-orange-400 bg-orange-500 text-black hover:bg-orange-600 hover:text-white font-pixel text-xs drop-shadow-[0_0_10px_#fb923c] hover:drop-shadow-[0_0_10px_#fb923c]"
           >
             [EDIT] Custom Questions
           </Button>
@@ -58,15 +60,19 @@ const Index = () => {
                 />
               </div>
               <div className="space-y-3">
-                <h2 className="text-2xl font-retro font-bold text-orange-400 uppercase tracking-wider">Bridges</h2>
-                <p className="text-neon-yellow font-retro text-sm leading-relaxed">
-                  [WHO HERE...] questions with coin flip - TELL means reveal your answer, SAFE means you're protected
+                <h2 className="text-2xl font-arcade font-bold uppercase tracking-wider">
+                  <span className="bg-gradient-to-r from-yellow-200 via-orange-400 to-orange-300 bg-clip-text text-transparent">
+                    Bridges
+                  </span>
+                </h2>
+                <p className="font-pixel text-[10px] leading-relaxed bg-gradient-to-r from-orange-300 via-yellow-200 to-orange-400 bg-clip-text text-transparent">
+                  [WHO HERE...] questions with a coin flip mechanic - TELL means reveal your answer, SAFE means you're protected
                 </p>
               </div>
               <Button
                 variant="gaming"
                 size="lg"
-                className="w-full font-pixel text-xs bg-orange-500 text-black border-2 border-orange-400 hover:bg-orange-600 hover:text-white transition !shadow-none !filter-none drop-shadow-[0_0_6px_#f97316] hover:drop-shadow-[0_0_10px_#f97316]"
+                className="retro-button border-2 border-orange-400 bg-orange-500 text-black hover:bg-orange-600 hover:text-white font-pixel text-xs drop-shadow-[0_0_10px_#fb923c] hover:drop-shadow-[0_0_10px_#fb923c]"
               >
                 START
               </Button>
@@ -85,15 +91,19 @@ const Index = () => {
                 />
               </div>
               <div className="space-y-3">
-                <h2 className="text-2xl font-retro font-bold text-orange-400 uppercase tracking-wider">Truth or Dare</h2>
-                <p className="text-neon-yellow font-retro text-sm leading-relaxed">
-                  [CLASSIC] party game with a modern twist - AI-generated truths and dares for endless fun
+                <h2 className="text-2xl font-arcade font-bold uppercase tracking-wider">
+                  <span className="bg-gradient-to-r from-yellow-200 via-orange-400 to-orange-300 bg-clip-text text-transparent">
+                    Truth or Dare
+                  </span>
+                </h2>
+                <p className="font-pixel text-[10px] leading-relaxed bg-gradient-to-r from-orange-300 via-yellow-200 to-orange-400 bg-clip-text text-transparent">
+                  [CLASSIC] party game with a modern twist - AI-generated truths and dares for endless fun and challenge
                 </p>
               </div>
               <Button
                 variant="gaming"
                 size="lg"
-                className="w-full font-pixel text-xs bg-orange-500 text-black border-2 border-orange-400 hover:bg-orange-600 hover:text-white transition !shadow-none !filter-none drop-shadow-[0_0_6px_#f97316] hover:drop-shadow-[0_0_10px_#f97316]"
+                className="retro-button border-2 border-orange-400 bg-orange-500 text-black hover:bg-orange-600 hover:text-white font-pixel text-xs drop-shadow-[0_0_10px_#fb923c] hover:drop-shadow-[0_0_10px_#fb923c]"
               >
                 START
               </Button>
@@ -112,15 +122,19 @@ const Index = () => {
                 />
               </div>
               <div className="space-y-3">
-                <h2 className="text-2xl font-retro font-bold text-orange-400 uppercase tracking-wider">Wavelength</h2>
-                <p className="text-neon-yellow font-retro text-sm leading-relaxed">
-                  [SOCIAL] guessing game where teams sync their wavelengths through creative examples
+                <h2 className="text-2xl font-arcade font-bold uppercase tracking-wider">
+                  <span className="bg-gradient-to-r from-yellow-200 via-orange-400 to-orange-300 bg-clip-text text-transparent">
+                    Wavelength
+                  </span>
+                </h2>
+                <p className="font-pixel text-[10px] leading-relaxed bg-gradient-to-r from-orange-300 via-yellow-200 to-orange-400 bg-clip-text text-transparent">
+                  [SOCIAL] guessing game where teams sync their wavelengths through creative examples and clues
                 </p>
               </div>
               <Button
                 variant="gaming"
                 size="lg"
-                className="w-full font-pixel text-xs bg-orange-500 text-black border-2 border-orange-400 hover:bg-orange-600 hover:text-white transition !shadow-none !filter-none drop-shadow-[0_0_6px_#f97316] hover:drop-shadow-[0_0_10px_#f97316]"
+                className="retro-button border-2 border-orange-400 bg-orange-500 text-black hover:bg-orange-600 hover:text-white font-pixel text-xs drop-shadow-[0_0_10px_#fb923c] hover:drop-shadow-[0_0_10px_#fb923c]"
               >
                 START
               </Button>
