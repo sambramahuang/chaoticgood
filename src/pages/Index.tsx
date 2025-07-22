@@ -18,10 +18,15 @@ const Index = () => {
     >
       <div className="w-full max-w-4xl space-y-12">
         {/* Header */}
-        <div className="text-center space-y-4 retro-scan relative">
-          <h1 className="text-6xl font-bungee font-bold text-neon-cyan neon-text uppercase tracking-wider">
-            CHAOTIC GOOD
-          </h1>
+        
+        <div className="text-center space-y-4 relative">
+          <div className="flex justify-center mt-2 mb-2">
+            <img 
+              src="/chaoticlogo.png" 
+              alt="Chaotic Good" 
+              className="w-[250px] md:w-[350px] lg:w-[450px] !shadow-none !filter-none !drop-shadow-none" 
+            />
+          </div> 
           <div className="text-xl text-neon-yellow font-retro max-w-2xl mx-auto">
             <span className="inline-block animate-pulse">▶</span> Choose your game mode and let AI generate exciting questions for your group! <span className="inline-block animate-pulse">◀</span>
           </div>
