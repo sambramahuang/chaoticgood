@@ -20,7 +20,7 @@ const Index = () => {
         {/* Header */}
         <div className="text-center space-y-4 retro-scan relative">
           <h1 className="text-6xl font-pixel font-bold text-neon-cyan neon-text uppercase tracking-wider">
-            Party Games
+            CHAOTIC GOOD
           </h1>
           <div className="text-xl text-neon-yellow font-retro max-w-2xl mx-auto">
             <span className="inline-block animate-pulse">▶</span> Choose your game mode and let AI generate exciting questions for your group! <span className="inline-block animate-pulse">◀</span>
@@ -55,7 +55,7 @@ const Index = () => {
                 </p>
               </div>
               <Button variant="gaming" size="lg" className="w-full font-pixel text-xs">
-                [START] Bridges
+                START
               </Button>
             </div>
           </Card>
@@ -74,7 +74,7 @@ const Index = () => {
                 </p>
               </div>
               <Button variant="gaming" size="lg" className="w-full font-pixel text-xs">
-                [START] Truth or Dare
+                START
               </Button>
             </div>
           </Card>
@@ -93,7 +93,7 @@ const Index = () => {
                 </p>
               </div>
               <Button variant="gaming" size="lg" className="w-full font-pixel text-xs">
-                [START] Wavelength
+                START
               </Button>
             </div>
           </Card>
