@@ -10,7 +10,7 @@ const Index = () => {
     <div 
       className="min-h-screen bg-background flex flex-col items-center justify-center p-4 relative"
       style={{
-        backgroundImage: `linear-gradient(rgba(12, 10, 20, 0.8), rgba(12, 10, 20, 0.8)), url(${heroImage})`,
+        backgroundImage: `linear-gradient(rgba(15, 8, 4, 0.85), rgba(12, 6, 3, 0.9)), url(${heroImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed'

@@ -2,114 +2,101 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Retro 90s Gaming Design System */
+/* Retro 90s Gaming Design System - Cozy Gaming Room Aesthetic */
 
 @layer base {
   :root {
-    --background: 220 20% 8%;
-    --foreground: 60 100% 95%;
+    /* Base Colors - Warm, dim gaming room lighting */
+    --background: 15 10 5;  /* Deep warm black */
+    --foreground: 255 240 220; /* Warm CRT glow */
 
-    --card: 220 25% 12%;
-    --card-foreground: 60 100% 95%;
+    --card: 25 15 10; /* Dark warm card background */
+    --card-foreground: 255 240 220;
 
-    --popover: 220 30% 10%;
-    --popover-foreground: 60 100% 95%;
+    --popover: 25 15 10;
+    --popover-foreground: 255 240 220;
 
-    --primary: 180 100% 50%;
-    --primary-foreground: 220 20% 8%;
+    --primary: 30 100% 50%; /* Warm orange like retro consoles */
+    --primary-foreground: 15 10 5;
 
-    --secondary: 300 100% 60%;
-    --secondary-foreground: 220 20% 8%;
+    --secondary: 45 80% 40%; /* Muted orange-brown */
+    --secondary-foreground: 255 240 220;
 
-    --muted: 220 15% 20%;
-    --muted-foreground: 60 30% 70%;
+    --muted: 20 12 8;
+    --muted-foreground: 200 150 120;
 
-    --accent: 60 100% 50%;
-    --accent-foreground: 220 20% 8%;
+    --accent: 190 100% 60%; /* Bright cyan for contrast */
+    --accent-foreground: 15 10 5;
 
-    --destructive: 0 100% 60%;
-    --destructive-foreground: 60 100% 95%;
+    --destructive: 0 80% 60%;
+    --destructive-foreground: 255 240 220;
 
-    --border: 180 50% 30%;
-    --input: 220 25% 15%;
-    --ring: 180 100% 50%;
+    --border: 30 40% 25%; /* Subtle warm border */
+    --input: 25 20% 15;
+    --ring: 30 100% 50%;
 
-    /* Retro 90s specific colors */
-    --neon-cyan: 180 100% 50%;
-    --neon-pink: 300 100% 60%;
-    --neon-yellow: 60 100% 50%;
-    --neon-green: 120 100% 50%;
-    --retro-dark: 220 20% 8%;
-    --retro-surface: 220 25% 12%;
-    --retro-grid: 180 50% 30%;
+    /* Gaming room inspired colors */
+    --neon-cyan: 190 100% 60%; /* Classic arcade cyan */
+    --neon-pink: 320 100% 70%; /* Hot magenta */
+    --neon-yellow: 50 100% 60%; /* Electric yellow */
+    --neon-green: 120 100% 50%; /* Electric green */
+    --retro-dark: 15 10 5; /* Deep background */
+    --retro-surface: 25 15 10; /* Card surface */
+    --retro-grid: 30 40% 25%; /* Grid lines */
     
-    /* Retro gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(180 100% 50%), hsl(300 100% 60%));
-    --gradient-surface: linear-gradient(135deg, hsl(220 25% 12%), hsl(220 20% 18%));
-    --gradient-neon: linear-gradient(45deg, hsl(180 100% 50%), hsl(60 100% 50%), hsl(300 100% 60%));
-    --gradient-retro: linear-gradient(90deg, hsl(300 100% 60%), hsl(180 100% 50%));
+    /* Warm retro gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(30 100% 50%), hsl(50 100% 60%));
+    --gradient-surface: linear-gradient(135deg, hsl(25 15 10%), hsl(35 20 15%));
+    --gradient-neon: linear-gradient(45deg, hsl(190 100% 60%), hsl(50 100% 60%), hsl(320 100% 70%));
+    --gradient-retro: linear-gradient(90deg, hsl(320 100% 70%), hsl(190 100% 60%));
     
-    /* Retro shadows and effects */
-    --shadow-neon: 0 0 20px hsl(180 100% 50% / 0.8), 0 0 40px hsl(180 100% 50% / 0.4);
-    --shadow-pink: 0 0 20px hsl(300 100% 60% / 0.8), 0 0 40px hsl(300 100% 60% / 0.4);
-    --shadow-retro: 0 4px 0 hsl(180 50% 30%), 0 8px 16px hsl(220 20% 8% / 0.8);
-    --shadow-card: 0 0 0 2px hsl(180 50% 30%), 0 4px 0 hsl(180 50% 25%), 0 8px 16px hsl(220 20% 8% / 0.8);
+    /* Cozy glow effects */
+    --shadow-neon: 0 0 20px hsl(190 100% 60% / 0.6), 0 0 40px hsl(190 100% 60% / 0.3);
+    --shadow-pink: 0 0 20px hsl(320 100% 70% / 0.6), 0 0 40px hsl(320 100% 70% / 0.3);
+    --shadow-retro: 0 4px 0 hsl(30 40% 20%), 0 8px 16px hsl(15 10 5 / 0.9);
+    --shadow-card: 0 0 0 2px hsl(30 40% 25%), 0 4px 0 hsl(30 40% 20%), 0 8px 20px hsl(15 10 5 / 0.9);
 
     --radius: 0.5rem;
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 25 15 10;
+    --sidebar-foreground: 255 240 220;
+    --sidebar-primary: 30 100% 50%;
+    --sidebar-primary-foreground: 15 10 5;
+    --sidebar-accent: 45 80% 40%;
+    --sidebar-accent-foreground: 255 240 220;
+    --sidebar-border: 30 40% 25%;
+    --sidebar-ring: 30 100% 50%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    /* Enhanced dark mode for cozy gaming */
+    --background: 12 8 4;
+    --foreground: 255 245 230;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 20 12 8;
+    --card-foreground: 255 245 230;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 20 12 8;
+    --popover-foreground: 255 245 230;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 25 100% 55%;
+    --primary-foreground: 12 8 4;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 40 70% 35%;
+    --secondary-foreground: 255 245 230;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 18 10 6;
+    --muted-foreground: 180 130 100;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 185 100% 65%;
+    --accent-foreground: 12 8 4;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 80% 60%;
+    --destructive-foreground: 255 245 230;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 25 30% 20%;
+    --input: 20 15% 12;
+    --ring: 25 100% 55%;
   }
 }
 
@@ -121,50 +108,136 @@
   body {
     @apply bg-background text-foreground;
     font-family: 'Orbitron', monospace;
-    background-image: 
-      linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 20px 20px;
+    background: 
+      radial-gradient(ellipse at top, hsl(25 15 10%) 0%, hsl(15 10 5%) 50%, hsl(12 8 4%) 100%),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 165, 0, 0.02) 2px,
+        rgba(255, 165, 0, 0.02) 4px
+      );
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* CRT-style ambient glow */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(255, 165, 0, 0.05) 0%,
+      rgba(0, 255, 255, 0.03) 30%,
+      transparent 60%
+    );
+    pointer-events: none;
+    z-index: -1;
+    animation: ambient-glow 8s ease-in-out infinite;
+  }
+
+  @keyframes ambient-glow {
+    0%, 100% { 
+      opacity: 0.6;
+      transform: scale(1) rotate(0deg);
+    }
+    50% { 
+      opacity: 0.8;
+      transform: scale(1.1) rotate(2deg);
+    }
   }
 
   /* Retro pixel font utilities */
   .font-pixel {
     font-family: 'Press Start 2P', monospace;
+    letter-spacing: 0.1em;
   }
 
   .font-retro {
     font-family: 'Orbitron', monospace;
+    letter-spacing: 0.05em;
   }
 
-  /* Retro button effects */
+  /* Enhanced retro button effects */
   .retro-button {
     position: relative;
     border: 2px solid hsl(var(--border));
-    box-shadow: var(--shadow-retro);
-    transition: all 0.1s ease;
+    box-shadow: 
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+      var(--shadow-retro);
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
   }
 
   .retro-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 0 hsl(var(--border)), 0 10px 20px hsl(220 20% 8% / 0.8);
+    transform: translateY(-3px);
+    box-shadow: 
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+      0 6px 0 hsl(var(--border)), 
+      0 12px 24px hsl(15 10 5 / 0.6);
   }
 
   .retro-button:active {
-    transform: translateY(2px);
-    box-shadow: 0 2px 0 hsl(var(--border)), 0 4px 8px hsl(220 20% 8% / 0.8);
+    transform: translateY(1px);
+    box-shadow: 
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.2),
+      0 2px 0 hsl(var(--border)), 
+      0 4px 8px hsl(15 10 5 / 0.8);
   }
 
-  /* Neon glow animations */
-  @keyframes neon-pulse {
-    0%, 100% { text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor; }
-    50% { text-shadow: 0 0 2px currentColor, 0 0 5px currentColor, 0 0 8px currentColor; }
+  /* Enhanced neon glow animations */
+  @keyframes neon-flicker {
+    0%, 100% { 
+      text-shadow: 
+        0 0 5px currentColor, 
+        0 0 10px currentColor, 
+        0 0 20px currentColor,
+        0 0 35px currentColor;
+      filter: brightness(1.1);
+    }
+    25% { 
+      text-shadow: 
+        0 0 2px currentColor, 
+        0 0 5px currentColor, 
+        0 0 10px currentColor,
+        0 0 20px currentColor;
+      filter: brightness(0.9);
+    }
+    50% { 
+      text-shadow: 
+        0 0 8px currentColor, 
+        0 0 15px currentColor, 
+        0 0 25px currentColor,
+        0 0 45px currentColor;
+      filter: brightness(1.2);
+    }
+    75% { 
+      text-shadow: 
+        0 0 3px currentColor, 
+        0 0 8px currentColor, 
+        0 0 15px currentColor,
+        0 0 25px currentColor;
+      filter: brightness(1.0);
+    }
   }
 
   .neon-text {
-    animation: neon-pulse 2s ease-in-out infinite;
+    animation: neon-flicker 3s ease-in-out infinite;
   }
 
-  /* Retro scan line effect */
+  /* Retro scan line effect with CRT feel */
+  .retro-scan {
+    position: relative;
+    overflow: hidden;
+  }
+
   .retro-scan::before {
     content: '';
     position: absolute;
@@ -172,13 +245,41 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(
-      transparent 50%,
-      rgba(0, 255, 255, 0.02) 50%,
-      rgba(0, 255, 255, 0.02) 52%,
-      transparent 52%
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 165, 0, 0.03) 2px,
+      rgba(255, 165, 0, 0.03) 4px
     );
-    background-size: 100% 4px;
     pointer-events: none;
+    animation: scan-lines 0.1s linear infinite;
+  }
+
+  .retro-scan::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.08) 50%,
+      transparent
+    );
+    animation: scan-sweep 4s ease-in-out infinite;
+  }
+
+  @keyframes scan-lines {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(4px); }
+  }
+
+  @keyframes scan-sweep {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: -100%; }
   }
 }

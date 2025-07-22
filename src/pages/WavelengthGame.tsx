@@ -135,20 +135,20 @@ const WavelengthGame = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 retro-scan">
       <div className="w-full max-w-2xl space-y-8">
         <div className="flex items-center justify-between">
           <Button
-            variant="ghost"
+            variant="retro"
             onClick={() => navigate("/")}
-            className="flex items-center gap-2 hover:bg-secondary"
+            className="flex items-center gap-2 font-pixel text-xs"
           >
             <ArrowLeft className="h-4 w-4" />
-            Back to Menu
+            [BACK] Menu
           </Button>
           
-          <h1 className="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-            Wavelength
+          <h1 className="text-3xl font-pixel font-bold text-neon-yellow neon-text">
+            WAVELENGTH
           </h1>
           
           <div className="w-24" />
