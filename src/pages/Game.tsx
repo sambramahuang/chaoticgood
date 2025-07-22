@@ -83,7 +83,7 @@ const Game = () => {
       }
       
       // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      //await new Promise(resolve => setTimeout(resolve, 1000));
       
       setCurrentQuestion(selectedQuestion);
     } catch (error) {
