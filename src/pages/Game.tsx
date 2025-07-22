@@ -151,7 +151,7 @@ const Game = () => {
                   : 'bg-gradient-primary text-white hover:scale-110 hover:shadow-lg hover:shadow-primary/50'
               }`}
             >
-              {isFlipping ? <span className="animate-bounce">🪙</span> : coinResult || "🪙"}
+              {isFlipping ? <span className="animate-bounce">🪙</span> : coinResult || "🪙"} 
             </div>
 
             {!coinResult && !isFlipping && (
