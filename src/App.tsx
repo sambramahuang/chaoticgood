@@ -9,6 +9,7 @@ import WavelengthGame from "./pages/WavelengthGame";
 import CustomQuestions from "./pages/CustomQuestions";
 import NotFound from "./pages/NotFound";
 import PicoloGame from "@/pages/PicoloGame";
+import FibbageGame from "./pages/fibbage";
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/wavelength" element={<WavelengthGame />} />
           <Route path="/custom-questions" element={<CustomQuestions />} />
           <Route path="/picolo" element={<PicoloGame />} />
+          <Route path="/fibbage" element={<FibbageGame />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

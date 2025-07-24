@@ -1,5 +1,3 @@
-
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -165,6 +163,9 @@ const FibbageGameFlow = ({
     playerStates: PlayerWithAnswers[];
   } | null>(null);
 
+  const [currentAnsweringPlayerIdx, setCurrentAnsweringPlayerIdx] = useState(0);
+  const [currentVotingPlayerIdx, setCurrentVotingPlayerIdx] = useState(0);
+
   const currentQuestion =
     FIBBAGE_QUESTIONS[questionOrder[round] % FIBBAGE_QUESTIONS.length];
 
@@ -179,17 +180,23 @@ const FibbageGameFlow = ({
 
   const allFakeAnswersSubmitted = fakeAnswers.every((a) => a.trim().length > 0);
 
-  const submitFakeAnswers = () => {
-    // Prepare answer list: all fake answers + real answer
-    // Each answer: { text, author } (author: player index, real answer is author=null)
-    const answerObjs: { text: string; author: number | null }[] = [
-      ...fakeAnswers.map((text, i) => ({ text: text.trim(), author: i })),
-      { text: currentQuestion.answer, author: null },
-    ];
-    const shuffled = shuffle(answerObjs);
-    setShuffledAnswers(shuffled);
-    setPhase("vote");
-    setVotes(Array(players.length).fill(null));
+  const submitFakeAnswerForCurrentPlayer = () => {
+    if (fakeAnswers[currentAnsweringPlayerIdx].trim().length === 0) return;
+    if (currentAnsweringPlayerIdx + 1 < players.length) {
+      setCurrentAnsweringPlayerIdx(currentAnsweringPlayerIdx + 1);
+    } else {
+      // Prepare answer list: all fake answers + real answer
+      // Each answer: { text, author } (author: player index, real answer is author=null)
+      const answerObjs: { text: string; author: number | null }[] = [
+        ...fakeAnswers.map((text, i) => ({ text: text.trim(), author: i })),
+        { text: currentQuestion.answer, author: null },
+      ];
+      const shuffled = shuffle(answerObjs);
+      setShuffledAnswers(shuffled);
+      setPhase("vote");
+      setVotes(Array(players.length).fill(null));
+      setCurrentVotingPlayerIdx(0);
+    }
   };
 
   // Handle voting
@@ -202,6 +209,13 @@ const FibbageGameFlow = ({
   };
 
   const allVotesSubmitted = votes.every((v) => v !== null);
+
+  const submitVoteForCurrentPlayer = () => {
+    if (votes[currentVotingPlayerIdx] === null) return;
+    if (currentVotingPlayerIdx + 1 < players.length) {
+      setCurrentVotingPlayerIdx(currentVotingPlayerIdx + 1);
+    }
+  };
 
   const submitVotes = () => {
     // Score calculation:
@@ -251,6 +265,8 @@ const FibbageGameFlow = ({
           score: p.score,
         }))
       );
+      setCurrentAnsweringPlayerIdx(0);
+      setCurrentVotingPlayerIdx(0);
     } else {
       setPhase("final");
     }
@@ -330,6 +346,7 @@ const FibbageGameFlow = ({
 
   // Voting phase
   if (phase === "vote") {
+    const p = playerStates[currentVotingPlayerIdx];
     return (
       <Card className="p-8 text-center space-y-6">
         <h2 className="text-xl font-bold">Round {round + 1}: Vote</h2>
@@ -338,42 +355,46 @@ const FibbageGameFlow = ({
           <div className="italic">{currentQuestion.question}</div>
         </div>
         <div className="mb-3">
-          {playerStates.map((p, i) => (
-            <div key={i} className="mb-4">
-              <div className="font-semibold">{p.name}, pick the real answer:</div>
-              <div className="flex flex-col items-center gap-2 mt-2">
-                {shuffledAnswers.map((ans, idx) => (
-                  <Button
-                    key={idx}
-                    variant={votes[i] === idx ? "default" : "secondary"}
-                    className="w-full"
-                    disabled={
-                      votes[i] !== null ||
-                      (ans.author === i) // can't vote your own fake answer
-                    }
-                    onClick={() => handleVote(i, idx)}
-                  >
-                    {ans.text}
-                  </Button>
-                ))}
-                {votes[i] !== null && (
-                  <div className="text-xs text-muted mt-1">Vote submitted!</div>
-                )}
-              </div>
-            </div>
-          ))}
+          <div className="font-semibold">{p.name}, pick the real answer:</div>
+          <div className="flex flex-col items-center gap-2 mt-2">
+            {shuffledAnswers.map((ans, idx) => (
+              <Button
+                key={idx}
+                variant={votes[currentVotingPlayerIdx] === idx ? "default" : "secondary"}
+                className="w-full"
+                disabled={
+                  votes[currentVotingPlayerIdx] !== null ||
+                  (ans.author === currentVotingPlayerIdx) // can't vote your own fake answer
+                }
+                onClick={() => handleVote(currentVotingPlayerIdx, idx)}
+              >
+                {ans.text}
+              </Button>
+            ))}
+            {votes[currentVotingPlayerIdx] !== null && (
+              <div className="text-xs text-muted mt-1">Vote submitted!</div>
+            )}
+          </div>
         </div>
-        <Button
-          onClick={submitVotes}
-          disabled={!allVotesSubmitted}
-        >
-          Reveal Results
-        </Button>
+        <div className="flex justify-center gap-4">
+          <Button
+            onClick={submitVoteForCurrentPlayer}
+            disabled={votes[currentVotingPlayerIdx] === null}
+          >
+            {currentVotingPlayerIdx + 1 < players.length ? "Next Voter" : "Ready to Reveal"}
+          </Button>
+          {allVotesSubmitted && (
+            <Button onClick={submitVotes}>
+              Reveal Results
+            </Button>
+          )}
+        </div>
       </Card>
     );
   }
 
   // Fake answer submission phase
+  const currentPlayer = playerStates[currentAnsweringPlayerIdx];
   return (
     <Card className="p-8 text-center space-y-6">
       <h2 className="text-xl font-bold">Round {round + 1} of {numRounds}</h2>
@@ -381,34 +402,21 @@ const FibbageGameFlow = ({
         <div className="mb-1 font-semibold">Question:</div>
         <div className="italic">{currentQuestion.question}</div>
       </div>
-      <div className="mb-3">
-        <div className="font-semibold mb-2">Enter your fake answers:</div>
-        {playerStates.map((p, i) => (
-          <div key={i} className="mb-4 flex flex-col items-center">
-            <div className="mb-1">{p.name}'s fake answer:</div>
-            <Input
-              value={fakeAnswers[i]}
-              onChange={(e) => handleFakeAnswerChange(i, e.target.value)}
-              placeholder="Type your fake answer"
-              disabled={!!fakeAnswers[i]}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && fakeAnswers[i].trim().length > 0) {
-                  // Lock in answer on enter
-                  handleFakeAnswerChange(i, fakeAnswers[i].trim());
-                }
-              }}
-            />
-            {fakeAnswers[i] && (
-              <div className="text-xs text-muted mt-1">Answer submitted!</div>
-            )}
-          </div>
-        ))}
+      <div className="mb-3 flex flex-col items-center">
+        <div className="font-semibold mb-2">{currentPlayer.name}'s fake answer:</div>
+        <textarea
+          value={fakeAnswers[currentAnsweringPlayerIdx]}
+          onChange={(e) => handleFakeAnswerChange(currentAnsweringPlayerIdx, e.target.value)}
+          placeholder="Type your fake answer"
+          rows={3}
+          className="w-full max-w-md p-2 border rounded resize-y"
+        />
       </div>
       <Button
-        onClick={submitFakeAnswers}
-        disabled={!allFakeAnswersSubmitted}
+        onClick={submitFakeAnswerForCurrentPlayer}
+        disabled={fakeAnswers[currentAnsweringPlayerIdx].trim().length === 0}
       >
-        Submit All Answers
+        {currentAnsweringPlayerIdx + 1 < players.length ? "Next Player" : "Submit All Answers"}
       </Button>
     </Card>
   );
