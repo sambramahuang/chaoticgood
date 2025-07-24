@@ -135,7 +135,7 @@ const WavelengthGame = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4 retro-scan">
+    <div className="min-h-screen bg-[url('/gaming-hero.jpg')] bg-cover bg-center bg-no-repeat flex flex-col items-center justify-center px-4 py-10 text-white font-pixel">
       <div className="w-full max-w-2xl space-y-8">
         <div className="flex items-center justify-between">
           <Button
@@ -144,10 +144,10 @@ const WavelengthGame = () => {
             className="flex items-center gap-2 font-pixel text-xs"
           >
             <ArrowLeft className="h-4 w-4" />
-            [BACK] Menu
+            Back to Menu
           </Button>
           
-          <h1 className="text-3xl font-pixel font-bold text-neon-yellow neon-text">
+          <h1 className="text-4xl font-arcade text-center my-4 bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-400 bg-clip-text text-transparent drop-shadow-[0_0_6px_rgba(255,200,100,0.9)]">
             WAVELENGTH
           </h1>
           
@@ -155,31 +155,28 @@ const WavelengthGame = () => {
         </div>
 
         {gamePhase === "setup" && (
-          <Card className="bg-gradient-surface border-border shadow-card p-8 text-center space-y-6">
+          <Card className="bg-black bg-opacity-60 border border-orange-500 p-4 rounded-xl text-center space-y-6">
             <div className="space-y-4">
-              <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto animate-float">
-                <span className="text-3xl">📊</span>
-              </div>
-              <h2 className="text-2xl font-bold text-foreground">How to Play Wavelength</h2>
-              <div className="text-left space-y-3 text-muted-foreground max-w-lg mx-auto">
-                <p>1. One player is the <strong className="text-foreground">guesser</strong> and looks away</p>
-                <p>2. A secret number (1-10) is generated for the other players</p>
-                <p>3. Each round, give an example from the category that matches the number's intensity</p>
-                <p>4. <strong className="text-foreground">1 = worst/weakest</strong>, <strong className="text-foreground">10 = best/strongest</strong></p>
-                <p>5. After several rounds, the guesser tries to guess the number!</p>
+              <h2 className="bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)] text-base font-bold">How to Play Wavelength</h2>
+              <div className="text-left space-y-3 max-w-lg mx-auto">
+                <p className="bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">1. One player is the <strong className="text-white">guesser</strong> and looks away</p>
+                <p className="bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">2. A secret number (1-10) is generated for the other players</p>
+                <p className="bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">3. Each round, give an example from the category that matches the number's intensity</p>
+                <p className="bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">4. <strong className="text-white">1 = worst/weakest</strong>, <strong className="text-white">10 = best/strongest</strong></p>
+                <p className="bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">5. After several rounds, the guesser tries to guess the number!</p>
               </div>
             </div>
 
             {/* Drinking Mode Toggle */}
-            <Card className="bg-gradient-surface border-border shadow-card p-4">
+            <Card className="bg-black bg-opacity-60 border border-orange-500 p-4 rounded-xl">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <Wine className="h-5 w-5 text-electric" />
+                  <Wine className="h-5 w-5 text-orange-300" />
                   <div>
-                    <Label htmlFor="drinking-mode" className="text-foreground font-medium">
+                    <Label htmlFor="drinking-mode" className="bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)] font-medium text-xs">
                       Drinking Game Mode
                     </Label>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-xs bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">
                       Wrong guesses = shots (difference between numbers)
                     </p>
                   </div>
@@ -193,34 +190,36 @@ const WavelengthGame = () => {
             </Card>
 
             {/* Number of Players */}
-            <Card className="bg-gradient-surface border-border shadow-card p-4">
+            <Card className="bg-black bg-opacity-60 border border-orange-500 p-4 rounded-xl">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <Users className="h-5 w-5 text-electric" />
+                  <Users className="h-5 w-5 text-orange-300" />
                   <div>
-                    <Label htmlFor="players" className="text-foreground font-medium">
+                    <Label htmlFor="players" className="bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)] font-medium text-xs">
                       Number of Players
                     </Label>
-                    <p className="text-sm text-muted-foreground">
+                    <p className="text-xs bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">
                       Total players including the guesser ({numberOfPlayers - 1} rounds)
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
                   <Button
-                    variant="outline"
+                    // variant="outline"
                     size="sm"
                     onClick={() => setNumberOfPlayers(Math.max(2, numberOfPlayers - 1))}
                     disabled={numberOfPlayers <= 2}
+                    className="text-xs px-3 py-1 font-pixel shadow-md shadow-orange-400/50 hover:shadow-yellow-300/80 border-orange-400"
                   >
                     -
                   </Button>
-                  <span className="text-xl font-bold min-w-[2rem] text-center">{numberOfPlayers}</span>
+                  <span className="text-sm font-bold min-w-[2rem] text-center">{numberOfPlayers}</span>
                   <Button
-                    variant="outline"
+                    // variant="outline"
                     size="sm"
                     onClick={() => setNumberOfPlayers(Math.min(10, numberOfPlayers + 1))}
                     disabled={numberOfPlayers >= 10}
+                    className="text-xs px-3 py-1 font-pixel shadow-md shadow-orange-400/50 hover:shadow-yellow-300/80 border-orange-400"
                   >
                     +
                   </Button>
@@ -228,7 +227,7 @@ const WavelengthGame = () => {
               </div>
             </Card>
 
-            <Button onClick={startNewRound} variant="gaming" size="lg" className="w-full">
+            <Button onClick={startNewRound} variant="gaming" size="lg" className="w-full text-xs">
               Start New Round
             </Button>
           </Card>
@@ -237,15 +236,15 @@ const WavelengthGame = () => {
         {gamePhase === "playing" && (
           <>
             {/* Secret Number Display */}
-            <Card className="bg-gradient-surface border-border shadow-card p-6">
+            <Card className="bg-black bg-opacity-60 border border-orange-500 p-4 rounded-xl">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center">
                     <Target className="h-6 w-6 text-primary-foreground" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-foreground">Secret Number</h3>
-                    <p className="text-sm text-muted-foreground">For non-guessers only</p>
+                    <h3 className="bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)] text-xs font-semibold">Secret Number</h3>
+                    <p className="text-xs bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">For non-guessers only</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -253,12 +252,12 @@ const WavelengthGame = () => {
                     variant="ghost"
                     size="sm"
                     onClick={() => setShowNumber(!showNumber)}
-                    className="flex items-center gap-2"
+                    className="flex items-center gap-2 text-xs px-3 py-1 font-pixel shadow-md shadow-orange-400/50 hover:shadow-yellow-300/80"
                   >
                     {showNumber ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     {showNumber ? "Hide" : "Show"}
                   </Button>
-                  <div className="text-4xl font-bold text-electric">
+                  <div className="text-lg font-bold text-orange-300 drop-shadow-[0_0_6px_rgba(255,200,100,0.8)]">
                     {showNumber ? secretNumber : "?"}
                   </div>
                 </div>
@@ -266,23 +265,23 @@ const WavelengthGame = () => {
             </Card>
 
             {/* Category Card */}
-            <Card className="bg-gradient-surface border-border shadow-card p-8 min-h-[300px] flex flex-col items-center justify-center text-center space-y-6">
+            <Card className="bg-black bg-opacity-60 border border-orange-500 p-6 min-h-[300px] flex flex-col items-center justify-center text-center space-y-6 rounded-xl">
               <div className="space-y-4">
-                <div className="flex items-center gap-2 text-muted-foreground">
+                <div className="flex items-center gap-2 bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">
                   <Users className="h-5 w-5" />
-                  <span>Round {roundNumber}</span>
+                  <span className="text-xs">Round {roundNumber}</span>
                 </div>
                 
                 {currentCategory ? (
                   <>
                     <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center mx-auto animate-pulse-electric">
-                      <span className="text-2xl">📝</span>
+                      <span className="text-xs">📝</span>
                     </div>
                     <div className="space-y-2">
-                      <p className="text-sm text-muted-foreground uppercase tracking-wide">Category</p>
-                      <h2 className="text-3xl font-bold text-foreground">{currentCategory}</h2>
+                      <p className="text-xs bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)] uppercase tracking-wide">Category</p>
+                      <h2 className="text-lg font-bold bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">{currentCategory}</h2>
                     </div>
-                    <p className="text-muted-foreground max-w-md">
+                    <p className="bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)] max-w-md">
                       Give an example that matches the intensity of the secret number (1 = worst, 10 = best)
                     </p>
                   </>
@@ -291,7 +290,7 @@ const WavelengthGame = () => {
                     <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto animate-float">
                       <RefreshCw className="h-8 w-8 animate-spin text-primary-foreground" />
                     </div>
-                    <p className="text-xl text-muted-foreground">Generating category...</p>
+                    <p className="text-sm bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">Generating category...</p>
                   </div>
                 )}
               </div>
@@ -302,7 +301,7 @@ const WavelengthGame = () => {
               <Button
                 onClick={nextCategory}
                 disabled={isLoading || !currentCategory}
-                className="bg-gradient-primary hover:shadow-electric transition-all duration-300 flex-1"
+                className="text-xs px-3 py-1 font-pixel shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 border-orange-400 hover:bg-orange-300 flex-1"
               >
                 {isLoading ? (
                   <>
@@ -316,16 +315,16 @@ const WavelengthGame = () => {
               
               <Button
                 onClick={startGuessing}
-                variant="electric"
+                // variant="electric"
                 disabled={roundNumber < requiredRounds}
-                className="flex-1"
+                className="text-xs px-3 py-1 font-pixel shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 border-orange-400 hover:bg-orange-300 flex-1"
               >
                 Start Guessing Phase
               </Button>
             </div>
             
             {roundNumber < requiredRounds && (
-              <p className="text-center text-sm text-muted-foreground">
+              <p className="text-center text-xs bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">
                 Complete {requiredRounds} rounds before guessing ({roundNumber}/{requiredRounds} done)
               </p>
             )}
@@ -333,16 +332,16 @@ const WavelengthGame = () => {
         )}
 
         {gamePhase === "guessing" && (
-          <Card className="bg-gradient-surface border-border shadow-card p-8 text-center space-y-6">
+          <Card className="bg-black bg-opacity-60 border border-orange-500 p-4 rounded-xl text-center space-y-6">
             <div className="space-y-4">
               <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto animate-float">
-                <span className="text-3xl">🤔</span>
+                <span className="text-lg">🤔</span>
               </div>
-              <h2 className="text-2xl font-bold text-foreground">Guesser's Turn!</h2>
-              <p className="text-muted-foreground max-w-md mx-auto">
+              <h2 className="bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)] text-base font-bold">Guesser's Turn!</h2>
+              <p className="bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)] max-w-md mx-auto">
                 Based on the {requiredRounds} examples you heard, what do you think the secret number was?
               </p>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-xs bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">
                 Remember: 1 = worst/weakest, 10 = best/strongest
               </p>
             </div>
@@ -350,7 +349,7 @@ const WavelengthGame = () => {
               onClick={() => setShowGuessDialog(true)} 
               variant="gaming" 
               size="lg" 
-              className="w-full"
+              className="w-full text-xs"
             >
               Make Your Guess
             </Button>
@@ -358,31 +357,31 @@ const WavelengthGame = () => {
         )}
 
         {gamePhase === "reveal" && (
-          <Card className="bg-gradient-surface border-border shadow-card p-8 text-center space-y-6">
+          <Card className="bg-black bg-opacity-60 border border-orange-500 p-4 rounded-xl text-center space-y-6">
             <div className="space-y-4">
               <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center mx-auto animate-pulse-electric">
-                <span className="text-3xl">🎉</span>
+                <span className="text-lg">🎉</span>
               </div>
-              <h2 className="text-2xl font-bold text-foreground">Results!</h2>
+              <h2 className="bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)] text-base font-bold">Results!</h2>
               
               <div className="grid grid-cols-2 gap-6 max-w-md mx-auto">
                 <div className="space-y-2">
-                  <p className="text-sm text-muted-foreground">Secret Number</p>
-                  <div className="text-4xl font-bold text-electric">{secretNumber}</div>
+                  <p className="text-xs bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">Secret Number</p>
+                  <div className="text-lg font-bold text-orange-300 drop-shadow-[0_0_6px_rgba(255,200,100,0.8)]">{secretNumber}</div>
                 </div>
                 <div className="space-y-2">
-                  <p className="text-sm text-muted-foreground">Your Guess</p>
-                  <div className="text-4xl font-bold text-foreground">{guessedNumber}</div>
+                  <p className="text-xs bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">Your Guess</p>
+                  <div className="text-lg font-bold text-white drop-shadow-[0_0_6px_rgba(255,200,100,0.8)]">{guessedNumber}</div>
                 </div>
               </div>
               
-              <div className="text-2xl">{getScoreText()}</div>
+              <div className="text-lg bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_6px_rgba(255,200,100,0.9)]">{getScoreText()}</div>
               
               {drinkingMode && (
-                <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-4">
-                  <div className="text-xl font-bold text-red-400">{getDrinkingText()}</div>
+                <div className="bg-orange-500/20 border border-orange-500/30 rounded-lg p-4">
+                  <div className="text-sm font-bold text-orange-300">{getDrinkingText()}</div>
                   {guessedNumber !== null && Math.abs(secretNumber - guessedNumber) > 0 && (
-                    <p className="text-sm text-red-300 mt-2">
+                    <p className="text-xs text-orange-300 mt-2">
                       🍻 Time to drink! Difference: {Math.abs(secretNumber - guessedNumber)}
                     </p>
                   )}
@@ -391,10 +390,10 @@ const WavelengthGame = () => {
             </div>
             
             <div className="flex gap-4">
-              <Button onClick={startNewRound} variant="gaming" className="flex-1">
+              <Button onClick={startNewRound} variant="gaming" className="flex-1 text-xs">
                 Play Again
               </Button>
-              <Button onClick={resetGame} variant="outline" className="flex-1">
+              <Button onClick={resetGame} className="text-xs px-3 py-1 font-pixel shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 border-orange-400 hover:bg-orange-300 flex-1">
                 Back to Menu
               </Button>
             </div>
@@ -403,28 +402,32 @@ const WavelengthGame = () => {
 
         {/* Guess Dialog */}
         <Dialog open={showGuessDialog} onOpenChange={setShowGuessDialog}>
-          <DialogContent className="bg-gaming-surface border-border">
+          <DialogContent className="bg-black bg-opacity-80 border border-orange-500 rounded-xl">
             <DialogHeader>
-              <DialogTitle className="text-foreground text-center">Make Your Guess</DialogTitle>
+              <DialogTitle className="bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)] text-center text-sm">Make Your Guess</DialogTitle>
             </DialogHeader>
             <div className="space-y-6">
-              <p className="text-center text-muted-foreground">
+              <p className="text-center bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">
                 What number do you think it was?
               </p>
               <div className="grid grid-cols-5 gap-2">
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
                   <Button
                     key={num}
-                    variant={guessedNumber === num ? "gaming" : "outline"}
+                    variant={guessedNumber === num ? "gaming" : undefined}
                     onClick={() => setGuessedNumber(num)}
-                    className="aspect-square text-lg font-bold"
+                    className={`aspect-square text-xs font-bold ${guessedNumber !== num ? "text-xs px-3 py-1 font-pixel shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 border-orange-400 hover:bg-orange-300" : ""}`}
                   >
                     {num}
                   </Button>
                 ))}
               </div>
               <div className="flex gap-2 justify-end">
-                <Button variant="outline" onClick={() => setShowGuessDialog(false)}>
+                <Button
+                  // variant="outline"
+                  onClick={() => setShowGuessDialog(false)}
+                  className="text-xs px-3 py-1 font-pixel shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 border-orange-400 hover:bg-orange-300"
+                >
                   Cancel
                 </Button>
                 <Button variant="gaming" onClick={submitGuess}>
