@@ -141,7 +141,7 @@ const WavelengthGame = () => {
           <Button
             variant="retro"
             onClick={() => navigate("/")}
-            className="flex items-center gap-2 font-pixel text-xs"
+            className="flex items-center gap-2 font-pixel text-xs text-white rounded-md shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 bg-orange-600 hover:bg-orange-400 px-3 py-1"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Menu
@@ -209,7 +209,7 @@ const WavelengthGame = () => {
                     size="sm"
                     onClick={() => setNumberOfPlayers(Math.max(2, numberOfPlayers - 1))}
                     disabled={numberOfPlayers <= 2}
-                    className="text-xs px-3 py-1 font-pixel shadow-md shadow-orange-400/50 hover:shadow-yellow-300/80 border-orange-400"
+                    className="text-xs px-3 py-1 font-pixel shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 border-orange-400 hover:bg-orange-300"
                   >
                     -
                   </Button>
@@ -219,7 +219,7 @@ const WavelengthGame = () => {
                     size="sm"
                     onClick={() => setNumberOfPlayers(Math.min(10, numberOfPlayers + 1))}
                     disabled={numberOfPlayers >= 10}
-                    className="text-xs px-3 py-1 font-pixel shadow-md shadow-orange-400/50 hover:shadow-yellow-300/80 border-orange-400"
+                    className="text-xs px-3 py-1 font-pixel shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 border-orange-400 hover:bg-orange-300"
                   >
                     +
                   </Button>
@@ -227,7 +227,10 @@ const WavelengthGame = () => {
               </div>
             </Card>
 
-            <Button onClick={startNewRound} variant="gaming" size="lg" className="w-full text-xs">
+            <Button
+              onClick={startNewRound}
+              className="w-full text-xs font-pixel bg-orange-600 hover:bg-orange-400 text-white rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 px-3 py-2"
+            >
               Start New Round
             </Button>
           </Card>
@@ -252,7 +255,7 @@ const WavelengthGame = () => {
                     variant="ghost"
                     size="sm"
                     onClick={() => setShowNumber(!showNumber)}
-                    className="flex items-center gap-2 text-xs px-3 py-1 font-pixel shadow-md shadow-orange-400/50 hover:shadow-yellow-300/80"
+                    className="flex items-center gap-2 text-xs px-3 py-1 font-pixel shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 border-orange-400 hover:bg-orange-300"
                   >
                     {showNumber ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                     {showNumber ? "Hide" : "Show"}
@@ -390,10 +393,16 @@ const WavelengthGame = () => {
             </div>
             
             <div className="flex gap-4">
-              <Button onClick={startNewRound} variant="gaming" className="flex-1 text-xs">
+              <Button
+                onClick={startNewRound}
+                className="flex-1 text-xs font-pixel bg-orange-600 hover:bg-orange-400 text-white rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 px-3 py-2"
+              >
                 Play Again
               </Button>
-              <Button onClick={resetGame} className="text-xs px-3 py-1 font-pixel shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 border-orange-400 hover:bg-orange-300 flex-1">
+              <Button
+                onClick={resetGame}
+                className="flex items-center justify-center text-xs font-pixel text-white rounded-md bg-orange-600 hover:bg-orange-400 shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 px-3 py-2 border-none outline-none ring-0 focus:ring-0 focus:outline-none focus-visible:ring-0 focus-visible:outline-none"
+              >
                 Back to Menu
               </Button>
             </div>
@@ -416,7 +425,11 @@ const WavelengthGame = () => {
                     key={num}
                     variant={guessedNumber === num ? "gaming" : undefined}
                     onClick={() => setGuessedNumber(num)}
-                    className={`aspect-square text-xs font-bold ${guessedNumber !== num ? "text-xs px-3 py-1 font-pixel shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 border-orange-400 hover:bg-orange-300" : ""}`}
+                    className={
+                      guessedNumber === num
+                        ? "aspect-square text-xs font-bold"
+                        : "aspect-square text-xs font-bold text-xs px-3 py-1 font-pixel shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 border-orange-400 hover:bg-orange-300"
+                    }
                   >
                     {num}
                   </Button>

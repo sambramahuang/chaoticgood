@@ -76,23 +76,22 @@ const PicoloGame = () => {
         {/* header */}
         <div className="flex items-center justify-between">
           <Button
-            variant="retro"
             onClick={() => (window.location.href = "/")}
-            className="flex items-center gap-2 font-pixel text-xs"
+            className="text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 flex items-center gap-2"
           >
             <ArrowLeft className="h-4 w-4" />
             [BACK] Menu
           </Button>
-          <h1 className="text-3xl font-bold text-neon-yellow neon-text">PICOLO MODE</h1>
+          <h1 className="text-3xl font-arcade text-center my-2 sm:my-4 bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-400 bg-clip-text text-transparent drop-shadow-[0_0_6px_rgba(255,200,100,0.9)]">PICOLO MODE</h1>
           <div className="w-24" />
         </div>
 
         {/* setup or game screen */}
         {!gameStarted ? (
           <Card className="p-6 bg-gradient-surface space-y-4">
-            <h2 className="text-xl font-semibold">Add Players</h2>
+            <h2 className="text-xl font-semibold font-pixel">Add Players</h2>
             <div className="flex gap-2 items-center">
-              <span>Number of players:</span>
+              <span className="font-pixel">Number of players:</span>
               <input
                 type="number"
                 min={MIN_PLAYERS}
@@ -103,7 +102,7 @@ const PicoloGame = () => {
                   setNumPlayers(val);
                   setTempNames(Array(val).fill(""));
                 }}
-                className="border px-2 py-1 w-16 rounded"
+                className="border px-2 py-1 w-16 rounded font-pixel text-black"
               />
             </div>
 
@@ -118,20 +117,20 @@ const PicoloGame = () => {
                   updated[idx] = e.target.value;
                   setTempNames(updated);
                 }}
-                className="w-full border rounded p-2"
+                className="w-full border rounded p-2 font-pixel text-black"
               />
             ))}
 
-            <Button onClick={startGame} className="w-full mt-2">
+            <Button onClick={startGame} className="w-full mt-2 text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80">
               Start Game
             </Button>
           </Card>
         ) : (
           <Card className="bg-gradient-surface border-border shadow-card p-6 text-center space-y-4">
-            <h2 className="text-xl font-semibold">Current Prompt</h2>
+            <h2 className="text-xl font-semibold font-pixel">Current Prompt</h2>
             {showPrompt ? (
               <div
-                className={`rounded-lg p-6 text-lg font-bold text-white ${
+                className={`rounded-lg p-6 text-lg font-bold font-pixel text-white ${
                   categories[
                     (currentPrompt &&
                       (Object.keys(categories) as (keyof typeof categories)[]).find((t) =>
@@ -144,14 +143,14 @@ const PicoloGame = () => {
                 {currentPrompt || "Press Next to start!"}
               </div>
             ) : (
-              <div className="text-muted-foreground italic">Prompt is hidden</div>
+              <div className="text-muted-foreground italic font-pixel">Prompt is hidden</div>
             )}
             <div className="flex gap-2 justify-center">
-              <Button onClick={() => setShowPrompt(!showPrompt)} variant="outline">
+              <Button onClick={() => setShowPrompt(!showPrompt)} className="text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80">
                 {showPrompt ? <EyeOff className="w-4 h-4 mr-2" /> : <Eye className="w-4 h-4 mr-2" />}
                 {showPrompt ? "Hide" : "Show"}
               </Button>
-              <Button onClick={getRandomPrompt}>
+              <Button onClick={getRandomPrompt} className="text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80">
                 <RefreshCw className="w-4 h-4 mr-2" />
                 Next
               </Button>

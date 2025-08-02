@@ -34,22 +34,23 @@ const FibbageGame = () => {
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
       <div className="w-full max-w-2xl space-y-8">
         <div className="flex items-center justify-between">
-          <Button variant="ghost" onClick={() => navigate("/")} className="flex items-center gap-2 hover:bg-secondary">
+          <Button onClick={() => navigate("/")} className="text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 flex items-center gap-2">
             <ArrowLeft className="h-4 w-4" /> Back to Menu
           </Button>
-          <h1 className="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent">Fibbage</h1>
+          <h1 className="text-3xl font-arcade bg-gradient-primary bg-clip-text text-transparent">Fibbage</h1>
           <div className="w-10" />
         </div>
 
         {!gameStarted ? (
-          <Card className="p-6 space-y-4">
+          <Card className="p-6 space-y-4 font-pixel">
             <Input
               placeholder="Enter player name"
               value={playerName}
               onChange={(e) => setPlayerName(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && addPlayer()}
+              className="bg-white text-black placeholder-gray-500"
             />
-            <Button onClick={addPlayer} disabled={!playerName}>Add Player</Button>
+            <Button onClick={addPlayer} disabled={!playerName} className="text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80">Add Player</Button>
             <div className="space-y-2">
               {players.map((p, i) => (
                 <div key={i} className="text-sm">{p.name}</div>
@@ -63,9 +64,10 @@ const FibbageGame = () => {
                 onChange={(e) => setNumRounds(Number(e.target.value))}
                 min={1}
                 max={10}
+                className="bg-white text-black placeholder-gray-500"
               />
             </div>
-            <Button className="mt-4" onClick={startGame} disabled={players.length < 2}>
+            <Button className="mt-4 text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80" onClick={startGame} disabled={players.length < 2}>
               Start Game
             </Button>
           </Card>
@@ -276,7 +278,7 @@ const FibbageGameFlow = ({
   if (phase === "final") {
     const sorted = [...playerStates].sort((a, b) => b.score - a.score);
     return (
-      <Card className="p-8 text-center space-y-4">
+      <Card className="p-8 text-center space-y-4 font-pixel">
         <h2 className="text-2xl font-bold mb-4">Game Over!</h2>
         <div className="mb-4">
           <h3 className="text-xl font-semibold mb-2">Final Scores</h3>
@@ -286,7 +288,7 @@ const FibbageGameFlow = ({
             </div>
           ))}
         </div>
-        <Button onClick={onBackToMenu}>Back to Menu</Button>
+        <Button onClick={onBackToMenu} className="text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80">Back to Menu</Button>
       </Card>
     );
   }
@@ -294,7 +296,7 @@ const FibbageGameFlow = ({
   // Reveal phase
   if (phase === "reveal" && revealData) {
     return (
-      <Card className="p-8 text-center space-y-4">
+      <Card className="p-8 text-center space-y-4 font-pixel">
         <h2 className="text-xl font-bold mb-3">Round {round + 1} Results</h2>
         <div className="mb-3">
           <div className="mb-2 font-semibold">Question:</div>
@@ -337,7 +339,7 @@ const FibbageGameFlow = ({
             ))}
           </ul>
         </div>
-        <Button onClick={nextRound}>
+        <Button onClick={nextRound} className="text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80">
           {round + 1 < numRounds ? "Next Round" : "See Final Scores"}
         </Button>
       </Card>
@@ -348,7 +350,7 @@ const FibbageGameFlow = ({
   if (phase === "vote") {
     const p = playerStates[currentVotingPlayerIdx];
     return (
-      <Card className="p-8 text-center space-y-6">
+      <Card className="p-8 text-center space-y-6 font-pixel">
         <h2 className="text-xl font-bold">Round {round + 1}: Vote</h2>
         <div className="mb-3">
           <div className="mb-1 font-semibold">Question:</div>
@@ -360,8 +362,7 @@ const FibbageGameFlow = ({
             {shuffledAnswers.map((ans, idx) => (
               <Button
                 key={idx}
-                variant={votes[currentVotingPlayerIdx] === idx ? "default" : "secondary"}
-                className="w-full"
+                className="text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 w-full"
                 disabled={
                   votes[currentVotingPlayerIdx] !== null ||
                   (ans.author === currentVotingPlayerIdx) // can't vote your own fake answer
@@ -380,11 +381,12 @@ const FibbageGameFlow = ({
           <Button
             onClick={submitVoteForCurrentPlayer}
             disabled={votes[currentVotingPlayerIdx] === null}
+            className="text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80"
           >
             {currentVotingPlayerIdx + 1 < players.length ? "Next Voter" : "Ready to Reveal"}
           </Button>
           {allVotesSubmitted && (
-            <Button onClick={submitVotes}>
+            <Button onClick={submitVotes} className="text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80">
               Reveal Results
             </Button>
           )}
@@ -396,7 +398,7 @@ const FibbageGameFlow = ({
   // Fake answer submission phase
   const currentPlayer = playerStates[currentAnsweringPlayerIdx];
   return (
-    <Card className="p-8 text-center space-y-6">
+    <Card className="p-8 text-center space-y-6 font-pixel">
       <h2 className="text-xl font-bold">Round {round + 1} of {numRounds}</h2>
       <div className="mb-3">
         <div className="mb-1 font-semibold">Question:</div>
@@ -409,12 +411,13 @@ const FibbageGameFlow = ({
           onChange={(e) => handleFakeAnswerChange(currentAnsweringPlayerIdx, e.target.value)}
           placeholder="Type your fake answer"
           rows={3}
-          className="w-full max-w-md p-2 border rounded resize-y"
+          className="w-full max-w-md p-2 border rounded resize-y font-pixel text-black"
         />
       </div>
       <Button
         onClick={submitFakeAnswerForCurrentPlayer}
         disabled={fakeAnswers[currentAnsweringPlayerIdx].trim().length === 0}
+        className="text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80"
       >
         {currentAnsweringPlayerIdx + 1 < players.length ? "Next Player" : "Submit All Answers"}
       </Button>
