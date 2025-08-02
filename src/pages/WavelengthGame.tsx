@@ -20,6 +20,7 @@ const WavelengthGame = () => {
   const [showGuessDialog, setShowGuessDialog] = useState(false);
   const [drinkingMode, setDrinkingMode] = useState(false);
   const [numberOfPlayers, setNumberOfPlayers] = useState(4);
+  const [skipUsed, setSkipUsed] = useState(false);
 
   const categories = [
     "Basketball Players",
@@ -46,7 +47,49 @@ const WavelengthGame = () => {
     "Vacation Destinations",
     "Sports",
     "Cartoon Characters",
-    "Movie Genres"
+    "Movie Genres",
+    // New categories
+    "NBA Players",
+    "K-Pop Songs",
+    "Taylor Swift Songs",
+    "TikTok Trends",
+    "Anime Characters",
+    "Disney Movies",
+    "Marvel Characters",
+    "Horror Movies",
+    "YouTubers",
+    "Celebrity Couples",
+    "Viral Memes",
+    "Rappers",
+    "Pop Songs",
+    "Asian Street Foods",
+    "Luxury Brands",
+    "Super Smash Bros Characters",
+    "Game of Thrones Characters",
+    "Harry Potter Spells",
+    "Fantasy Creatures",
+    "Reality TV Shows",
+    // Even more categories
+    "Romantic Comedies",
+    "Science Fiction Movies",
+    "Stand-up Comedians",
+    "Instagram Filters",
+    "Fashion Trends",
+    "K-Drama Series",
+    "Disney Villains",
+    "Anime Openings",
+    "Pixar Characters",
+    "Celebrity Scandals",
+    "Conspiracy Theories",
+    "Viral TikTok Songs",
+    "Historical Events",
+    "World Leaders",
+    "Video Game Bosses",
+    "Famous Paintings",
+    "Classic Novels",
+    "Superstitions",
+    "Musical Instruments",
+    "Streetwear Brands"
   ];
 
   const startNewRound = () => {
@@ -57,6 +100,7 @@ const WavelengthGame = () => {
     generateCategory();
     setShowNumber(true);
     setGuessedNumber(null);
+    setSkipUsed(false);
   };
 
   const generateCategory = async () => {
@@ -82,6 +126,7 @@ const WavelengthGame = () => {
   const nextCategory = () => {
     setRoundNumber(prev => prev + 1);
     generateCategory();
+    setSkipUsed(false); // reset skip on player change
   };
 
   const startGuessing = () => {
@@ -312,10 +357,21 @@ const WavelengthGame = () => {
                     Loading...
                   </>
                 ) : (
-                  "Next Category"
+                  "Next Player"
                 )}
               </Button>
-              
+
+              <Button
+                onClick={() => {
+                  generateCategory();
+                  setSkipUsed(true);
+                }}
+                disabled={isLoading || skipUsed}
+                className="text-xs px-3 py-1 font-pixel shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 border-orange-400 hover:bg-orange-300 flex-1"
+              >
+                Skip Category
+              </Button>
+
               <Button
                 onClick={startGuessing}
                 // variant="electric"
