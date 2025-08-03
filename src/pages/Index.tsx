@@ -84,7 +84,7 @@ const Index = () => {
 
           {/* Truth or Dare Card */}
           <Card 
-            onClick={() => navigate("/game/truth-or-dare")}
+            onClick={() => navigate("/game/truthOrDare")}
             className="retro-button bg-gradient-to-b from-black via-black to-orange-900 border-2 border-orange-500 shadow-orange-500 p-8 hover:shadow-orange-500 transition-all duration-200 hover:scale-105 cursor-pointer group relative overflow-hidden"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
