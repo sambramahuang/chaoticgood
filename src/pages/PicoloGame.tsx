@@ -1,29 +1,21 @@
-// PicoloGame.tsx
-import { useState } from "react";
+// src/pages/PicoloGame.tsx
+import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowLeft, Eye, EyeOff, RefreshCw } from "lucide-react";
+import {
+  regularPrompts,
+  circleNamingGames,
+  memoryChainGames,
+  charadeActionJokeGames,
+  virusEffects,
+  splitTheRoomQuestions,
+  bets
+} from "@/data/picolo";
+import type { VirusEffect } from "@/data/picolo";
 
 const MAX_PLAYERS = 20;
 const MIN_PLAYERS = 2;
-
-const promptsData = [
-  { text: "{{player}}, what's your guilty pleasure?", type: "truth", category: "mild" },
-  { text: "{{player}}, call your ex or drink 3 sips.", type: "dare", category: "spicy" },
-  { text: "Everyone who's single drinks 1 sip.", type: "group", category: "mild" },
-  { text: "{{player}}, compliment {{random_player}} sincerely or take 2 sips.", type: "dare", category: "mild" },
-  { text: "{{player}}, confess your first impression of {{random_player}}.", type: "truth", category: "mild" },
-  { text: "{{player}}, do your best impression of {{random_player}}.", type: "challenge", category: "mild" },
-  { text: "{{player}}, bark before every sentence or drink twice.", type: "rule", category: "spicy" }
-];
-
-const categories = {
-  truth: "bg-blue-500",
-  dare: "bg-red-500",
-  group: "bg-green-500",
-  challenge: "bg-yellow-500",
-  rule: "bg-purple-500"
-};
 
 const PicoloGame = () => {
   const [gameStarted, setGameStarted] = useState(false);
@@ -33,125 +25,144 @@ const PicoloGame = () => {
   const [currentPrompt, setCurrentPrompt] = useState<string | null>(null);
   const [usedIndexes, setUsedIndexes] = useState<Set<number>>(new Set());
   const [showPrompt, setShowPrompt] = useState(true);
-  const [mode] = useState<"mild" | "spicy" | "insane">("mild");  // default mode
+  const [activeVirus, setActiveVirus] = useState<VirusEffect | null>(null);
+  const [virusRounds, setVirusRounds] = useState(0);
+
+  // Combine all prompts
+  const allPrompts = useMemo(
+    () => [
+      ...regularPrompts,
+      ...circleNamingGames,
+      ...memoryChainGames,
+      ...charadeActionJokeGames,
+      ...splitTheRoomQuestions,
+      ...bets
+    ],
+    []
+  );
+
+  // Inject actor/target into underscores
+  const injectPlayers = (text: string) => {
+    const actor = playerNames[Math.floor(Math.random() * playerNames.length)];
+    const others = playerNames.filter((n) => n !== actor);
+    const target = others.length
+      ? others[Math.floor(Math.random() * others.length)]
+      : actor;
+    let count = 0;
+    return text.replace(/_/g, () => (count++ === 0 ? actor : target));
+  };
 
   const startGame = () => {
     if (tempNames.length === numPlayers && tempNames.every((n) => n.trim() !== "")) {
       setPlayerNames(tempNames);
       setGameStarted(true);
+      // pick a random virus
+      const virus = virusEffects[Math.floor(Math.random() * virusEffects.length)];
+      const rounds = Math.floor(Math.random() * 6) + 3; // 3-8
+      setActiveVirus(virus);
+      setVirusRounds(rounds);
     }
   };
 
   const getRandomPrompt = () => {
-    const filtered = promptsData.filter((p) => p.category === mode || mode === "insane");
-    const availableIndexes = filtered.map((_, i) => i).filter((i) => !usedIndexes.has(i));
+    // virus phase
+    if (activeVirus) {
+      if (virusRounds > 0) {
+        // inject and prefix
+        const base = injectPlayers(activeVirus.prompt);
+        setCurrentPrompt(`VIRUS: ${base}`);
+        setVirusRounds((r) => r - 1);
+      } else {
+        // Virus ended, show activation message
+        setCurrentPrompt(`VIRUS: ${injectPlayers(activeVirus.activation)}`);
+        setActiveVirus(null);
+      }
+      return;
+    }
 
-    if (availableIndexes.length === 0) {
+    // normal prompts
+    const available = allPrompts.filter((_, i) => !usedIndexes.has(i));
+    if (available.length === 0) {
       setUsedIndexes(new Set());
       setCurrentPrompt("🎉 All prompts used! Restarting...");
       return;
     }
-
-    const randomIdx = availableIndexes[Math.floor(Math.random() * availableIndexes.length)];
-    const prompt = filtered[randomIdx];
-
-    const randomPlayer = () => playerNames[Math.floor(Math.random() * playerNames.length)];
-    const p = randomPlayer();
-    const otherPlayers = playerNames.filter((n) => n !== p);
-    const rp = otherPlayers[Math.floor(Math.random() * otherPlayers.length)];
-
-    const finalText = prompt.text
-      .replace(/{{player}}/g, p)
-      .replace(/{{random_player}}/g, rp)
-      .replace(/{{all_players}}/g, playerNames.join(", "))
-      .replace(/{{others}}/g, otherPlayers.join(", "));
-
-    setUsedIndexes(new Set(usedIndexes).add(randomIdx));
-    setCurrentPrompt(finalText);
+    const idxList = allPrompts.map((_, i) => i).filter((i) => !usedIndexes.has(i));
+    const choice = idxList[Math.floor(Math.random() * idxList.length)];
+    setUsedIndexes((s) => new Set(s).add(choice));
+    const gameText = injectPlayers(allPrompts[choice]);
+    setCurrentPrompt(`GAME: ${gameText}`);
   };
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background p-6">
       <div className="w-full max-w-xl space-y-6">
-        {/* header */}
+        {/* Header */}
         <div className="flex items-center justify-between">
           <Button
-            onClick={() => (window.location.href = "/")}
-            className="text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 flex items-center gap-2"
+            onClick={() => (window.location.href = "/picolo")}
+            className="flex items-center gap-2 text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80"
           >
             <ArrowLeft className="h-4 w-4" />
-            [BACK] Menu
+            [BACK]
           </Button>
-          <h1 className="text-3xl font-arcade text-center my-2 sm:my-4 bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-400 bg-clip-text text-transparent drop-shadow-[0_0_6px_rgba(255,200,100,0.9)]">PICOLO MODE</h1>
+          <h1 className="text-3xl font-arcade text-center bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-400 drop-shadow-[0_0_6px_rgba(255,200,100,0.9)]">
+            PICOLO MODE
+          </h1>
           <div className="w-24" />
         </div>
 
-        {/* setup or game screen */}
         {!gameStarted ? (
           <Card className="p-6 bg-gradient-surface space-y-4">
-            <h2 className="text-xl font-semibold font-pixel">Add Players</h2>
-            <div className="flex gap-2 items-center">
-              <span className="font-pixel">Number of players:</span>
+            <h2 className="text-xl font-pixel">Add Players</h2>
+            <div className="flex gap-2 items-center font-pixel">
+              <span>Number of players:</span>
               <input
                 type="number"
                 min={MIN_PLAYERS}
                 max={MAX_PLAYERS}
                 value={numPlayers}
                 onChange={(e) => {
-                  const val = Math.min(MAX_PLAYERS, Math.max(MIN_PLAYERS, Number(e.target.value)));
+                  const val = Math.max(MIN_PLAYERS, Math.min(MAX_PLAYERS, Number(e.target.value)));
                   setNumPlayers(val);
                   setTempNames(Array(val).fill(""));
                 }}
-                className="border px-2 py-1 w-16 rounded font-pixel text-black"
+                className="w-16 border rounded px-2 py-1 text-black"
               />
             </div>
-
-            {Array.from({ length: numPlayers }).map((_, idx) => (
+            {Array.from({ length: numPlayers }).map((_, i) => (
               <input
-                key={idx}
+                key={i}
                 type="text"
-                placeholder={`Player ${idx + 1}`}
-                value={tempNames[idx] || ""}
+                placeholder={`Player ${i+1}`}
+                value={tempNames[i] || ""}
                 onChange={(e) => {
-                  const updated = [...tempNames];
-                  updated[idx] = e.target.value;
-                  setTempNames(updated);
+                  const copy = [...tempNames]; copy[i] = e.target.value; setTempNames(copy);
                 }}
                 className="w-full border rounded p-2 font-pixel text-black"
               />
             ))}
-
-            <Button onClick={startGame} className="w-full mt-2 text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80">
+            <Button onClick={startGame} className="w-full text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1">
               Start Game
             </Button>
           </Card>
         ) : (
-          <Card className="bg-gradient-surface border-border shadow-card p-6 text-center space-y-4">
-            <h2 className="text-xl font-semibold font-pixel">Current Prompt</h2>
+          <Card className="p-6 bg-gradient-surface text-center space-y-4">
+            <h2 className="text-xl font-pixel">Current Prompt</h2>
             {showPrompt ? (
-              <div
-                className={`rounded-lg p-6 text-lg font-bold font-pixel text-white ${
-                  categories[
-                    (currentPrompt &&
-                      (Object.keys(categories) as (keyof typeof categories)[]).find((t) =>
-                        currentPrompt.toLowerCase().includes(t)
-                      )) ||
-                      "truth"
-                  ]
-                }`}
-              >
+              <div className="bg-blue-500 text-white p-6 rounded-lg font-pixel text-lg font-bold">
                 {currentPrompt || "Press Next to start!"}
               </div>
             ) : (
-              <div className="text-muted-foreground italic font-pixel">Prompt is hidden</div>
+              <div className="italic text-muted-foreground font-pixel">Prompt hidden</div>
             )}
-            <div className="flex gap-2 justify-center">
-              <Button onClick={() => setShowPrompt(!showPrompt)} className="text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80">
-                {showPrompt ? <EyeOff className="w-4 h-4 mr-2" /> : <Eye className="w-4 h-4 mr-2" />}
+            <div className="flex justify-center gap-2">
+              <Button onClick={() => setShowPrompt((s) => !s)} className="text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 px-3 flex items-center gap-2">
+                {showPrompt ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 {showPrompt ? "Hide" : "Show"}
               </Button>
-              <Button onClick={getRandomPrompt} className="text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80">
-                <RefreshCw className="w-4 h-4 mr-2" />
+              <Button onClick={getRandomPrompt} className="text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 px-3 flex items-center gap-2">
+                <RefreshCw className="w-4 h-4" />
                 Next
               </Button>
             </div>
