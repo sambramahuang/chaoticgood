@@ -255,11 +255,11 @@ const BattleRoyale = () => {
 
         {!gameStarted ? (
           <Card className="p-6 bg-gradient-surface space-y-4 min-h-[420px]">
-            <h2 className="text-xl font-pixel">Add Players</h2>
+            <h2 className=" text-xl font-pixel bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">Add Players</h2>
 
             {/* Controls row stays fixed (sticky) */}
             <div className="sticky top-0 z-10 bg-gradient-surface/90 backdrop-blur supports-[backdrop-filter]:bg-gradient-surface/60 border-b pb-3">
-              <div className="flex items-center justify-between font-pixel">
+              <div className="flex items-center justify-between font-pixel text-white">
                 <span>Number of players:</span>
                 <div className="flex items-center gap-2">
                   <Button
@@ -320,13 +320,13 @@ const BattleRoyale = () => {
           </Card>
         ) : (
           <Card className="p-6 bg-gradient-surface text-center space-y-4">
-            <h2 className="text-xl font-pixel">Current Prompt</h2>
+            <h2 className="text-xl font-pixel bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">Current Prompt</h2>
 
             {/* Locked height so Next row doesn't shift */}
             <div
-              className="bg-black bg-opacity-60 text-white p-6 rounded-lg font-pixel text-lg font-bold
-                         h-56 md:h-64 overflow-y-auto flex items-center justify-center text-center
-                         whitespace-pre-wrap"
+              className="bg-black bg-opacity-60 text-white p-10 rounded-lg font-pixel text-lg font-bold
+             h-72 md:h-80 overflow-y-auto flex items-center justify-center text-center
+             whitespace-pre-wrap"
             >
               <span className="block">
                 {currentPrompt || "Press Next to start!"}
