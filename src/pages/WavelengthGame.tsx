@@ -200,15 +200,15 @@ const WavelengthGame = () => {
         </div>
 
         {gamePhase === "setup" && (
-          <Card className="bg-black bg-opacity-60 border border-orange-500 p-4 rounded-xl text-center space-y-6">
+          <Card className="bg-black bg-opacity-60 border border-orange-500 p-4 rounded-xl text-center space-y-6 font-sans">
             <div className="space-y-4">
-              <h2 className="bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)] text-base font-bold">How to Play Wavelength</h2>
-              <div className="text-left space-y-3 max-w-lg mx-auto">
-                <p className="bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">1. One player is the <strong className="text-white">guesser</strong> and looks away</p>
-                <p className="bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">2. A secret number (1-10) is generated for the other players</p>
-                <p className="bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">3. Each round, give an example from the category that matches the number's intensity</p>
-                <p className="bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">4. <strong className="text-white">1 = worst/weakest</strong>, <strong className="text-white">10 = best/strongest</strong></p>
-                <p className="bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">5. After several rounds, the guesser tries to guess the number!</p>
+              <h2 className="text-white text-base font-bold font-sans">How to Play Wavelength</h2>
+              <div className="text-left space-y-3 max-w-lg mx-auto font-sans">
+                <p className="text-white font-sans">1. One player is the <strong className="text-white">guesser</strong> and looks away</p>
+                <p className="text-white font-sans">2. A secret number (1-10) is generated for the other players</p>
+                <p className="text-white font-sans">3. Each round, give an example from the category that matches the number's intensity</p>
+                <p className="text-white font-sans">4. <strong className="text-white">1 = worst/weakest</strong>, <strong className="text-white">10 = best/strongest</strong></p>
+                <p className="text-white font-sans">5. After several rounds, the guesser tries to guess the number!</p>
               </div>
             </div>
 
@@ -322,9 +322,6 @@ const WavelengthGame = () => {
                 
                 {currentCategory ? (
                   <>
-                    <div className="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center mx-auto animate-pulse-electric">
-                      <span className="text-xs">📝</span>
-                    </div>
                     <div className="space-y-2">
                       <p className="text-xs bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)] uppercase tracking-wide">Category</p>
                       <h2 className="text-lg font-bold bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">{currentCategory}</h2>

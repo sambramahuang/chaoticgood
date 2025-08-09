@@ -1,5 +1,6 @@
 // src/pages/BattleRoyale.tsx
 import { useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowLeft, Eye, EyeOff, RefreshCw } from "lucide-react";
