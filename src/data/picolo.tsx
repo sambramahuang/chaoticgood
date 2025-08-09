@@ -1,6 +1,8 @@
 // src/data/picolo.tsx
 // Categorized Picolo-style game prompts and virus effects
 
+import { ZAxis } from "recharts";
+
 export interface VirusEffect {
   prompt: string;
   activation: string;

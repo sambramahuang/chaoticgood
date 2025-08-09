@@ -1,4 +1,4 @@
-// src/pages/PicoloGame.tsx
+// src/pages/BattleRoyale.tsx
 import { useState, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -17,7 +17,7 @@ import type { VirusEffect } from "@/data/picolo";
 const MAX_PLAYERS = 20;
 const MIN_PLAYERS = 2;
 
-const PicoloGame = () => {
+const BattleRoyale = () => {
   const [gameStarted, setGameStarted] = useState(false);
   const [numPlayers, setNumPlayers] = useState(MIN_PLAYERS);
   const [playerNames, setPlayerNames] = useState<string[]>([]);
@@ -100,14 +100,14 @@ const PicoloGame = () => {
         {/* Header */}
         <div className="flex items-center justify-between">
           <Button
-            onClick={() => (window.location.href = "/picolo")}
+            onClick={() => (window.location.href = "/")}
             className="flex items-center gap-2 text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80"
           >
             <ArrowLeft className="h-4 w-4" />
             [BACK]
           </Button>
           <h1 className="text-3xl font-arcade text-center bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-400 drop-shadow-[0_0_6px_rgba(255,200,100,0.9)]">
-            PICOLO MODE
+            BATTLE ROYALE
           </h1>
           <div className="w-24" />
         </div>
@@ -173,4 +173,4 @@ const PicoloGame = () => {
   );
 };
 
-export default PicoloGame;
+export default BattleRoyale;
