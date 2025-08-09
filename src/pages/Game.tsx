@@ -112,57 +112,59 @@ const Game = () => {
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center p-4">
-      <div className="w-full max-w-2xl space-y-8">
-        <div className="flex items-center justify-between">
-          <Button variant="ghost" onClick={() => navigate("/")} className="flex items-center gap-2 hover:bg-secondary">
-            <ArrowLeft className="h-4 w-4" /> Back to Menu
+      <div className="w-full max-w-2xl space-y-8 font-pixel">
+        <div className="flex items-center justify-between gap-2">
+          <Button onClick={() => navigate("/")} className="flex items-center gap-2 text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80">
+            <ArrowLeft className="h-4 w-4" />
+            Back to Menu
           </Button>
-          <h1 className="text-3xl font-bold bg-gradient-primary bg-clip-text text-transparent">{gameTitle}</h1>
-          <Button variant="ghost" onClick={() => navigate("/custom-questions")} className="flex items-center gap-2 hover:bg-secondary">
-            <Settings className="h-4 w-4" /> Manage Questions
+          <h1 className="font-arcade uppercase tracking-[0.06em] text-xl md:text-2xl leading-tight flex-1 text-center px-2 bg-gradient-to-r from-orange-500 via-yellow-300 to-orange-400 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(255,200,120,0.85)]">{gameTitle}</h1>
+          <Button onClick={() => navigate("/custom-questions")} className="flex items-center gap-2 text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80">
+            <Settings className="h-4 w-4" />
+            Manage Questions
           </Button>
         </div>
 
         {mode === "bridges" && (
-          <Card className="p-4">
-            <Label className="mb-2 block text-sm">Select Bridge Mode</Label>
+          <Card className="p-4 bg-black bg-opacity-60 border border-orange-500 rounded-xl">
+            <Label className="mb-2 block text-sm bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">Select Bridge Mode</Label>
             <div className="flex gap-4">
-              <Button variant={bridgeMode === 'building' ? 'default' : 'outline'} onClick={() => setBridgeMode('building')}>Building</Button>
-              <Button variant={bridgeMode === 'burning' ? 'default' : 'outline'} onClick={() => setBridgeMode('burning')}>Burning</Button>
-              <Button variant={bridgeMode === 'chaotic' ? 'default' : 'outline'} onClick={() => setBridgeMode('chaotic')}>Chaotic</Button>
+              <Button onClick={() => setBridgeMode('building')} className={`${bridgeMode === 'building' ? 'bg-orange-600 hover:bg-orange-400' : 'bg-orange-700/40 hover:bg-orange-500/60'} text-white px-3 py-1 text-xs rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80`}>Building</Button>
+              <Button onClick={() => setBridgeMode('burning')} className={`${bridgeMode === 'burning' ? 'bg-orange-600 hover:bg-orange-400' : 'bg-orange-700/40 hover:bg-orange-500/60'} text-white px-3 py-1 text-xs rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80`}>Burning</Button>
+              <Button onClick={() => setBridgeMode('chaotic')} className={`${bridgeMode === 'chaotic' ? 'bg-orange-600 hover:bg-orange-400' : 'bg-orange-700/40 hover:bg-orange-500/60'} text-white px-3 py-1 text-xs rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80`}>Chaotic</Button>
             </div>
           </Card>
         )}
 
         {mode === "truthOrDare" && (
-  <Card className="p-4">
-    <Label className="mb-2 block text-sm">Select Truth or Dare Mode</Label>
+  <Card className="p-4 bg-black bg-opacity-60 border border-orange-500 rounded-xl">
+    <Label className="mb-2 block text-sm bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">Select Truth or Dare Mode</Label>
     <div className="flex gap-4">
-      <Button variant={truthOrDareMode === 'truth' ? 'default' : 'outline'} onClick={() => setTruthOrDareMode('truth')}>Truth</Button>
-      <Button variant={truthOrDareMode === 'dare' ? 'default' : 'outline'} onClick={() => setTruthOrDareMode('dare')}>Dare</Button>
-      <Button variant={truthOrDareMode === 'both' ? 'default' : 'outline'} onClick={() => setTruthOrDareMode('both')}>Both</Button>
+      <Button onClick={() => setTruthOrDareMode('truth')} className={`${truthOrDareMode === 'truth' ? 'bg-orange-600 hover:bg-orange-400' : 'bg-orange-700/40 hover:bg-orange-500/60'} text-white px-3 py-1 text-xs rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80`}>Truth</Button>
+      <Button onClick={() => setTruthOrDareMode('dare')} className={`${truthOrDareMode === 'dare' ? 'bg-orange-600 hover:bg-orange-400' : 'bg-orange-700/40 hover:bg-orange-500/60'} text-white px-3 py-1 text-xs rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80`}>Dare</Button>
+      <Button onClick={() => setTruthOrDareMode('both')} className={`${truthOrDareMode === 'both' ? 'bg-orange-600 hover:bg-orange-400' : 'bg-orange-700/40 hover:bg-orange-500/60'} text-white px-3 py-1 text-xs rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80`}>Both</Button>
     </div>
   </Card>
 )}
 
-        <Card className="p-8 min-h-[300px] flex flex-col items-center justify-center text-center space-y-6">
+        <Card className="p-8 min-h-[300px] flex flex-col items-center justify-center text-center space-y-6 bg-black bg-opacity-60 border border-orange-500 rounded-xl">
           {currentQuestion ? (
             <>
-              <Button variant="outline" size="sm" onClick={() => setQuestionHidden(prev => !prev)}>
+              <Button size="sm" onClick={() => setQuestionHidden(prev => !prev)} className="text-white bg-orange-600 hover:bg-orange-400 px-3 py-1 text-xs rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80">
                 {questionHidden ? "Show Question" : "Hide Question"}
               </Button>
-              {!questionHidden && <p className="text-xl mt-4">{currentQuestion}</p>}
+              {!questionHidden && <p className="text-xl mt-4 text-white">{currentQuestion}</p>}
             </>
           ) : (
-            <p>Click the button to start!</p>
+            <p className="text-white">Click the button to start!</p>
           )}
         </Card>
 
         {mode === "bridges" && (
-          <Card className="p-6 flex flex-col items-center text-center space-y-4">
+          <Card className="p-6 flex flex-col items-center text-center space-y-4 bg-black bg-opacity-60 border border-orange-500 rounded-xl">
             <div
               onClick={!isFlipping ? flipCoin : undefined}
-              className={`w-24 h-24 rounded-full border-4 border-primary flex items-center justify-center text-2xl font-bold cursor-pointer transition-all duration-300 ${
+              className={`w-24 h-24 rounded-full border-4 border-primary flex items-center justify-center text-lg font-bold cursor-pointer transition-all duration-300 ${
                 isFlipping
                   ? 'animate-spin border-electric shadow-lg shadow-electric/50'
                   : coinResult === 'TELL'
@@ -172,19 +174,25 @@ const Game = () => {
                   : 'bg-gradient-primary text-white hover:scale-110 hover:shadow-lg hover:shadow-primary/50'
               }`}
             >
-              {isFlipping ? <span className="animate-bounce">🪙</span> : coinResult || "🪙"} 
+              {isFlipping ? (
+                <span className="animate-bounce">🪙</span>
+              ) : coinResult ? (
+                <span className="font-pixel">{coinResult}</span>
+              ) : (
+                "🪙"
+              )}
             </div>
 
             {!coinResult && !isFlipping && (
-              <p className="text-sm text-muted-foreground animate-pulse">👆 Tap the coin to flip!</p>
+              <p className="text-sm text-white/80 animate-pulse">👆 Tap the coin to flip!</p>
             )}
 
             {coinResult && !isFlipping && (
               <div className="text-center mt-2">
-                <p className="text-2xl font-bold">
-                  {coinResult === "TELL" ? "🗣️ TELL" : "🛡️ SAFE"}
+                <p className="text-2xl font-bold font-pixel">
+                  {coinResult === "TELL" ? "TELL" : "SAFE"}
                 </p>
-                <p className="text-sm text-muted-foreground max-w-sm">
+                <p className="text-sm text-white/80 max-w-sm">
                   {coinResult === "TELL"
                     ? "You must tell the person you pointed at about the question!"
                     : "You're safe! No need to reveal anything."}
@@ -195,7 +203,7 @@ const Game = () => {
         )}
 
         <div className="flex justify-center">
-          <Button onClick={() => { generateQuestion(); setCoinResult(null); }} disabled={isFlipping} className="px-8 py-6 text-lg">
+          <Button onClick={() => { generateQuestion(); setCoinResult(null); }} disabled={isFlipping} className="px-8 py-3 text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80">
             {currentQuestion ? "Next Question" : "Start Game"}
           </Button>
         </div>

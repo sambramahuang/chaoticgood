@@ -1,5 +1,6 @@
 // src/pages/PicoloGame.tsx
 import { useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowLeft, Eye, EyeOff, RefreshCw } from "lucide-react";
@@ -18,6 +19,7 @@ const MAX_PLAYERS = 20;
 const MIN_PLAYERS = 2;
 
 const PicoloGame = () => {
+  const navigate = useNavigate();
   const [gameStarted, setGameStarted] = useState(false);
   const [numPlayers, setNumPlayers] = useState(MIN_PLAYERS);
   const [playerNames, setPlayerNames] = useState<string[]>([]);
@@ -100,7 +102,7 @@ const PicoloGame = () => {
         {/* Header */}
         <div className="flex items-center justify-between">
           <Button
-            onClick={() => (window.location.href = "/picolo")}
+            onClick={() => navigate("/")}
             className="flex items-center gap-2 text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80"
           >
             <ArrowLeft className="h-4 w-4" />
