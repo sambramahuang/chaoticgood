@@ -131,7 +131,7 @@ const Game = () => {
             <div className="flex gap-4">
               <Button onClick={() => setBridgeMode('building')} className={`${bridgeMode === 'building' ? 'bg-orange-600 hover:bg-orange-400' : 'bg-orange-700/40 hover:bg-orange-500/60'} text-white px-3 py-1 text-xs rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80`}>Building</Button>
               <Button onClick={() => setBridgeMode('burning')} className={`${bridgeMode === 'burning' ? 'bg-orange-600 hover:bg-orange-400' : 'bg-orange-700/40 hover:bg-orange-500/60'} text-white px-3 py-1 text-xs rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80`}>Burning</Button>
-              <Button onClick={() => setBridgeMode('chaotic')} className={`${bridgeMode === 'chaotic' ? 'bg-orange-600 hover:bg-orange-400' : 'bg-orange-700/40 hover:bg-orange-500/60'} text-white px-3 py-1 text-xs rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80`}>Chaotic</Button>
+              <Button onClick={() => setBridgeMode('chaotic')} className={`${bridgeMode === 'chaotic' ? 'bg-orange-600 hover:bg-orange-400' : 'bg-orange-700/40 hover:bg-orange-500/60'} text-white px-3 py-1 text-xs rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80`}>Chaotic (mixed)</Button>
             </div>
           </Card>
         )}
