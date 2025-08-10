@@ -1,6 +1,5 @@
 // src/pages/BattleRoyale.tsx
 import { useState, useMemo, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowLeft, RefreshCw } from "lucide-react";
@@ -12,35 +11,46 @@ import {
   virusEffects,
   splitTheRoomQuestions,
   bets
-} from "@/data/picolo";
-import type { VirusEffect } from "@/data/picolo";
+} from "@/data/br/classic";
+import type { VirusEffect } from "@/data/br/classic";
 
 const MAX_PLAYERS = 18;
 const MIN_PLAYERS = 2;
+const MAX_TURNS = 50; // end after 50 normal prompts (turns)
+
+type Stage = "players" | "category" | "playing";
+type CategoryKey = "classic"; // future: extend with other categories
 
 const BattleRoyale = () => {
-  const navigate = useNavigate();
+  // Flow
+  const [stage, setStage] = useState<Stage>("players");
+  const [selectedCategory, setSelectedCategory] = useState<CategoryKey | null>(null);
 
-  const [gameStarted, setGameStarted] = useState(false);
+  // Setup
   const [numPlayers, setNumPlayers] = useState(MIN_PLAYERS);
   const [playerNames, setPlayerNames] = useState<string[]>([]);
   const [tempNames, setTempNames] = useState<string[]>([]);
+
+  // Turn management (randomized order each round)
+  const [turnOrder, setTurnOrder] = useState<string[]>([]);
+  const [turnIndex, setTurnIndex] = useState<number>(0);
+
+  // Prompt state
   const [currentPrompt, setCurrentPrompt] = useState<string | null>(null);
   const [usedIndexes, setUsedIndexes] = useState<Set<number>>(new Set());
+  const [normalPromptCount, setNormalPromptCount] = useState(0);
+  const [isGameOver, setIsGameOver] = useState(false);
 
   // Virus state (single active at a time)
   const [activeVirus, setActiveVirus] = useState<VirusEffect | null>(null);
-  const [virusRounds, setVirusRounds] = useState(0);            // how many normal prompts until virus ends
+  const [virusRounds, setVirusRounds] = useState(0);
   const [virusOwner, setVirusOwner] = useState<string | null>(null);
-  const [virusShown, setVirusShown] = useState(0);              // normal prompts shown since this virus started
+  const [virusShown, setVirusShown] = useState(0);
 
-  // Virus scheduling (multiple across the game, but never overlapping)
-  const [virusSchedule, setVirusSchedule] = useState<number[]>([]); // normal-prompt counts when a virus starts
+  // Virus scheduling
+  const [virusSchedule, setVirusSchedule] = useState<number[]>([]);
   const [virusesStarted, setVirusesStarted] = useState(0);
   const [usedVirusIds, setUsedVirusIds] = useState<Set<number>>(new Set());
-
-  // Tracking how many NORMAL prompts have been shown (excludes virus prompt and activation lines)
-  const [normalPromptCount, setNormalPromptCount] = useState(0);
 
   // Prompt history for back/forward
   const [history, setHistory] = useState<string[]>([]);
@@ -53,29 +63,90 @@ const BattleRoyale = () => {
     }
   }, [historyIndex, history]);
 
-  // Combine all prompts
-  const allPrompts = useMemo(
-    () => [
-      ...regularPrompts,
-      ...circleNamingGames,
-      ...memoryChainGames,
-      ...charadeActionJokeGames,
-      ...splitTheRoomQuestions,
-      ...bets
-    ],
-    []
-  );
+  // Combine prompts based on category
+  const allPrompts = useMemo(() => {
+    if (selectedCategory === "classic" || selectedCategory === null) {
+      return [
+        ...regularPrompts,
+        ...circleNamingGames,
+        ...memoryChainGames,
+        ...charadeActionJokeGames,
+        ...splitTheRoomQuestions,
+        ...bets
+      ];
+    }
+    return [];
+  }, [selectedCategory]);
 
-  // Inject actor/target into underscores (normal prompts)
-  const injectPlayers = (text: string) => {
+  // Utils
+  const shuffle = (arr: string[]) => {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  };
+
+  const currentPlayer = () =>
+    turnOrder.length > 0 ? turnOrder[turnIndex] : null;
+
+  const advanceTurn = () => {
+    if (turnOrder.length === 0) return;
+    const nextIndex = turnIndex + 1;
+    if (nextIndex >= turnOrder.length) {
+      // new round → reshuffle order
+      setTurnOrder(shuffle(playerNames));
+      setTurnIndex(0);
+    } else {
+      setTurnIndex(nextIndex);
+    }
+  };
+
+  const pushToHistory = (msg: string) => {
+    setHistory((prev) => {
+      const next = prev.slice(0, historyIndex + 1); // truncate forward history if user went back
+      next.push(msg);
+      return next;
+    });
+    setHistoryIndex((idx) => idx + 1);
+  };
+
+  // Inject actor/target into underscores (normal prompts with turn ownership)
+  // Ensures for the first two underscores, names are different: actor != target
+  const injectPlayersFor = (text: string, actor: string) => {
     if (!playerNames.length) return text;
-    const actor = playerNames[Math.floor(Math.random() * playerNames.length)];
+
     const others = playerNames.filter((n) => n !== actor);
-    const target = others.length
-      ? others[Math.floor(Math.random() * others.length)]
-      : actor;
+    let lastAssigned: string | null = null;
     let count = 0;
-    return text.replace(/_/g, () => (count++ === 0 ? actor : target));
+
+    return text.replace(/_/g, () => {
+      let nameToUse: string;
+
+      if (count === 0) {
+        // first underscore is always the actor (turn owner)
+        nameToUse = actor;
+      } else if (count === 1) {
+        // second underscore must not equal actor
+        if (others.length > 0) {
+          nameToUse = others[Math.floor(Math.random() * others.length)];
+        } else {
+          // only one player edge-case
+          nameToUse = actor;
+        }
+      } else {
+        // for additional underscores, pick anyone, try not to repeat the immediately previous
+        const pool = playerNames.length > 1
+          ? playerNames.filter((n) => n !== lastAssigned)
+          : playerNames;
+        nameToUse = pool[Math.floor(Math.random() * pool.length)];
+      }
+
+      lastAssigned = nameToUse;
+      count++;
+      return nameToUse;
+    });
   };
 
   // Inject with fixed virus owner for first underscore (state-based)
@@ -104,16 +175,7 @@ const BattleRoyale = () => {
     return text.replace(/_/g, () => (count++ === 0 ? owner : target));
   };
 
-  const pushToHistory = (msg: string) => {
-    setHistory((prev) => {
-      const next = prev.slice(0, historyIndex + 1); // truncate forward history if user went back
-      next.push(msg);
-      return next;
-    });
-    setHistoryIndex((idx) => idx + 1);
-  };
-
-  // Create a virus schedule: choose 3–4 triggers, spaced by 5–9 normal prompts each (first after 4–6)
+  // Create a virus schedule
   const makeVirusSchedule = () => {
     const count = Math.random() < 0.5 ? 3 : 4;
     const triggers: number[] = [];
@@ -125,30 +187,43 @@ const BattleRoyale = () => {
     return triggers;
   };
 
-  const startGame = () => {
+  // Flow actions
+  const confirmPlayers = () => {
     if (
       tempNames.length === numPlayers &&
       tempNames.every((n) => n.trim() !== "")
     ) {
-      setPlayerNames(tempNames);
-      setGameStarted(true);
-
-      // reset all state for a fresh run
-      setUsedIndexes(new Set());
-      setHistory([]);
-      setHistoryIndex(-1);
-      setCurrentPrompt(null);
-
-      setActiveVirus(null);
-      setVirusRounds(0);
-      setVirusOwner(null);
-      setVirusShown(0);
-
-      setVirusSchedule(makeVirusSchedule());
-      setVirusesStarted(0);
-      setUsedVirusIds(new Set());
-      setNormalPromptCount(0);
+      const trimmed = tempNames.map(n => n.trim());
+      setPlayerNames(trimmed);
+      setStage("category"); // go choose category next
     }
+  };
+
+  const startNewGame = (category: CategoryKey) => {
+    setSelectedCategory(category);
+
+    // reset all state for a fresh run
+    setUsedIndexes(new Set());
+    setHistory([]);
+    setHistoryIndex(-1);
+    setCurrentPrompt(null);
+    setIsGameOver(false);
+
+    setActiveVirus(null);
+    setVirusRounds(0);
+    setVirusOwner(null);
+    setVirusShown(0);
+
+    setVirusSchedule(makeVirusSchedule());
+    setVirusesStarted(0);
+    setUsedVirusIds(new Set());
+    setNormalPromptCount(0);
+
+    // set randomized order for first round
+    setTurnOrder(shuffle(playerNames));
+    setTurnIndex(0);
+
+    setStage("playing");
   };
 
   const handlePrev = () => {
@@ -158,7 +233,6 @@ const BattleRoyale = () => {
   };
 
   const startNewVirusNow = () => {
-    // choose a virus not used before if possible
     const availableIds = virusEffects
       .map((_, i) => i)
       .filter((i) => !usedVirusIds.has(i));
@@ -169,7 +243,9 @@ const BattleRoyale = () => {
 
     const virus = virusEffects[idx];
     const rounds = Math.floor(Math.random() * 6) + 3; // 3-8 normals until end
-    const owner = playerNames[Math.floor(Math.random() * playerNames.length)];
+
+    // Tie virus owner to the current player's turn (fairness)
+    const owner = currentPlayer() ?? playerNames[Math.floor(Math.random() * playerNames.length)];
 
     setActiveVirus(virus);
     setVirusRounds(rounds);
@@ -178,7 +254,7 @@ const BattleRoyale = () => {
     setVirusesStarted((n) => n + 1);
     setUsedVirusIds((s) => new Set(s).add(idx));
 
-    // Immediately show the virus prompt
+    // Immediately show the virus prompt (does NOT consume a normal turn)
     const virusText = `CURSE!: ${injectVirusTextWithOwner(
       virus.prompt,
       owner,
@@ -188,23 +264,32 @@ const BattleRoyale = () => {
   };
 
   const handleNext = () => {
+    if (stage !== "playing" || isGameOver) return;
+
     // If we have forward history (user pressed Back), go forward first
     if (historyIndex < history.length - 1) {
       setHistoryIndex((i) => i + 1);
       return;
     }
 
-    // If a virus is active and its duration is done, end it now
-    if (activeVirus && virusShown >= virusRounds) {
-      const endText = 'CURSE LIFTED!: ' + injectVirusText(activeVirus.activation);
-      
-      pushToHistory(endText);
-      setActiveVirus(null);
-      // do NOT increment normalPromptCount here; this is an end message
+    // If we already hit max turns, finalize
+    if (normalPromptCount >= MAX_TURNS) {
+      if (!isGameOver) {
+        pushToHistory("🎉 50 prompts reached. Game over.");
+        setIsGameOver(true);
+      }
       return;
     }
 
-    // If no active virus, check if it's time to start one (based on schedule)
+    // End active virus (does not consume a normal turn)
+    if (activeVirus && virusShown >= virusRounds) {
+      const endText = 'CURSE LIFTED!: ' + injectVirusText(activeVirus.activation);
+      pushToHistory(endText);
+      setActiveVirus(null);
+      return;
+    }
+
+    // Maybe start a virus (does not consume a normal turn)
     if (
       !activeVirus &&
       virusesStarted < virusSchedule.length &&
@@ -219,19 +304,34 @@ const BattleRoyale = () => {
       .map((_, i) => i)
       .filter((i) => !usedIndexes.has(i));
     if (idxList.length === 0) {
-      pushToHistory("🎉 No more prompts. Game over.");
+      pushToHistory("🎉 No more prompts in this category. Game over.");
+      setIsGameOver(true);
       return;
     }
 
+    // Determine whose turn it is (this player will occupy the first "_" slot)
+    const actor = currentPlayer() ?? playerNames[Math.floor(Math.random() * playerNames.length)];
+
+    // Pick a prompt
     const choice = idxList[Math.floor(Math.random() * idxList.length)];
     setUsedIndexes((s) => new Set(s).add(choice));
-    const gameText = injectPlayers(allPrompts[choice]);
-    pushToHistory(`${gameText}`);
 
-    // This was a NORMAL prompt; increment counters
+    // Inject names, ensuring two-player prompts `_,_` use distinct names
+    const textWithNames = injectPlayersFor(allPrompts[choice], actor);
+
+    pushToHistory(textWithNames);
+
+    // This was a NORMAL prompt; increment counters and advance turn
     setNormalPromptCount((c) => c + 1);
     if (activeVirus) {
       setVirusShown((v) => v + 1);
+    }
+    advanceTurn();
+
+    // End if we just hit max turns
+    if (normalPromptCount + 1 >= MAX_TURNS) {
+      pushToHistory("🎉 50 prompts reached. Game over.");
+      setIsGameOver(true);
     }
   };
 
@@ -253,7 +353,7 @@ const BattleRoyale = () => {
           <div className="w-24" />
         </div>
 
-        {!gameStarted ? (
+        {stage === "players" && (
           <Card className="p-6 bg-gradient-surface space-y-4 min-h-[420px]">
             <h2 className=" text-xl font-pixel bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">Add Players</h2>
 
@@ -312,17 +412,66 @@ const BattleRoyale = () => {
             </div>
 
             <Button
-              onClick={startGame}
+              onClick={confirmPlayers}
               className="w-full text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1"
             >
-              Start Game
+              Continue
             </Button>
           </Card>
-        ) : (
-          <Card className="p-6 bg-gradient-surface text-center space-y-4">
-            <h2 className="text-xl font-pixel bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">Current Prompt</h2>
+        )}
 
-            {/* Locked height so Next row doesn't shift */}
+        {stage === "category" && (
+          <Card className="p-6 bg-gradient-surface space-y-4 min-h-[300px]">
+            <h2 className=" text-xl font-pixel bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">
+              Choose a Category
+            </h2>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <Button
+                onClick={() => startNewGame("classic")}
+                className="w-full text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-3"
+              >
+                Classic
+              </Button>
+
+              {/* Future categories (disabled) */}
+              <Button disabled className="w-full text-sm font-pixel text-white/60 bg-gray-700 cursor-not-allowed rounded py-3" title="Coming soon">
+                Spicy (Soon)
+              </Button>
+              <Button disabled className="w-full text-sm font-pixel text-white/60 bg-gray-700 cursor-not-allowed rounded py-3" title="Coming soon">
+                K-Pop (Soon)
+              </Button>
+              <Button disabled className="w-full text-sm font-pixel text-white/60 bg-gray-700 cursor-not-allowed rounded py-3" title="Coming soon">
+                Chaos (Soon)
+              </Button>
+            </div>
+
+            <div className="flex justify-between pt-2">
+              <Button
+                onClick={() => setStage("players")}
+                className="text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 px-3 flex items-center gap-2"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Back
+              </Button>
+            </div>
+          </Card>
+        )}
+
+        {stage === "playing" && (
+          <Card className="p-6 bg-gradient-surface text-center space-y-4">
+      <div className="flex items-center justify-between text-xs font-pixel text-white/80">
+  {selectedCategory && (
+   <div className="text- left text-xl font-pixel bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">
+  {selectedCategory && selectedCategory.toUpperCase()}
+</div>
+  )}
+  <div className="text-right">
+    Round: {normalPromptCount}/{MAX_TURNS}
+  </div>
+</div>
+            {/* <h2 className="text-xl font-pixel bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">Current Prompt</h2> */}
+
             <div
               className="bg-black bg-opacity-60 text-white p-10 rounded-lg font-pixel text-lg font-bold
              h-72 md:h-80 overflow-y-auto flex items-center justify-center text-center
@@ -334,7 +483,6 @@ const BattleRoyale = () => {
             </div>
 
             <div className="flex justify-center gap-2">
-              {/* Back button goes to previous prompt in history */}
               <Button
                 onClick={handlePrev}
                 disabled={historyIndex <= 0}
@@ -346,7 +494,8 @@ const BattleRoyale = () => {
 
               <Button
                 onClick={handleNext}
-                className="text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 px-3 flex items-center gap-2"
+                disabled={isGameOver}
+                className="text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 disabled:opacity-50 rounded py-1 px-3 flex items-center gap-2"
               >
                 <RefreshCw className="w-4 h-4" />
                 Next
