@@ -1,8 +1,8 @@
 import { Sword } from "lucide-react";
 
 export type CategoryKey =
-  | "footballers"
-  | "disneyCharacters"
+  | "soccer"
+  | "disney"
   | "internetSlang"
   | "anime"
   | "kpop"
@@ -11,27 +11,33 @@ export type CategoryKey =
   | "superheroes"
   | "famousHistoricalFigures"
   | "cartoonCharacters"
-  | "internetCelebrities"
-  | "countriesAndCities"
+  | "celebrities"
+  | "countries"
   | "animals"
-  | "foodAndDrinks";
+  ;
 
 export const categories: Record<CategoryKey, string[]> = {
-  footballers: [
-    "Lionel Messi", "Cristiano Ronaldo", "Neymar", "Son Heung-min", "Kylian Mbappé", "Mohamed Salah", "Erling Haaland", "Karim Benzema", "Luka Modrić", "Robert Lewandowski",
-    "Sergio Ramos", "Kevin De Bruyne", "Paul Pogba", "Gareth Bale", "Virgil van Dijk", "Thiago Silva", "Phil Foden", "Marcus Rashford", "Bruno Fernandes", "Vinícius Jr."
+  soccer: [
+    "Lionel Messi", "Cristiano Ronaldo", "Kylian Mbappé", "Mohamed Salah", "Son Heung-min",
+    "Bicycle Kick", "Free Kick", "Offside", "Penalty Shootout", "Corner Kick",
+    "Tottenham Hotspur", "PSG", "Real Madrid", "Manchester United", "Juventus",
+    "World Cup", "Champions League", "Euros", "Yellow Card", "Hat Trick", "Dribbling", "Tiki-Taka", "Goalkeeper", "Extra Time"
   ],
-  disneyCharacters: [
-    "Mulan", "Simba", "Elsa", "Woody", "Ariel", "Belle", "Jasmine", "Aladdin", "Pocahontas", "Snow White",
-    "Rapunzel", "Tiana", "Cinderella", "Olaf", "Mickey Mouse", "Donald Duck", "Goofy", "Hercules", "Tarzan", "Scar"
+  disney: [
+    "Mickey Mouse", "Elsa", "Simba", "Woody", "Ariel",
+    "The Lion King", "Frozen", "Toy Story", "Aladdin", "Mulan",
+    "Belle", "Cinderella", "Pocahontas", "Snow White", "Rapunzel",
+    "The Little Mermaid", "Beauty and the Beast", "Hercules", "Tarzan", "Olaf"
   ],
   internetSlang: [
     "yeet", "simp", "ratio", "cap", "rizz", "sus", "mid", "based", "bet", "slay",
     "gyatt", "goated", "stan", "flex", "no cap", "drip", "hits different", "pressed", "bruh", "L + ratio"
   ],
   anime: [
-    "Luffy", "Naruto", "Goku", "Attack on Titan", "Sword Art Online", "One Punch Man", "Deku", "Sasuke", "Itachi", "Vegeta",
-    "Zoro", "Hinata Hyuga", "Light Yagami", "Ryuk", "Nezuko", "Tanjiro", "Levi Ackerman", "Mikasa", "Gojo Satoru", "Megumi Fushiguro"
+    "Naruto", "One Piece", "Attack on Titan", "Dragon Ball", "My Hero Academia",
+    "Goku", "Luffy", "Levi Ackerman", "Sasuke", "Eren Yeager",
+    "Death Note", "Demon Slayer", "Fullmetal Alchemist", "Jujutsu Kaisen", "One Punch Man",
+    "Itachi", "Nezuko", "Gojo Satoru", "Tanjiro", "Vegeta"
   ],
   kpop: [
     "Jennie", "Jimin", "IU", "NewJeans", "Lisa", "RM", "Suga", "V", "Jisoo", "Rosé",
@@ -42,8 +48,8 @@ export const categories: Record<CategoryKey, string[]> = {
     "Finding Nemo", "Toy Story", "The Lion King", "La La Land", "The Matrix", "Jurassic Park", "Harry Potter", "Avatar", "Up", "Inside Out"
   ],
   videogames: [
-    "Minecraft", "Fortnite", "League of Legends", "Call of Duty", "Among Us", "Overwatch", "Valorant", "PUBG", "Elden Ring", "Zelda: Breath of the Wild",
-    "Super Mario", "Animal Crossing", "Apex Legends", "Roblox", "Halo", "The Witcher", "Street Fighter", "Tekken", "Resident Evil", "Cyberpunk 2077"
+    "Minecraft", "Fortnite", "League of Legends", "Call of Duty", "Among Us", "Phasmophobia", "Valorant", "PUBG", "Elden Ring", "The Legend of Zelda",
+    "Super Mario", "Animal Crossing", "Roblox", "Cooking Mama", "The Witcher", "Street Fighter", "Resident Evil", "Cyberpunk 2077"
   ],
   superheroes: [
     "Spiderman", "Iron Man", "Batman", "Superman", "Wonder Woman", "The Flash", "Thor", "Hulk", "Captain America", "Black Panther",
@@ -57,20 +63,20 @@ export const categories: Record<CategoryKey, string[]> = {
     "Spongebob", "Patrick Star", "Doraemon", "Shin Chan", "Bugs Bunny", "Tom", "Jerry", "Scooby-Doo", "Shrek", "Donkey",
     "Pikachu", "Ash Ketchum", "Bart Simpson", "Homer Simpson", "Stewie Griffin", "Peter Griffin", "Rick Sanchez", "Morty Smith", "Finn the Human", "Jake the Dog"
   ],
-  internetCelebrities: [
-    "MrBeast", "PewDiePie", "Doge", "Khaby Lame", "Nyan Cat", "Markiplier", "Pokimane", "Dream", "Ninja", "Belle Delphine",
-    "Logan Paul", "KSI", "Charli D'Amelio", "Addison Rae", "Shroud", "Corpse Husband", "Jacksepticeye", "Technoblade", "Emma Chamberlain", "Hasbulla"
+  celebrities: [
+    "Beyoncé", "Taylor Swift", "Leonardo DiCaprio", "Oprah Winfrey", "Kanye West",
+    "Rihanna", "Tom Hanks", "Adele", "Brad Pitt", "Jennifer Lawrence",
+    "Drake", "Angelina Jolie", "Will Smith", "Lady Gaga", "Robert Downey Jr.",
+    "Ellen DeGeneres", "Dwayne Johnson", "Selena Gomez", "Johnny Depp", "Chris Hemsworth"
   ],
-  countriesAndCities: [
-    "Singapore", "Tokyo", "Paris", "London", "New York", "Bangkok", "Dubai", "Seoul", "Rome", "Barcelona",
-    "Sydney", "Los Angeles", "Berlin", "Shanghai", "Hong Kong", "Moscow", "Istanbul", "Cairo", "Rio de Janeiro", "Cape Town"
+  countries: [
+    "Singapore", "Japan", "France", "United Kingdom", "United States",
+    "Thailand", "United Arab Emirates", "South Korea", "Italy", "Spain",
+    "Australia", "Germany", "China", "Russia", "Malaysia",
+    "Egypt", "Vietnam", "India", "Thailand", "Mexico"
   ],
   animals: [
     "Cat", "Dog", "Lion", "Tiger", "Elephant", "Giraffe", "Kangaroo", "Panda", "Koala", "Penguin",
     "Eagle", "Shark", "Dolphin", "Crocodile", "Turtle", "Octopus", "Dragon", "Unicorn", "Phoenix", "Sloth"
-  ],
-  foodAndDrinks: [
-    "Pizza", "Burger", "Sushi", "Ramen", "Steak", "Pasta", "Tacos", "Fried Chicken", "Ice Cream", "Cake",
-    "Coca-Cola", "Beer", "Wine", "Whiskey", "Smoothie", "Bubble Tea", "Hotpot", "Donut", "Croissant", "Fries"
   ]
 };

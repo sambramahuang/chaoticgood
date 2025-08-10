@@ -64,7 +64,7 @@ type Stage = "settings" | "turnIntro" | "playing" | "turnSummary" | "roundEnd" |
       timerSeconds: 60,
       allowSkips: true,
       selectedCategories: ["internetSlang" as CategoryKey],
-      cardCount: 50,
+      cardCount: 40,
     };
   });
 
@@ -148,7 +148,7 @@ const handleEndGame = () => {
     timerSeconds: 60,
     allowSkips: true,
     selectedCategories: ["internetSlang" as CategoryKey],
-    cardCount: 50,
+    cardCount: 40,
   });
   setStage("settings");
 };
@@ -453,11 +453,7 @@ const handleEndGame = () => {
               <div className="text-left">
                 <div className="text-xl font-pixel bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">{ruleText}</div>
                 {/* <div className="mt-1">Cards left: {cardsLeft}</div> */}
-                {currentCard && (
-    <div className="mt-1 inline-block text-[10px] font-pixel px-2 py-1 rounded bg-black/50 text-white/80">
-      Category: {prettyCategory(currentCard.category)}
-    </div>
-  )}
+                
               </div>
               <div className="text-right">
                 <div className="text-3xl font-arcade">{timeLeft}s</div>
@@ -465,8 +461,17 @@ const handleEndGame = () => {
               </div>
             </div>
 
-            <div className="bg-black bg-opacity-60 text-white p-8 rounded-lg font-pixel text-xl font-bold h-64 md:h-72 overflow-y-auto flex items-center justify-center text-center whitespace-pre-wrap">
-<span>{currentCard?.text || ""}</span>            </div>
+           <div className="bg-black bg-opacity-60 text-white p-8 rounded-lg font-pixel text-xl font-bold h-64 md:h-72 flex flex-col">
+  {currentCard && (
+    <div className="text-[10px] font-pixel text-white/80 text-center mb-2">
+      Category: {prettyCategory(currentCard.category)}
+    </div>
+  )}
+
+  <div className="flex-1 overflow-y-auto flex items-center justify-center text-center whitespace-pre-wrap">
+    <span>{currentCard?.text || ""}</span>
+  </div>
+</div>
 
             <div className="flex justify-center gap-2">
               <Button onClick={onSkip} disabled={!settings.allowSkips} className="text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 px-3 disabled:opacity-40">PASS ❌</Button>
