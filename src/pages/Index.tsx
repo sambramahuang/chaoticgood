@@ -167,7 +167,7 @@ const Index = () => {
                     </span>
                   </h2>
                   <p className="font-pixel text-[10px] leading-relaxed bg-gradient-to-r from-orange-300 via-yellow-200 to-orange-400 bg-clip-text text-transparent">
-                    [SOCIAL] guessing game where teams sync their wavelengths through creative examples and clues
+                    Can you figure out what your friends are thinking? A game of deduction.
                   </p>
                 </div>
                 <Button
@@ -182,7 +182,7 @@ const Index = () => {
 
 
           {/* Fibbage Card */}
-          <Card className="retro-button bg-gradient-to-b from-black via-black to-orange-900 border-2 border-orange-500 shadow-orange-500 p-8 hover:shadow-orange-500 transition-all duration-200 hover:scale-105 cursor-pointer group relative overflow-hidden">
+          {/* <Card className="retro-button bg-gradient-to-b from-black via-black to-orange-900 border-2 border-orange-500 shadow-orange-500 p-8 hover:shadow-orange-500 transition-all duration-200 hover:scale-105 cursor-pointer group relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div className="text-center space-y-6 relative z-10" onClick={() => navigate("/fibbage")}>
               <div className="w-20 h-20 bg-orange-900 border-2 border-orange-500 flex items-center justify-center mx-auto group-hover:animate-pulse">
@@ -210,7 +210,8 @@ const Index = () => {
                 START
               </Button>
             </div>
-          </Card>
+          </Card> */}
+
         </div>
       </div>
     </div>
