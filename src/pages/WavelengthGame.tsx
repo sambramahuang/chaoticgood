@@ -77,8 +77,6 @@ const WavelengthGame = () => {
     "Disney Villains",
     "Anime Openings",
     "Pixar Characters",
-    "Celebrity Scandals",
-    "Conspiracy Theories",
     "Viral TikTok Songs",
     "Historical Events",
     "World Leaders",
@@ -166,9 +164,9 @@ const WavelengthGame = () => {
   const getDrinkingText = () => {
     if (guessedNumber === null || !drinkingMode) return "";
     const difference = Math.abs(secretNumber - guessedNumber);
-    if (difference === 0) return "🍻 No shots! Perfect guess!";
-    if (difference === 1) return `🥃 1 shot for being off by ${difference}!`;
-    return `🥃 ${difference} shots for being off by ${difference}!`;
+    if (difference === 0) return "No penalty! Perfect guess!";
+    if (difference === 1) return `1 penalty for being off by ${difference}!`;
+    return `${difference} penalties for being off by ${difference}!`;
   };
 
   return (
@@ -196,13 +194,13 @@ const WavelengthGame = () => {
         {gamePhase === "setup" && (
           <Card className="bg-black/60 border border-orange-500 p-3 sm:p-4 rounded-xl text-center space-y-4 sm:space-y-6 font-sans overflow-hidden">
             <div className="space-y-3 sm:space-y-4">
-              <h2 className="text-white text-sm sm:text-base font-bold font-sans">How to Play Wavelength</h2>
+              <h2 className="text-white text-xs sm:text-sm font-bold font-sans">How to Play Wavelength</h2>
               <div className="text-left space-y-2.5 sm:space-y-3 max-w-prose mx-auto font-sans">
-                <p className="text-white break-words">1. One player is the <strong>guesser</strong> and looks away</p>
-                <p className="text-white break-words">2. A secret number (1-10) is generated for the other players</p>
-                <p className="text-white break-words">3. Each round, give an example from the category that matches the number&apos;s intensity</p>
-                <p className="text-white break-words">4. <strong>1 = worst/weakest</strong>, <strong>10 = best/strongest</strong></p>
-                <p className="text-white break-words">5. After several rounds, the guesser tries to guess the number!</p>
+                <p className="text-white text-[11px] sm:text-xs break-words">1. One player is the <strong>guesser</strong> and looks away</p>
+                <p className="text-white text-[11px] sm:text-xs break-words">2. A secret number (1-10) is generated for the other players</p>
+                <p className="text-white text-[11px] sm:text-xs break-words">3. Each round, give an example from the category that matches the number&apos;s intensity</p>
+                <p className="text-white text-[11px] sm:text-xs break-words">4. <strong>1 = worst/weakest</strong>, <strong>10 = best/strongest</strong></p>
+                <p className="text-white text-[11px] sm:text-xs break-words">5. After several rounds, the guesser tries to guess the number!</p>
               </div>
             </div>
 
@@ -213,10 +211,10 @@ const WavelengthGame = () => {
                   <Wine className="h-5 w-5 text-orange-300 shrink-0" />
                   <div className="min-w-0">
                     <Label htmlFor="drinking-mode" className="bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)] font-medium text-[11px] sm:text-xs">
-                      Drinking Game Mode
+                      Penalty Game Mode
                     </Label>
                     <p className="text-[11px] sm:text-xs bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)] break-words">
-                      Wrong guesses = shots (difference between numbers)
+                      Wrong guesses = penalties (difference between numbers)
                     </p>
                   </div>
                 </div>
@@ -436,7 +434,7 @@ const WavelengthGame = () => {
                   <div className="text-sm font-bold text-orange-300">{getDrinkingText()}</div>
                   {guessedNumber !== null && Math.abs(secretNumber - guessedNumber) > 0 && (
                     <p className="text-[11px] sm:text-xs text-orange-300 mt-2">
-                      🍻 Time to drink! Difference: {Math.abs(secretNumber - guessedNumber)}
+                      Time to take a penalty! Difference: {Math.abs(secretNumber - guessedNumber)}
                     </p>
                   )}
                 </div>
