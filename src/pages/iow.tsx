@@ -41,6 +41,8 @@ const shuffle = <T,>(arr: T[]): T[] => {
 };
 
 const slug = (s: string) => s.toLowerCase().replace(/\s+/g, "-");
+const prettyCategory = (k: CategoryKey) =>
+  k.replace(/([A-Z])/g, " $1").replace(/^./, c => c.toUpperCase());
 
 // -------- LocalStorage Keys --------
 const LS_SETTINGS = "iow.settings";
@@ -48,7 +50,7 @@ const LS_STATE = "iow.state";
 
 // -------- Page Component --------
 const InOtherWords = () => {
-  type Stage = "settings" | "turnIntro" | "privacy" | "playing" | "turnSummary" | "roundEnd" | "final";
+type Stage = "settings" | "turnIntro" | "playing" | "turnSummary" | "roundEnd" | "final";
 
   const [stage, setStage] = useState<Stage>("settings");
 
@@ -57,8 +59,8 @@ const InOtherWords = () => {
     const saved = localStorage.getItem(LS_SETTINGS);
     if (saved) return JSON.parse(saved) as Settings;
     return {
-      teamAName: "Team 1",
-      teamBName: "Team 2",
+      teamAName: "Team A",
+      teamBName: "Team B",
       timerSeconds: 60,
       allowSkips: true,
       selectedCategories: ["internetSlang" as CategoryKey],
@@ -120,28 +122,37 @@ const InOtherWords = () => {
   };
 
   // Turn control
-  const beginTurn = () => {
-    setTimeLeft(settings.timerSeconds);
-    setStage("privacy");
-  };
+const beginTurn = () => {
+  setTimeLeft(settings.timerSeconds);
+  setStage("playing");
+  startCountdown();
+};
 
-  const holdTimer = useRef<number | null>(null);
-  const [holding, setHolding] = useState(false);
+const handleEndGame = () => {
+  // clear local storage
+  localStorage.removeItem(LS_STATE);
+  localStorage.removeItem(LS_SETTINGS);
 
-  const onHoldDown = () => {
-    setHolding(true);
-    holdTimer.current = window.setTimeout(() => {
-      setStage("playing");
-      startCountdown();
-    }, 700);
-  };
-  const onHoldUp = () => {
-    setHolding(false);
-    if (holdTimer.current) {
-      clearTimeout(holdTimer.current);
-      holdTimer.current = null;
-    }
-  };
+  // reset in-memory state
+  setRound(1);
+  setCurrentTeam("A");
+  setDeck([]);
+  setDiscard([]);
+  setScores({ A: 0, B: 0 });
+  setCurrentCard(null);
+  setTimeLeft(60);
+  setCardsLeft(0);
+  setSettings({
+    teamAName: "Team A",
+    teamBName: "Team B",
+    timerSeconds: 60,
+    allowSkips: true,
+    selectedCategories: ["internetSlang" as CategoryKey],
+    cardCount: 50,
+  });
+  setStage("settings");
+};
+
 
   const startCountdown = () => {
     // drift-corrected countdown
@@ -165,14 +176,19 @@ const InOtherWords = () => {
 
   // Draw next card (respect skips and end-of-round)
   const drawNext = () => {
-    setCurrentCard((prev) => {
-      const next = deck[0] ?? null;
-      if (!next) return null;
-      setDeck((d) => d.slice(1));
-      setCardsLeft((n) => Math.max(0, n - 1));
-      return next;
-    });
-  };
+  // If no cards remain, jump immediately to the next round/final
+  if (deck.length === 0) {
+    gotoNextRound();
+    return;
+  }
+
+  setCurrentCard(() => {
+    const next = deck[0];
+    setDeck((d) => d.slice(1));
+    setCardsLeft((n) => Math.max(0, n - 1));
+    return next;
+  });
+};
 
   // Actions during play
   useEffect(() => {
@@ -207,6 +223,27 @@ const InOtherWords = () => {
     }
     setStage("turnSummary");
   };
+
+  const gotoNextRound = () => {
+  // stop timer if running
+  if (timerRef.current) {
+    clearInterval(timerRef.current);
+    timerRef.current = null;
+  }
+
+  if (round < 3) {
+    const nextDeck = shuffle(discard);
+    setDeck(nextDeck);
+    setDiscard([]);
+    setCardsLeft(nextDeck.length);
+    setRound((r) => (r + 1) as Round);
+    setCurrentTeam(currentTeam === "A" ? "B" : "A");
+    setCurrentCard(null);
+    setStage("roundEnd"); // show the round transition immediately
+  } else {
+    setStage("final");
+  }
+};
 
   const nextTeam = () => {
     // deck empty = end of round
@@ -286,6 +323,12 @@ const InOtherWords = () => {
           <h1 className="text-3xl font-arcade text-center bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-400 drop-shadow-[0_0_6px_rgba(255,200,100,0.9)]">
             IN OTHER WORDS
           </h1>
+          <Button
+      onClick={handleEndGame}
+      className="text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded px-3 py-1"
+    >
+      END GAME
+    </Button>
           <div className="w-24" />
         </div>
 
@@ -392,33 +435,16 @@ const InOtherWords = () => {
             <h2 className="text-xl font-pixel bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">
               {currentTeam === "A" ? settings.teamAName : settings.teamBName}'s Turn
             </h2>
-            <p className="font-pixel text-white/80">Choose a describer on your team and pass them the phone.</p>
+            <p className="font-pixel text-xs text-white/80">Choose a describer on your team and pass them the phone.</p>
+                        <div className="text-xs font-pixel text-white">{ruleText}</div>
+
             <Button onClick={beginTurn} className="mx-auto text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-2 px-4">
-              I'm Ready
+              I'M READY!
             </Button>
-            <div className="text-xs font-pixel text-white/60">{ruleText}</div>
           </Card>
         )}
 
-        {/* PRIVACY GUARD (Hold to reveal) */}
-        {stage === "privacy" && (
-          <Card className="p-6 bg-gradient-surface space-y-4 text-center">
-            <h2 className="text-xl font-pixel bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">Hold to Reveal</h2>
-            <div className="h-56 flex items-center justify-center">
-              <button
-                onMouseDown={onHoldDown}
-                onMouseUp={onHoldUp}
-                onMouseLeave={onHoldUp}
-                onTouchStart={onHoldDown}
-                onTouchEnd={onHoldUp}
-                className={`px-6 py-4 rounded-xl font-pixel text-lg shadow ${holding ? "bg-orange-500 text-white" : "bg-black/60 text-white"}`}
-              >
-                Press & Hold 0.7s
-              </button>
-            </div>
-            <div className="text-xs font-pixel text-white/60">A 3-2-1 countdown will start your timer.</div>
-          </Card>
-        )}
+         
 
         {/* ACTIVE PLAY */}
         {stage === "playing" && (
@@ -426,7 +452,12 @@ const InOtherWords = () => {
             <div className="flex items-center justify-between text-xs font-pixel text-white/80">
               <div className="text-left">
                 <div className="text-xl font-pixel bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">{ruleText}</div>
-                <div className="mt-1">Cards left: {cardsLeft}</div>
+                {/* <div className="mt-1">Cards left: {cardsLeft}</div> */}
+                {currentCard && (
+    <div className="mt-1 inline-block text-[10px] font-pixel px-2 py-1 rounded bg-black/50 text-white/80">
+      Category: {prettyCategory(currentCard.category)}
+    </div>
+  )}
               </div>
               <div className="text-right">
                 <div className="text-3xl font-arcade">{timeLeft}s</div>
@@ -435,13 +466,12 @@ const InOtherWords = () => {
             </div>
 
             <div className="bg-black bg-opacity-60 text-white p-8 rounded-lg font-pixel text-xl font-bold h-64 md:h-72 overflow-y-auto flex items-center justify-center text-center whitespace-pre-wrap">
-              <span>{currentCard?.text ?? "Loading..."}</span>
-            </div>
+<span>{currentCard?.text || ""}</span>            </div>
 
             <div className="flex justify-center gap-2">
-              <Button onClick={onSkip} disabled={!settings.allowSkips} className="text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 px-3 disabled:opacity-40">Pass</Button>
-              <Button onClick={onGotIt} className="text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 px-3">Got It</Button>
-              <Button onClick={endTurn} className="text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 px-3 flex items-center gap-2"><RefreshCw className="w-4 h-4"/>End Turn</Button>
+              <Button onClick={onSkip} disabled={!settings.allowSkips} className="text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 px-3 disabled:opacity-40">PASS ❌</Button>
+              <Button onClick={onGotIt} className="text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 px-3">GOT IT ✅</Button>
+              <Button onClick={endTurn} className="text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 px-3 flex items-center gap-2"><RefreshCw className="w-4 h-4"/>END TURN</Button>
             </div>
           </Card>
         )}
