@@ -9,6 +9,7 @@ import WavelengthGame from "./pages/WavelengthGame";
 import CustomQuestions from "./pages/CustomQuestions";
 import NotFound from "./pages/NotFound";
 import BattleRoyale from "@/pages/BattleRoyale";
+import InOtherWords from "@/pages/iow";
 import FibbageGame from "./pages/fibbage";
 
 const queryClient = new QueryClient();
@@ -25,7 +26,8 @@ const App = () => (
           <Route path="/wavelength" element={<WavelengthGame />} />
           <Route path="/custom-questions" element={<CustomQuestions />} />
           <Route path="/battleroyale" element={<BattleRoyale />} />
-          <Route path="/fibbage" element={<FibbageGame />} />
+          <Route path="/inotherwords" element={<InOtherWords />} />
+          {/* <Route path="/fibbage" element={<FibbageGame />} /> */}
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
