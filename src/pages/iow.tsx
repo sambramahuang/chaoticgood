@@ -438,10 +438,27 @@ const InOtherWords = () => {
               <span>{currentCard?.text ?? "Loading..."}</span>
             </div>
 
-            <div className="flex justify-center gap-2">
-              <Button onClick={onSkip} disabled={!settings.allowSkips} className="text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 px-3 disabled:opacity-40">Pass</Button>
-              <Button onClick={onGotIt} className="text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 px-3">Got It</Button>
-              <Button onClick={endTurn} className="text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 px-3 flex items-center gap-2"><RefreshCw className="w-4 h-4"/>End Turn</Button>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+              <Button
+                onClick={onSkip}
+                disabled={!settings.allowSkips}
+                className="w-full text-[9px] sm:text-xs leading-tight font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 sm:py-2 px-2 disabled:opacity-40"
+              >
+                Pass
+              </Button>
+              <Button
+                onClick={onGotIt}
+                className="w-full text-[9px] sm:text-xs leading-tight font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 sm:py-2 px-2"
+              >
+                Got It
+              </Button>
+              <Button
+                onClick={endTurn}
+                className="w-full text-[9px] sm:text-xs leading-tight font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 sm:py-2 px-2 flex items-center justify-center gap-1.5 sm:gap-2 col-span-2 sm:col-span-1"
+              >
+                <RefreshCw className="w-3 h-3 sm:w-3.5 sm:h-3.5"/>
+                <span>End Turn</span>
+              </Button>
             </div>
           </Card>
         )}
