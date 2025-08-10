@@ -3,28 +3,42 @@ import { useState, useMemo, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ArrowLeft, RefreshCw } from "lucide-react";
-import {
-  regularPrompts,
-  circleNamingGames,
-  memoryChainGames,
-  charadeActionJokeGames,
-  virusEffects,
-  splitTheRoomQuestions,
-  bets
-} from "@/data/br/classic";
-import type { VirusEffect } from "@/data/br/classic";
 
 const MAX_PLAYERS = 18;
 const MIN_PLAYERS = 2;
 const MAX_TURNS = 50; // end after 50 normal prompts (turns)
 
 type Stage = "players" | "category" | "playing";
-type CategoryKey = "classic"; // future: extend with other categories
+type CategoryKey = "classic" | "boysnight"; // extend with new categories
+
+export interface VirusEffect {
+  prompt: string;
+  activation: string;
+}
+
+type PromptModule = {
+  regularPrompts: string[];
+  circleNamingGames: string[];
+  memoryChainGames: string[];
+  charadeActionJokeGames: string[];
+  splitTheRoomQuestions: string[];
+  bets: string[];
+  virusEffects: VirusEffect[];
+};
+
+const loaders: Record<CategoryKey, () => Promise<PromptModule>> = {
+  classic: () => import("@/data/br/classic") as unknown as Promise<PromptModule>,
+  boysnight: () => import("@/data/br/boysnight") as unknown as Promise<PromptModule>,
+};
 
 const BattleRoyale = () => {
   // Flow
   const [stage, setStage] = useState<Stage>("players");
   const [selectedCategory, setSelectedCategory] = useState<CategoryKey | null>(null);
+  const [isLoadingPack, setIsLoadingPack] = useState(false);
+
+  // Loaded prompts pack (depends on selectedCategory)
+  const [pack, setPack] = useState<PromptModule | null>(null);
 
   // Setup
   const [numPlayers, setNumPlayers] = useState(MIN_PLAYERS);
@@ -63,20 +77,18 @@ const BattleRoyale = () => {
     }
   }, [historyIndex, history]);
 
-  // Combine prompts based on category
+  // Combine prompts from the loaded pack
   const allPrompts = useMemo(() => {
-    if (selectedCategory === "classic" || selectedCategory === null) {
-      return [
-        ...regularPrompts,
-        ...circleNamingGames,
-        ...memoryChainGames,
-        ...charadeActionJokeGames,
-        ...splitTheRoomQuestions,
-        ...bets
-      ];
-    }
-    return [];
-  }, [selectedCategory]);
+    if (!pack) return [];
+    return [
+      ...pack.regularPrompts,
+      ...pack.circleNamingGames,
+      ...pack.memoryChainGames,
+      ...pack.charadeActionJokeGames,
+      ...pack.splitTheRoomQuestions,
+      ...pack.bets,
+    ];
+  }, [pack]);
 
   // Utils
   const shuffle = (arr: string[]) => {
@@ -112,8 +124,7 @@ const BattleRoyale = () => {
     setHistoryIndex((idx) => idx + 1);
   };
 
-  // Inject actor/target into underscores (normal prompts with turn ownership)
-  // Ensures for the first two underscores, names are different: actor != target
+  // Inject actor/target into underscores, ensuring the first two are distinct (actor != target)
   const injectPlayersFor = (text: string, actor: string) => {
     if (!playerNames.length) return text;
 
@@ -125,18 +136,12 @@ const BattleRoyale = () => {
       let nameToUse: string;
 
       if (count === 0) {
-        // first underscore is always the actor (turn owner)
-        nameToUse = actor;
+        nameToUse = actor; // first underscore is the turn owner
       } else if (count === 1) {
-        // second underscore must not equal actor
-        if (others.length > 0) {
-          nameToUse = others[Math.floor(Math.random() * others.length)];
-        } else {
-          // only one player edge-case
-          nameToUse = actor;
-        }
+        nameToUse = others.length > 0
+          ? others[Math.floor(Math.random() * others.length)]
+          : actor; // edge-case single player
       } else {
-        // for additional underscores, pick anyone, try not to repeat the immediately previous
         const pool = playerNames.length > 1
           ? playerNames.filter((n) => n !== lastAssigned)
           : playerNames;
@@ -199,8 +204,13 @@ const BattleRoyale = () => {
     }
   };
 
-  const startNewGame = (category: CategoryKey) => {
+  const startNewGame = async (category: CategoryKey) => {
     setSelectedCategory(category);
+    setIsLoadingPack(true);
+
+    // Load the pack dynamically based on category
+    const mod = await loaders[category]();
+    setPack(mod);
 
     // reset all state for a fresh run
     setUsedIndexes(new Set());
@@ -223,6 +233,7 @@ const BattleRoyale = () => {
     setTurnOrder(shuffle(playerNames));
     setTurnIndex(0);
 
+    setIsLoadingPack(false);
     setStage("playing");
   };
 
@@ -233,15 +244,17 @@ const BattleRoyale = () => {
   };
 
   const startNewVirusNow = () => {
-    const availableIds = virusEffects
+    if (!pack || pack.virusEffects.length === 0) return;
+
+    const availableIds = pack.virusEffects
       .map((_, i) => i)
       .filter((i) => !usedVirusIds.has(i));
     const idx =
       availableIds.length > 0
         ? availableIds[Math.floor(Math.random() * availableIds.length)]
-        : Math.floor(Math.random() * virusEffects.length);
+        : Math.floor(Math.random() * pack.virusEffects.length);
 
-    const virus = virusEffects[idx];
+    const virus = pack.virusEffects[idx];
     const rounds = Math.floor(Math.random() * 6) + 3; // 3-8 normals until end
 
     // Tie virus owner to the current player's turn (fairness)
@@ -264,7 +277,7 @@ const BattleRoyale = () => {
   };
 
   const handleNext = () => {
-    if (stage !== "playing" || isGameOver) return;
+    if (stage !== "playing" || isGameOver || !pack) return;
 
     // If we have forward history (user pressed Back), go forward first
     if (historyIndex < history.length - 1) {
@@ -434,15 +447,11 @@ const BattleRoyale = () => {
                 Classic
               </Button>
 
-              {/* Future categories (disabled) */}
-              <Button disabled className="w-full text-sm font-pixel text-white/60 bg-gray-700 cursor-not-allowed rounded py-3" title="Coming soon">
-                Spicy (Soon)
-              </Button>
-              <Button disabled className="w-full text-sm font-pixel text-white/60 bg-gray-700 cursor-not-allowed rounded py-3" title="Coming soon">
-                K-Pop (Soon)
-              </Button>
-              <Button disabled className="w-full text-sm font-pixel text-white/60 bg-gray-700 cursor-not-allowed rounded py-3" title="Coming soon">
-                Chaos (Soon)
+              <Button
+                onClick={() => startNewGame("boysnight")}
+                className="w-full text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-3"
+              >
+                Boy&apos;s Night
               </Button>
             </div>
 
@@ -460,17 +469,16 @@ const BattleRoyale = () => {
 
         {stage === "playing" && (
           <Card className="p-6 bg-gradient-surface text-center space-y-4">
-      <div className="flex items-center justify-between text-xs font-pixel text-white/80">
-  {selectedCategory && (
-   <div className="text- left text-xl font-pixel bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">
-  {selectedCategory && selectedCategory.toUpperCase()}
-</div>
-  )}
-  <div className="text-right">
-    Round: {normalPromptCount}/{MAX_TURNS}
-  </div>
-</div>
-            {/* <h2 className="text-xl font-pixel bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">Current Prompt</h2> */}
+            <div className="flex items-center justify-between text-xs font-pixel text-white/80">
+              {selectedCategory && (
+                <div className="text-left text-xl font-pixel bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">
+                  {selectedCategory.toUpperCase()}
+                </div>
+              )}
+              <div className="text-right">
+                Round: {normalPromptCount}/{MAX_TURNS}
+              </div>
+            </div>
 
             <div
               className="bg-black bg-opacity-60 text-white p-10 rounded-lg font-pixel text-lg font-bold
@@ -478,7 +486,9 @@ const BattleRoyale = () => {
              whitespace-pre-wrap"
             >
               <span className="block">
-                {currentPrompt || "Press Next to start!"}
+                {isLoadingPack
+                  ? "Loading prompts..."
+                  : currentPrompt || "Press Next to start!"}
               </span>
             </div>
 
@@ -494,7 +504,7 @@ const BattleRoyale = () => {
 
               <Button
                 onClick={handleNext}
-                disabled={isGameOver}
+                disabled={isGameOver || isLoadingPack || !pack}
                 className="text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 disabled:opacity-50 rounded py-1 px-3 flex items-center gap-2"
               >
                 <RefreshCw className="w-4 h-4" />
