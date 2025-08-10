@@ -357,10 +357,10 @@ const BattleRoyale = () => {
         <div className="flex items-center justify-between">
           <Button
             onClick={() => (window.location.href = "/")}
-            className="flex items-center gap-2 text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80"
+            className="h-10 w-10 p-0 bg-orange-600 hover:bg-orange-400 rounded-lg shadow-md shadow-yellow-300/60 hover:shadow-lg hover:shadow-yellow-300/90 flex items-center justify-center"
+            aria-label="Back to Menu"
           >
-            <ArrowLeft className="h-4 w-4" />
-            [HOME]
+            <ArrowLeft className="h-5 w-5 text-black" />
           </Button>
           <h1 className="text-3xl font-arcade text-center bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-400 drop-shadow-[0_0_6px_rgba(255,200,100,0.9)]">
             BATTLE ROYALE
