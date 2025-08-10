@@ -159,7 +159,7 @@ const Game = () => {
                 onClick={() => setBridgeMode('chaotic')}
                 className={`${bridgeMode === 'chaotic' ? 'bg-orange-600 hover:bg-orange-400' : 'bg-orange-700/40 hover:bg-orange-500/60'} text-white px-3 py-2 text-xs rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 w-full col-span-2 sm:col-span-1`}
               >
-                Chaotic (mixed)
+                Chaotic (Mixed)
               </Button>
             </div>
           </Card>
@@ -168,30 +168,32 @@ const Game = () => {
         {/* Truth/Dare selector */}
         {mode === "truthOrDare" && (
           <Card className="p-3 sm:p-4 bg-black/60 border border-orange-500 rounded-xl overflow-hidden">
-            <Label className="mb-2 block text-xs sm:text-sm bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">
-              Select Truth or Dare Mode
-            </Label>
-            <div className="grid grid-cols-3 gap-2">
-              <Button
-                onClick={() => setTruthOrDareMode('truth')}
-                className={`${truthOrDareMode === 'truth' ? 'bg-orange-600 hover:bg-orange-400' : 'bg-orange-700/40 hover:bg-orange-500/60'} text-white px-2.5 py-2 text-xs rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 w-full`}
-              >
-                Truth
-              </Button>
-              <Button
-                onClick={() => setTruthOrDareMode('dare')}
-                className={`${truthOrDareMode === 'dare' ? 'bg-orange-600 hover:bg-orange-400' : 'bg-orange-700/40 hover:bg-orange-500/60'} text-white px-2.5 py-2 text-xs rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 w-full`}
-              >
-                Dare
-              </Button>
-              <Button
-                onClick={() => setTruthOrDareMode('both')}
-                className={`${truthOrDareMode === 'both' ? 'bg-orange-600 hover:bg-orange-400' : 'bg-orange-700/40 hover:bg-orange-500/60'} text-white px-2.5 py-2 text-xs rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 w-full`}
-              >
-                Both
-              </Button>
-            </div>
-          </Card>
+  <Label className="mb-2 block text-xs sm:text-sm bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">
+    Select Truth or Dare Mode
+  </Label>
+
+  {/* Match Bridges layout so the mixed button has more width on phones */}
+  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+    <Button
+      onClick={() => setTruthOrDareMode('truth')}
+      className={`${truthOrDareMode === 'truth' ? 'bg-orange-600 hover:bg-orange-400' : 'bg-orange-700/40 hover:bg-orange-500/60'} text-white px-2.5 py-2 text-xs rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 w-full`}
+    >
+      Truth
+    </Button>
+    <Button
+      onClick={() => setTruthOrDareMode('dare')}
+      className={`${truthOrDareMode === 'dare' ? 'bg-orange-600 hover:bg-orange-400' : 'bg-orange-700/40 hover:bg-orange-500/60'} text-white px-2.5 py-2 text-xs rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 w-full`}
+    >
+      Dare
+    </Button>
+    <Button
+      onClick={() => setTruthOrDareMode('both')}
+      className={`${truthOrDareMode === 'both' ? 'bg-orange-600 hover:bg-orange-400' : 'bg-orange-700/40 hover:bg-orange-500/60'} text-white px-2.5 py-2 text-xs rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 w-full col-span-2 sm:col-span-1 whitespace-nowrap overflow-hidden text-ellipsis`}
+    >
+      Chaotic (Mixed)
+    </Button>
+  </div>
+</Card>
         )}
 
         {/* Question card: responsive height, wrap text safely */}

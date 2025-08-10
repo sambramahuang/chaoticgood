@@ -223,8 +223,8 @@ export const dareQuestions = [
   "Dare: Serenade someone in the most cringe way possible.",
   "Dare: Put your forehead on the floor and scream 'I’m a sexy dolphin!'",
   "Dare: Give your phone to the person on your left for 2 minutes — they can open anything.",
-  "Dare: Let the group come up with a new Instagram caption and post it.",
-  "Dare: Reenact your last hookup using only sound effects.",
+  "Dare: Let the group come up with a new Instagram bio, you have to keep it for 24 hours.",
+  "Dare: Reenact your last sexual position.",
   "Dare: Let the group pick a person in your contact list to send a flirty voice note to.",
   "Dare: Lick the floor or the bottom of someone’s shoe (your pick).",
   "Dare: Put your socks on your hands and cluck like a chicken until your next turn.",
@@ -245,7 +245,7 @@ export const dareQuestions = [
   "Dare: Pick someone to spank you or get fake-spanked by a random object.",
   "Dare: Do your best fake orgasm noises for 10 seconds.",
   "Dare: Take a funny selfie and send it to your ex.",
-  "Dare: Crawl on all fours and bark every time someone says your name for 3 rounds.",
+  "Dare: Crawl on all fours and bark 10 times.",
   "Dare: Do your best striptease dance with clothes on.",
   "Dare: Let the group choose a random contact for you to prank call.",
   "Dare: Sit on someone’s lap until your next turn.",
@@ -258,3 +258,5 @@ export const dareQuestions = [
   "Dare: Go stand outside and wave at strangers for 1 minute.",
   "Dare: Try to pick up someone in the room using your worst pickup line."
 ];
+
+
