@@ -86,27 +86,27 @@ export const charadeActionJokeGames: string[] = [
 
 export const virusEffects: VirusEffect[] = [
   {
-    prompt: "__ must say 'heyyyy sexy' at the end of every round or take a penalty for each round he does not until further notice.",
+    prompt: "_ must say 'heyyyy sexy' at the end of every round or take a penalty for each round he does not until further notice.",
     activation: "_ you no longer have to say 'heyyyy sexy'."
   },
   {
-    prompt: "__ must hold hands with the person on his right until further notice.",
+    prompt: "_ must hold hands with the person on his right until further notice.",
     activation: "_ you can let go now."
   },
   {
-    prompt: "__ must end every sentence with '...your mom' until further notice.",
+    prompt: "_ must end every sentence with '...your mom' until further notice.",
     activation: "_ you can stop saying '...your mom'."
   },
   {
-    prompt: "__ must refer to everyone as 'king' until further notice.",
+    prompt: "_ must refer to everyone as 'king' until further notice.",
     activation: "_ you can stop calling everyone 'king'."
   },
   {
-    prompt: "__ must refer to everyone as 'papi' until further notice.",
+    prompt: "_ must refer to everyone as 'papi' until further notice.",
     activation: "_ you can stop calling everyone 'papi'."
   },
   {
-    prompt: "__ must flex before speaking for the rest of the game.",
+    prompt: "_ must flex before speaking for the rest of the game.",
     activation: "_ you no longer have to flex before speaking."
   }
 ];
