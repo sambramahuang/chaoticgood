@@ -9,7 +9,7 @@ const MIN_PLAYERS = 2;
 const MAX_TURNS = 50; // end after 50 normal prompts (turns)
 
 type Stage = "players" | "category" | "playing";
-type CategoryKey = "classic" | "boysnight" | "chaos" ; // extend with new categories
+type CategoryKey = "classic" |  "chaos" | "boysnight" | "girlsnight" ; // extend with new categories
 
 export interface VirusEffect {
   prompt: string;
@@ -29,7 +29,8 @@ type PromptModule = {
 const loaders: Record<CategoryKey, () => Promise<PromptModule>> = {
   classic: () => import("@/data/br/classic") as unknown as Promise<PromptModule>,
   boysnight: () => import("@/data/br/boysnight") as unknown as Promise<PromptModule>,
-  chaos: () => import("@/data/br/chaos") as unknown as Promise<PromptModule>
+  chaos: () => import("@/data/br/chaos") as unknown as Promise<PromptModule>,
+  girlsnight: () => import("@/data/br/girlsnight") as unknown as Promise<PromptModule>
 };
 
 const BattleRoyale = () => {
@@ -449,18 +450,27 @@ const BattleRoyale = () => {
               </Button>
 
               <Button
+                onClick={() => startNewGame("chaos")}
+                className="w-full text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-3"
+              >
+              CHAOS (18+)
+              </Button>
+
+              <Button
                 onClick={() => startNewGame("boysnight")}
                 className="w-full text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-3"
               >
                 Boy&apos;s Night
               </Button>
 
-              <Button
-                onClick={() => startNewGame("chaos")}
+               <Button
+                onClick={() => startNewGame("girlsnight")}
                 className="w-full text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-3"
               >
-              CHAOS (18+)
+                Girl&apos;s Night
               </Button>
+
+              
             </div>
 
             <div className="flex justify-between pt-2">
