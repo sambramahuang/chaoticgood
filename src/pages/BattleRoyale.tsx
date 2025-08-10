@@ -9,7 +9,7 @@ const MIN_PLAYERS = 2;
 const MAX_TURNS = 50; // end after 50 normal prompts (turns)
 
 type Stage = "players" | "category" | "playing";
-type CategoryKey = "classic" | "boysnight"; // extend with new categories
+type CategoryKey = "classic" | "boysnight" | "chaos" ; // extend with new categories
 
 export interface VirusEffect {
   prompt: string;
@@ -29,6 +29,7 @@ type PromptModule = {
 const loaders: Record<CategoryKey, () => Promise<PromptModule>> = {
   classic: () => import("@/data/br/classic") as unknown as Promise<PromptModule>,
   boysnight: () => import("@/data/br/boysnight") as unknown as Promise<PromptModule>,
+  chaos: () => import("@/data/br/chaos") as unknown as Promise<PromptModule>
 };
 
 const BattleRoyale = () => {
@@ -452,6 +453,13 @@ const BattleRoyale = () => {
                 className="w-full text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-3"
               >
                 Boy&apos;s Night
+              </Button>
+
+              <Button
+                onClick={() => startNewGame("chaos")}
+                className="w-full text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-3"
+              >
+              CHAOS (18+)
               </Button>
             </div>
 
