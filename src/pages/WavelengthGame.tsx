@@ -194,13 +194,31 @@ const WavelengthGame = () => {
         {gamePhase === "setup" && (
           <Card className="bg-black/60 border border-orange-500 p-3 sm:p-4 rounded-xl text-center space-y-4 sm:space-y-6 font-sans overflow-hidden">
             <div className="space-y-3 sm:space-y-4">
-              <h2 className="text-white text-xs sm:text-sm font-bold font-sans">How to Play Wavelength</h2>
-              <div className="text-center space-y-2.5 sm:space-y-3 max-w-prose mx-auto font-sans">
-                <p className="text-white text-[11px] sm:text-xs break-words">1. One player is the <strong>guesser</strong> and looks away</p>
-                <p className="text-white text-[11px] sm:text-xs break-words">2. A secret number (1-10) is generated for the other players</p>
-                <p className="text-white text-[11px] sm:text-xs break-words">3. Each round, give an example from the category that matches the number&apos;s intensity</p>
-                <p className="text-white text-[11px] sm:text-xs break-words">4. <strong>1 = worst/weakest</strong>, <strong>10 = best/strongest</strong></p>
-                <p className="text-white text-[11px] sm:text-xs break-words">5. After several rounds, the guesser tries to guess the number!</p>
+              <h2 className="text-xs sm:text-sm font-bold font-sans bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">How to Play Wavelength</h2>
+              <div className="max-w-prose mx-auto">
+                <ol className="space-y-2 sm:space-y-2.5 text-white text-[11px] sm:text-xs font-sans">
+                  <li className="flex items-start gap-2">
+                    <span className="inline-flex items-center justify-center h-5 w-5 rounded-full border border-orange-400 text-[10px] font-bold text-orange-300 mt-0.5">1</span>
+                    <span className="flex-1">One player is the <strong>guesser</strong> and looks away.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="inline-flex items-center justify-center h-5 w-5 rounded-full border border-orange-400 text-[10px] font-bold text-orange-300 mt-0.5">2</span>
+                    <span className="flex-1">A secret number (1–10) is generated for the other players.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="inline-flex items-center justify-center h-5 w-5 rounded-full border border-orange-400 text-[10px] font-bold text-orange-300 mt-0.5">3</span>
+                    <span className="flex-1">Each round, give an example from the category that matches the number’s intensity.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="inline-flex items-center justify-center h-5 w-5 rounded-full border border-orange-400 text-[10px] font-bold text-orange-300 mt-0.5">4</span>
+                    <span className="flex-1"><strong>1 = worst/weakest</strong>, <strong>10 = best/strongest</strong>.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="inline-flex items-center justify-center h-5 w-5 rounded-full border border-orange-400 text-[10px] font-bold text-orange-300 mt-0.5">5</span>
+                    <span className="flex-1">After several rounds, the guesser makes a single guess.</span>
+                  </li>
+                </ol>
+                <div className="h-px bg-gradient-to-r from-transparent via-orange-500/40 to-transparent my-3 sm:my-4" />
               </div>
             </div>
 

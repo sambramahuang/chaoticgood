@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import heroImage from "@/assets/gaming-hero.jpg";
@@ -81,7 +81,7 @@ const Index = () => {
               </div>
               <div className="space-y-3">
                 <h2 className="text-2xl font-arcade font-bold uppercase tracking-wider">
-                  <span className="bg-gradient-to-r from-yellow-200 via-orange-400 to-orange-300 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-yellow-100 via-orange-300 to-orange-200 bg-clip-text text-transparent">
                     Battle Royale
                   </span>
                 </h2>
@@ -115,7 +115,7 @@ const Index = () => {
               </div>
               <div className="space-y-3">
                 <h2 className="text-2xl font-arcade font-bold uppercase tracking-wider">
-                  <span className="bg-gradient-to-r from-yellow-200 via-orange-400 to-orange-300 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-yellow-100 via-orange-300 to-orange-200 bg-clip-text text-transparent">
                     Bridges
                   </span>
                 </h2>
@@ -149,7 +149,7 @@ const Index = () => {
               </div>
               <div className="space-y-3">
                 <h2 className="text-2xl font-arcade font-bold uppercase tracking-wider">
-                  <span className="bg-gradient-to-r from-yellow-200 via-orange-400 to-orange-300 bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-yellow-100 via-orange-300 to-orange-200 bg-clip-text text-transparent">
                     Truth or Dare
                   </span>
                 </h2>
@@ -180,7 +180,7 @@ const Index = () => {
                 </div>
                 <div className="space-y-3">
                   <h2 className="text-2xl font-arcade font-bold uppercase tracking-wider">
-                    <span className="bg-gradient-to-r from-yellow-200 via-orange-400 to-orange-300 bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-yellow-100 via-orange-300 to-orange-200 bg-clip-text text-transparent">
                       Wavelength
                     </span>
                   </h2>
@@ -209,7 +209,7 @@ const Index = () => {
                 </div>
                 <div className="space-y-3">
                   <h2 className="text-2xl font-arcade font-bold uppercase tracking-wider">
-                    <span className="bg-gradient-to-r from-yellow-200 via-orange-400 to-orange-300 bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-yellow-100 via-orange-300 to-orange-200 bg-clip-text text-transparent">
                       IN OTHER WORDS
                     </span>
                   </h2>
@@ -239,7 +239,7 @@ const Index = () => {
                 </div>
                 <div className="space-y-3">
                   <h2 className="text-2xl font-arcade font-bold uppercase tracking-wider">
-                    <span className="bg-gradient-to-r from-yellow-200 via-orange-400 to-orange-300 bg-clip-text text-transparent">
+                    <span className="bg-gradient-to-r from-yellow-100 via-orange-300 to-orange-200 bg-clip-text text-transparent">
                       KING'S CUP
                     </span>
                   </h2>
@@ -299,7 +299,7 @@ Draw a card, follow the rule, and watch the night spiral into hilarious chaos.  
               This app is for entertainment purposes only. You must choose actions that are safe and legal for your situation. Do not attempt any prompt that could cause harm, property damage, or violate any law or rule.
             </p>
             <p className="font-sans text-[11px] text-white/90 mt-2">
-              By tapping “I Accept”, you confirm you are of legal age to access any (18+) modes (where applicable), accept full responsibility for your choices, and agree that you use this app at your own risk. To the maximum extent permitted by law, we disclaim all liability for loss, injury, or damages arising from use of the app. See our <a href="/terms" className="underline text-orange-300 hover:text-yellow-200">Terms</a> for details.
+              By tapping “I Accept”, you confirm you are of legal age to access any (18+) modes (where applicable), accept full responsibility for your choices, and agree that you use this app at your own risk. To the maximum extent permitted by law, we disclaim all liability for loss, injury, or damages arising from use of the app. See our <Link to="/termsconditions" className="underline text-orange-300 hover:text-yellow-200">Terms</Link> for details.
             </p>
             <div className="mt-4 flex justify-center gap-3">
               <Button
@@ -312,6 +312,15 @@ Draw a card, follow the rule, and watch the night spiral into hilarious chaos.  
           </Card>
         </div>
       )}
+      {/* Terms & Conditions link */}
+      <div className="mt-6 text-center">
+        <Link
+          to="/termsconditions"
+          className="font-pixel text-[10px] text-white/70 hover:text-orange-300 transition-colors"
+        >
+          Terms &amp; Conditions
+        </Link>
+      </div>
     </div>
   );
 };
