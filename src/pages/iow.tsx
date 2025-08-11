@@ -312,24 +312,23 @@ const handleEndGame = () => {
     <div className="min-h-screen flex flex-col items-center justify-center bg-background p-6">
       <div className="w-full max-w-xl space-y-6">
         {/* Header */}
-        <div className="flex items-center justify-between">
+        <div className="grid grid-cols-3 items-center">
           <Button
             onClick={() => (window.location.href = "/")}
-            className="flex items-center gap-2 text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80"
+            className="justify-self-start h-10 w-10 p-0 bg-orange-600 hover:bg-orange-400 rounded-lg shadow-md shadow-yellow-300/60 hover:shadow-lg hover:shadow-yellow-300/90 flex items-center justify-center"
+            aria-label="Back to Menu"
           >
-            <ArrowLeft className="h-4 w-4" />
-            [HOME]
+            <ArrowLeft className="h-5 w-5 text-black" />
           </Button>
-          <h1 className="text-3xl font-arcade text-center bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-400 drop-shadow-[0_0_6px_rgba(255,200,100,0.9)]">
+          <h1 className="justify-self-center text-xl sm:text-2xl font-arcade text-center bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-400 drop-shadow-[0_0_6px_rgba(255,200,100,0.9)]">
             IN OTHER WORDS
           </h1>
           <Button
-      onClick={handleEndGame}
-      className="text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded px-3 py-1"
-    >
-      END GAME
-    </Button>
-          <div className="w-24" />
+            onClick={handleEndGame}
+            className="justify-self-end text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 px-3 shadow-md shadow-yellow-300/60 hover:shadow-lg hover:shadow-yellow-300/90"
+          >
+            END GAME
+          </Button>
         </div>
 
         {/* SETTINGS */}
