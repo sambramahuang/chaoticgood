@@ -499,7 +499,7 @@ const BattleRoyale = () => {
             </div>
 
             <div
-              className="bg-black bg-opacity-60 text-white p-10 rounded-lg font-pixel text-lg font-bold
+              className="bg-black bg-opacity-60 text-white p-10 rounded-lg font-pixel text-sm sm:text-base font-bold
              h-72 md:h-80 overflow-y-auto flex items-center justify-center text-center
              whitespace-pre-wrap"
             >
