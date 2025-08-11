@@ -10,6 +10,7 @@ import CustomQuestions from "./pages/CustomQuestions";
 import NotFound from "./pages/NotFound";
 import BattleRoyale from "@/pages/BattleRoyale";
 import InOtherWords from "@/pages/iow";
+import KingsCup from "@/pages/kingscup";
 import FibbageGame from "./pages/fibbage";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/custom-questions" element={<CustomQuestions />} />
           <Route path="/battleroyale" element={<BattleRoyale />} />
           <Route path="/inotherwords" element={<InOtherWords />} />
+          <Route path="/kingscup" element={<KingsCup />} />
           {/* <Route path="/fibbage" element={<FibbageGame />} /> */}
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
