@@ -183,7 +183,7 @@ const WavelengthGame = () => {
             <span className="hidden xs:inline">Back</span>
           </Button>
 
-          <h1 className="font-arcade text-center my-1 bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-400 bg-clip-text text-transparent drop-shadow-[0_0_6px_rgba(255,200,100,0.9)] text-2xl md:text-4xl leading-tight px-1 overflow-hidden text-ellipsis whitespace-nowrap">
+          <h1 className="font-arcade text-center my-1 bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-400 bg-clip-text text-transparent drop-shadow-[0_0_6px_rgba(255,200,100,0.9)] text-xl sm:text-2xl leading-tight px-1 overflow-hidden text-ellipsis whitespace-nowrap">
             WAVELENGTH
           </h1>
 
@@ -195,7 +195,7 @@ const WavelengthGame = () => {
           <Card className="bg-black/60 border border-orange-500 p-3 sm:p-4 rounded-xl text-center space-y-4 sm:space-y-6 font-sans overflow-hidden">
             <div className="space-y-3 sm:space-y-4">
               <h2 className="text-white text-xs sm:text-sm font-bold font-sans">How to Play Wavelength</h2>
-              <div className="text-left space-y-2.5 sm:space-y-3 max-w-prose mx-auto font-sans">
+              <div className="text-center space-y-2.5 sm:space-y-3 max-w-prose mx-auto font-sans">
                 <p className="text-white text-[11px] sm:text-xs break-words">1. One player is the <strong>guesser</strong> and looks away</p>
                 <p className="text-white text-[11px] sm:text-xs break-words">2. A secret number (1-10) is generated for the other players</p>
                 <p className="text-white text-[11px] sm:text-xs break-words">3. Each round, give an example from the category that matches the number&apos;s intensity</p>
@@ -206,7 +206,7 @@ const WavelengthGame = () => {
 
             {/* Drinking Mode Toggle */}
             <Card className="bg-black/60 border border-orange-500 p-3 sm:p-4 rounded-xl overflow-hidden">
-              <div className="flex items-center justify-between gap-3">
+              <div className="flex flex-col items-center sm:flex-row sm:items-center sm:justify-between gap-3">
                 <div className="flex items-center gap-3 min-w-0">
                   <Wine className="h-5 w-5 text-orange-300 shrink-0" />
                   <div className="min-w-0">
