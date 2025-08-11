@@ -362,10 +362,10 @@ const BattleRoyale = () => {
           >
             <ArrowLeft className="h-5 w-5 text-black" />
           </Button>
-          <h1 className="text-3xl font-arcade text-center bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-400 drop-shadow-[0_0_6px_rgba(255,200,100,0.9)]">
+          <h1 className="text-xl sm:text-2xl font-arcade text-center bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-400 drop-shadow-[0_0_6px_rgba(255,200,100,0.9)]">
             BATTLE ROYALE
           </h1>
-          <div className="w-24" />
+          <div className="w-10" />
         </div>
 
         {stage === "players" && (
@@ -444,30 +444,30 @@ const BattleRoyale = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <Button
                 onClick={() => startNewGame("classic")}
-                className="w-full text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-3"
+                className="w-full text-[11px] sm:text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-2 sm:py-3"
               >
                 Classic
               </Button>
 
               <Button
                 onClick={() => startNewGame("chaotic")}
-                className="w-full text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-3"
+                className="w-full text-[11px] sm:text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-2 sm:py-3"
               >
               CHAOTIC (18+)
               </Button>
 
               <Button
                 onClick={() => startNewGame("boysnight")}
-                className="w-full text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-3"
+                className="w-full text-[11px] sm:text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-2 sm:py-3"
               >
-                Boy&apos;s Night
+                Boy&apos;s Night (18+)
               </Button>
 
                <Button
                 onClick={() => startNewGame("girlsnight")}
-                className="w-full text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-3"
+                className="w-full text-[11px] sm:text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-2 sm:py-3"
               >
-                Girl&apos;s Night
+                Girl&apos;s Night (18+)
               </Button>
 
               
@@ -476,7 +476,7 @@ const BattleRoyale = () => {
             <div className="flex justify-between pt-2">
               <Button
                 onClick={() => setStage("players")}
-                className="text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 px-3 flex items-center gap-2"
+                className="text-[11px] sm:text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 px-3 flex items-center gap-2"
               >
                 <ArrowLeft className="w-4 h-4" />
                 Back
@@ -489,7 +489,7 @@ const BattleRoyale = () => {
           <Card className="p-6 bg-gradient-surface text-center space-y-4">
             <div className="flex items-center justify-between text-xs font-pixel text-white/80">
               {selectedCategory && (
-                <div className="text-left text-xl font-pixel bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">
+                <div className="text-left text-sm sm:text-base font-pixel bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">
                   {selectedCategory.toUpperCase()}
                 </div>
               )}
