@@ -196,7 +196,7 @@ const Index = () => {
                     </span>
                   </h2>
                   <p className="font-pixel text-[10px] leading-relaxed bg-gradient-to-r from-orange-300 via-yellow-200 to-orange-400 bg-clip-text text-transparent">
-                    Work in teams to decipher what your teammates are trying to say. A game of words and charades. 
+                    Work in teams to decipher what your teammates are trying to say or charade. 
                   </p>
                 </div>
                 <Button
