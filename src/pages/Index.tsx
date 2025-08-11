@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -5,6 +6,23 @@ import heroImage from "@/assets/gaming-hero.jpg";
 
 const Index = () => {
   const navigate = useNavigate();
+
+  const [showDisclaimer, setShowDisclaimer] = useState(false);
+
+  useEffect(() => {
+    try {
+      if (!localStorage.getItem("cg_disclaimer_accepted")) {
+        setShowDisclaimer(true);
+      }
+    } catch {}
+  }, []);
+
+  const acceptDisclaimer = () => {
+    try {
+      localStorage.setItem("cg_disclaimer_accepted", "1");
+    } catch {}
+    setShowDisclaimer(false);
+  };
 
   return (
     <div 
@@ -272,6 +290,28 @@ Draw a card, follow the rule, and watch the night spiral into hilarious chaos.  
 
         </div>
       </div>
+      {showDisclaimer && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={acceptDisclaimer}></div>
+          <Card className="relative z-10 bg-black/80 border-2 border-orange-500 rounded-xl p-5 sm:p-6 max-w-md mx-4 text-center">
+            <h3 className="font-arcade text-xl bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-400 bg-clip-text text-transparent drop-shadow-[0_0_6px_rgba(255,200,100,0.9)]">Before You Play</h3>
+            <p className="font-sans text-xs text-white mt-2">
+              This app is for entertainment purposes only. You must choose actions that are safe and legal for your situation. Do not attempt any prompt that could cause harm, property damage, or violate any law or rule.
+            </p>
+            <p className="font-sans text-[11px] text-white/90 mt-2">
+              By tapping “I Accept”, you confirm you are of legal age to access any (18+) modes (where applicable), accept full responsibility for your choices, and agree that you use this app at your own risk. To the maximum extent permitted by law, we disclaim all liability for loss, injury, or damages arising from use of the app. See our <a href="/terms" className="underline text-orange-300 hover:text-yellow-200">Terms</a> for details.
+            </p>
+            <div className="mt-4 flex justify-center gap-3">
+              <Button
+                onClick={acceptDisclaimer}
+                className="retro-button border-2 border-orange-400 bg-orange-500 text-black hover:bg-orange-600 hover:text-white font-pixel text-xs drop-shadow-[0_0_10px_#fb923c] hover:drop-shadow-[0_0_10px_#fb923c]"
+              >
+                I Accept
+              </Button>
+            </div>
+          </Card>
+        </div>
+      )}
     </div>
   );
 };
