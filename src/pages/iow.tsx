@@ -311,26 +311,27 @@ const handleEndGame = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-background p-6">
       <div className="w-full max-w-xl space-y-6">
-        {/* Header */}
-        <div className="flex items-center justify-between">
-          <Button
-            onClick={() => (window.location.href = "/")}
-            className="flex items-center gap-2 text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            [HOME]
-          </Button>
-          <h1 className="text-3xl font-arcade text-center bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-400 drop-shadow-[0_0_6px_rgba(255,200,100,0.9)]">
-            IN OTHER WORDS
-          </h1>
-          <Button
-      onClick={handleEndGame}
-      className="text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded px-3 py-1"
-    >
-      END GAME
-    </Button>
-          <div className="w-24" />
-        </div>
+       {/* Header */}
+<div className="flex flex-wrap items-center justify-between gap-2 sm:gap-3">
+  <Button
+    onClick={() => (window.location.href = "/")}
+    className="flex items-center gap-2 text-xs px-3 py-1 font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded shadow-md shadow-orange-400/50 hover:shadow-lg hover:shadow-yellow-300/80 shrink-0"
+  >
+    <ArrowLeft className="h-4 w-4" />
+    
+  </Button>
+
+  <h1 className="w-full sm:w-auto flex-1 text-center text-2xl sm:text-3xl leading-tight my-1 sm:my-0 px-2 font-arcade bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-400 drop-shadow-[0_0_6px_rgba(255,200,100,0.9)]">
+    IN OTHER WORDS
+  </h1>
+
+  <Button
+    onClick={handleEndGame}
+    className="text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded px-3 py-1 shrink-0"
+  >
+    END GAME
+  </Button>
+</div>
 
         {/* SETTINGS */}
         {stage === "settings" && (
@@ -395,28 +396,36 @@ const handleEndGame = () => {
 
               <div>
                 <label className="block text-sm font-pixel text-white/80 mb-1">Categories</label>
-                <div className="grid grid-cols-2 gap-2">
-                  {(Object.keys(categories) as CategoryKey[]).map((k) => {
-                    const checked = settings.selectedCategories.includes(k);
-                    return (
-                      <label key={k} className={`flex items-center gap-2 border rounded px-2 py-2 cursor-pointer ${checked ? "bg-orange-500/20 border-orange-400" : "bg-black/10"}`}>
-                        <input
-                          type="checkbox"
-                          checked={checked}
-                          onChange={(e) => {
-                            setSettings((s) => {
-                              const next = new Set(s.selectedCategories);
-                              if (e.target.checked) next.add(k); else next.delete(k);
-                              return { ...s, selectedCategories: Array.from(next) as CategoryKey[] };
-                            });
-                          }}
-                        />
-                        <span className="font-pixel text-white/90 capitalize">{k.replace(/([A-Z])/g, " $1")}</span>
-                        <span className="ml-auto text-xs text-white/50">{categories[k].length}</span>
-                      </label>
-                    );
-                  })}
-                </div>
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+  {(Object.keys(categories) as CategoryKey[]).map((k) => {
+    const checked = settings.selectedCategories.includes(k);
+    return (
+      <label
+        key={k}
+        className={`flex items-start gap-2 border rounded px-2 py-2 cursor-pointer min-w-0 ${
+          checked ? "bg-orange-500/20 border-orange-400" : "bg-black/10"
+        }`}
+      >
+        <input
+          type="checkbox"
+          checked={checked}
+          onChange={(e) => {
+            setSettings((s) => {
+              const next = new Set(s.selectedCategories);
+              if (e.target.checked) next.add(k); else next.delete(k);
+              return { ...s, selectedCategories: Array.from(next) as CategoryKey[] };
+            });
+          }}
+          className="h-4 w-4 shrink-0"
+        />
+        <span className="font-pixel text-white/90 capitalize text-sm leading-snug break-words whitespace-normal hyphens-auto flex-1 min-w-0">
+          {k.replace(/([A-Z])/g, " $1")}
+        </span>
+        <span className="ml-2 text-xs text-white/50 shrink-0">{categories[k].length}</span>
+      </label>
+    );
+  })}
+</div>
               </div>
 
               <Button
@@ -452,8 +461,6 @@ const handleEndGame = () => {
             <div className="flex items-center justify-between text-xs font-pixel text-white/80">
               <div className="text-left">
                 <div className="text-xl font-pixel bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">{ruleText}</div>
-                {/* <div className="mt-1">Cards left: {cardsLeft}</div> */}
-                
               </div>
               <div className="text-right">
                 <div className="text-3xl font-arcade">{timeLeft}s</div>
@@ -473,11 +480,31 @@ const handleEndGame = () => {
   </div>
 </div>
 
-            <div className="flex justify-center gap-2">
-              <Button onClick={onSkip} disabled={!settings.allowSkips} className="text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 px-3 disabled:opacity-40">PASS ❌</Button>
-              <Button onClick={onGotIt} className="text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 px-3">GOT IT ✅</Button>
-              <Button onClick={endTurn} className="text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 px-3 flex items-center gap-2"><RefreshCw className="w-4 h-4"/>END TURN</Button>
-            </div>
+            {/* Buttons */}
+<div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-2">
+  <Button
+    onClick={onSkip}
+    disabled={!settings.allowSkips}
+    className="w-full text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-2 px-3 disabled:opacity-40"
+  >
+    PASS ❌
+  </Button>
+
+  <Button
+    onClick={onGotIt}
+    className="w-full text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-2 px-3"
+  >
+    GOT IT ✅
+  </Button>
+
+  <Button
+    onClick={endTurn}
+    className="w-full text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-2 px-3 flex items-center justify-center gap-2"
+  >
+    <RefreshCw className="w-4 h-4" />
+    END TURN
+  </Button>
+</div>
           </Card>
         )}
 

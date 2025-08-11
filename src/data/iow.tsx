@@ -24,6 +24,30 @@ export type CategoryKey =
   ;
 
 export const categories: Record<CategoryKey, string[]> = {
+ 
+
+  general: [
+  "Harry Potter", "Barbie", "The Rock", "Shrek", "SpongeBob SquarePants",
+  "Bigfoot", "Santa Claus", "Elon Musk", "Taylor Swift", "Oprah Winfrey",
+  "Mona Lisa", "Mickey Mouse", "Homer Simpson", "Pikachu", "Godzilla",
+  "Pizza Delivery Guy", "Zombie Apocalypse", "Vampire", "Ninja", "Clown",
+  "Selfie", "Yoga", "Karaoke", "Binge-Watching", "Online Shopping",
+  "Roller Coaster", "Ice Cream Truck", "Wedding Proposal", "Haunted House", "Treasure Hunt",
+  "Detective", "Astronaut", "Time Traveler", "Pirate", "Superhero Landing",
+  "Cat Video", "Treadmill", "DJ", "Cooking Show", "Magic Trick"
+],
+
+
+    hard: [
+  "Amelia Earhart", "Banksy", "Salvador Dalí", "Frida Kahlo", "Nikola Tesla",
+  "Black Swan", "Rosetta Stone", "Stonehenge", "Mount Vesuvius", "Great Wall of China",
+  "Hindenburg", "Great Barrier Reef", "Area 51", "Taj Mahal", "Antarctica",
+  "Marie Curie", "Leonardo da Vinci", "Rube Goldberg Machine", "Trojan Horse", "The Bermuda Triangle",
+  "Loch Ness Monster", "Suez Canal", "Mount Everest", "Easter Island", "Pyramids of Giza",
+  "Chernobyl", "Golden Gate Bridge", "Aurora Borealis", "Dead Sea", "Grand Canyon",
+  "Blue Whale", "Komodo Dragon", "Machu Picchu", "Petra", "Silk Road",
+  "Genghis Khan", "Cleopatra", "Zeus", "The Kraken", "Eiffel Tower"
+],
   soccer: [
     "Lionel Messi", "Cristiano Ronaldo", "Kylian Mbappé", "Mohamed Salah", "Son Heung-min",
     "Bicycle Kick",  "Offside", "Penalty Shootout", "Corner",
@@ -101,27 +125,7 @@ f1: [
     "Cat", "Dog", "Lion", "Tiger", "Elephant", "Giraffe", "Kangaroo", "Panda", "Koala", "Penguin",
     "Eagle", "Shark", "Dolphin", "Crocodile", "Turtle", "Octopus", "Dragon", "Unicorn", "Phoenix", "Sloth"
   ],
-  hard: [
-  "Amelia Earhart", "Banksy", "Salvador Dalí", "Frida Kahlo", "Nikola Tesla",
-  "Black Swan", "Rosetta Stone", "Stonehenge", "Mount Vesuvius", "Great Wall of China",
-  "Hindenburg", "Great Barrier Reef", "Area 51", "Taj Mahal", "Antarctica",
-  "Marie Curie", "Leonardo da Vinci", "Rube Goldberg Machine", "Trojan Horse", "The Bermuda Triangle",
-  "Loch Ness Monster", "Suez Canal", "Mount Everest", "Easter Island", "Pyramids of Giza",
-  "Chernobyl", "Golden Gate Bridge", "Aurora Borealis", "Dead Sea", "Grand Canyon",
-  "Blue Whale", "Komodo Dragon", "Machu Picchu", "Petra", "Silk Road",
-  "Genghis Khan", "Cleopatra", "Zeus", "The Kraken", "Eiffel Tower"
-],
-
-  general: [
-  "Harry Potter", "Barbie", "The Rock", "Shrek", "SpongeBob SquarePants",
-  "Bigfoot", "Santa Claus", "Elon Musk", "Taylor Swift", "Oprah Winfrey",
-  "Mona Lisa", "Mickey Mouse", "Homer Simpson", "Pikachu", "Godzilla",
-  "Pizza Delivery Guy", "Zombie Apocalypse", "Vampire", "Ninja", "Clown",
-  "Selfie", "Yoga", "Karaoke", "Binge-Watching", "Online Shopping",
-  "Roller Coaster", "Ice Cream Truck", "Wedding Proposal", "Haunted House", "Treasure Hunt",
-  "Detective", "Astronaut", "Time Traveler", "Pirate", "Superhero Landing",
-  "Cat Video", "Treadmill", "DJ", "Cooking Show", "Magic Trick"
-],
+ 
 nsfw: [
   "One-Night Stand", "Walk of Shame", "Dirty Talk", "Strip Poker", "Drunk Texting",
   "Handcuffs", "Naughty Nurse", "Pole Dancing", "Body Shot", "Morning After",
