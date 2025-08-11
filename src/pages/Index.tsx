@@ -80,8 +80,8 @@ const Index = () => {
                 />
               </div>
               <div className="space-y-3">
-                <h2 className="text-xl sm:text-2xl font-arcade font-bold uppercase tracking-wider">
-                  <span className="bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-400 bg-clip-text text-transparent drop-shadow-[0_0_6px_rgba(255,200,100,0.75)]">
+                <h2 className="text-2xl font-arcade font-bold uppercase tracking-wider">
+                  <span className="bg-gradient-to-r from-orange-700 via-orange-600 to-yellow-500 bg-clip-text text-transparent">
                     Battle Royale
                   </span>
                 </h2>
@@ -114,8 +114,8 @@ const Index = () => {
                 />
               </div>
               <div className="space-y-3">
-                <h2 className="text-xl sm:text-2xl font-arcade font-bold uppercase tracking-wider">
-                  <span className="bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-400 bg-clip-text text-transparent drop-shadow-[0_0_6px_rgba(255,200,100,0.75)]">
+                <h2 className="text-2xl font-arcade font-bold uppercase tracking-wider">
+                  <span className="bg-gradient-to-r from-orange-700 via-orange-600 to-yellow-500 bg-clip-text text-transparent">
                     Bridges
                   </span>
                 </h2>
@@ -148,8 +148,8 @@ const Index = () => {
                 />
               </div>
               <div className="space-y-3">
-                <h2 className="text-xl sm:text-2xl font-arcade font-bold uppercase tracking-wider">
-                  <span className="bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-400 bg-clip-text text-transparent drop-shadow-[0_0_6px_rgba(255,200,100,0.75)]">
+                <h2 className="text-2xl font-arcade font-bold uppercase tracking-wider">
+                  <span className="bg-gradient-to-r from-orange-700 via-orange-600 to-yellow-500 bg-clip-text text-transparent">
                     Truth or Dare
                   </span>
                 </h2>
@@ -179,8 +179,8 @@ const Index = () => {
                   />
                 </div>
                 <div className="space-y-3">
-                  <h2 className="text-xl sm:text-2xl font-arcade font-bold uppercase tracking-wider">
-                    <span className="bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-400 bg-clip-text text-transparent drop-shadow-[0_0_6px_rgba(255,200,100,0.75)]">
+                  <h2 className="text-2xl font-arcade font-bold uppercase tracking-wider">
+                    <span className="bg-gradient-to-r from-orange-700 via-orange-600 to-yellow-500 bg-clip-text text-transparent">
                       Wavelength
                     </span>
                   </h2>
@@ -208,8 +208,8 @@ const Index = () => {
                   />
                 </div>
                 <div className="space-y-3">
-                  <h2 className="text-xl sm:text-2xl font-arcade font-bold uppercase tracking-wider">
-                    <span className="bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-400 bg-clip-text text-transparent drop-shadow-[0_0_6px_rgba(255,200,100,0.75)]">
+                  <h2 className="text-2xl font-arcade font-bold uppercase tracking-wider">
+                    <span className="bg-gradient-to-r from-orange-700 via-orange-600 to-yellow-500 bg-clip-text text-transparent">
                       IN OTHER WORDS
                     </span>
                   </h2>
@@ -238,8 +238,8 @@ const Index = () => {
                   />
                 </div>
                 <div className="space-y-3">
-                  <h2 className="text-xl sm:text-2xl font-arcade font-bold uppercase tracking-wider">
-                    <span className="bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-400 bg-clip-text text-transparent drop-shadow-[0_0_6px_rgba(255,200,100,0.75)]">
+                  <h2 className="text-2xl font-arcade font-bold uppercase tracking-wider">
+                    <span className="bg-gradient-to-r from-orange-700 via-orange-600 to-yellow-500 bg-clip-text text-transparent">
                       KING'S CUP
                     </span>
                   </h2>
