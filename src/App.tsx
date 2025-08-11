@@ -12,6 +12,7 @@ import BattleRoyale from "@/pages/BattleRoyale";
 import InOtherWords from "@/pages/iow";
 import KingsCup from "@/pages/kingscup";
 import FibbageGame from "./pages/fibbage";
+import TermsConditions from "@/pages/termsconditions";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +32,7 @@ const App = () => (
           <Route path="/kingscup" element={<KingsCup />} />
           {/* <Route path="/fibbage" element={<FibbageGame />} /> */}
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="/termsconditions" element={<TermsConditions />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
