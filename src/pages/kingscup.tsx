@@ -19,18 +19,18 @@ interface PlayingCard {
 }
 
 const RULES: Record<Rank, { title: string; prompt: string }> = {
-  A: { title: "Ace — Waterfall", prompt: "Everyone drinks. Start together; you can stop only when the person before you stops." },
-  "2": { title: "Two — You", prompt: "Point at someone. They drink." },
-  "3": { title: "Three — Me", prompt: "You drink." },
-  "4": { title: "Four — Floor", prompt: "Last to touch the floor drinks." },
-  "5": { title: "Five — Guys", prompt: "All guys drink." },
-  "6": { title: "Six — Chicks", prompt: "All girls drink." },
-  "7": { title: "Seven — Heaven", prompt: "Last to raise a hand drinks." },
-  "8": { title: "Eight — Mate", prompt: "Pick a mate. Whenever you drink, your mate drinks for the rest of the game." },
-  "9": { title: "Nine — Rhyme", prompt: "Say a word. Go around rhyming it. First to fail or repeat drinks." },
-  "10": { title: "Ten — Categories", prompt: "Pick a category (e.g., fruits). Go around naming items. First to fail drinks." },
-  J: { title: "Jack — Never Have I Ever", prompt: "Say something you’ve never done. Anyone who has done it drinks." },
-  Q: { title: "Queen — Question Master", prompt: "Until the next Queen, anyone who answers your question must drink. (Don’t answer the QM!)" },
+  A: { title: "Ace — Waterfall", prompt: "Everyone takes a penalty. Start together; you can stop only when the person before you stops." },
+  "2": { title: "Two — You", prompt: "Point at someone. They take a penalty." },
+  "3": { title: "Three — Me", prompt: "You take a penalty." },
+  "4": { title: "Four — Floor", prompt: "Last to touch the floor takes a penalty." },
+  "5": { title: "Five — Guys", prompt: "All guys take a penalty." },
+  "6": { title: "Six — Chicks", prompt: "All girls take a penalty." },
+  "7": { title: "Seven — Heaven", prompt: "Last to raise a hand takes a penalty." },
+  "8": { title: "Eight — Mate", prompt: "Pick a mate. Whenever you take a penalty, your mate takes a penalty for the rest of the game." },
+  "9": { title: "Nine — Rhyme", prompt: "Say a word. Go around rhyming it. First to fail or repeat takes a penalty." },
+  "10": { title: "Ten — Categories", prompt: "Pick a category (e.g., fruits). Go around naming items. First to fail takes a penalty." },
+  J: { title: "Jack — Never Have I Ever", prompt: "Say something you’ve never done. Anyone who has done it takes a penalty." },
+  Q: { title: "Queen — Question Master", prompt: "Until the next Queen, anyone who answers your question must take a penalty. (Don’t answer the QM!)" },
   K: { title: "King — King’s Cup", prompt: "Pour a bit of your drink into the King’s Cup. Whoever draws the 4th King drinks the cup and the game ends." },
 };
 
