@@ -435,55 +435,55 @@ const BattleRoyale = () => {
           </Card>
         )}
 
-        {stage === "category" && (
-          <Card className="p-6 bg-gradient-surface space-y-4 min-h-[300px]">
-            <h2 className=" text-xl font-pixel bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">
-              Choose a Category
-            </h2>
+       {stage === "category" && (
+  <Card className="p-6 bg-gradient-surface space-y-4">
+    <h2 className="text-xl font-pixel bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">
+      Choose a Category
+    </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <Button
-                onClick={() => startNewGame("classic")}
-                className="w-full text-[11px] sm:text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-2 sm:py-3"
-              >
-                Classic
-              </Button>
+    {/* Category buttons */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <Button
+        onClick={() => startNewGame("classic")}
+        className="w-full text-[11px] sm:text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-2 sm:py-3 whitespace-normal break-words text-center leading-tight"
+      >
+        Classic
+      </Button>
 
-              <Button
-                onClick={() => startNewGame("chaotic")}
-                className="w-full text-[11px] sm:text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-2 sm:py-3"
-              >
-              CHAOTIC (18+)
-              </Button>
+      <Button
+        onClick={() => startNewGame("chaotic")}
+        className="w-full text-[11px] sm:text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-2 sm:py-3 whitespace-normal break-words text-center leading-tight"
+      >
+        CHAOTIC (18+)
+      </Button>
 
-              <Button
-                onClick={() => startNewGame("boysnight")}
-                className="w-full text-[11px] sm:text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-2 sm:py-3"
-              >
-                Boy&apos;s Night (18+)
-              </Button>
+      <Button
+        onClick={() => startNewGame("boysnight")}
+        className="w-full text-[11px] sm:text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-2 sm:py-3 whitespace-normal break-words text-center leading-tight"
+      >
+        Boy&apos;s Night (18+)
+      </Button>
 
-               <Button
-                onClick={() => startNewGame("girlsnight")}
-                className="w-full text-[11px] sm:text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-2 sm:py-3"
-              >
-                Girl&apos;s Night (18+)
-              </Button>
+      <Button
+        onClick={() => startNewGame("girlsnight")}
+        className="w-full text-[11px] sm:text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-2 sm:py-3 whitespace-normal break-words text-center leading-tight"
+      >
+        Girl&apos;s Night (18+)
+      </Button>
+    </div>
 
-              
-            </div>
-
-            <div className="flex justify-between pt-2">
-              <Button
-                onClick={() => setStage("players")}
-                className="text-[11px] sm:text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 px-3 flex items-center gap-2"
-              >
-                <ArrowLeft className="w-4 h-4" />
-                Back
-              </Button>
-            </div>
-          </Card>
-        )}
+    {/* Footer actions */}
+    <div className="flex justify-between pt-2">
+      <Button
+        onClick={() => setStage("players")}
+        className="text-[11px] sm:text-xs font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-1 px-3 flex items-center gap-2"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        Back
+      </Button>
+    </div>
+  </Card>
+)}
 
         {stage === "playing" && (
           <Card className="p-6 bg-gradient-surface text-center space-y-4">
