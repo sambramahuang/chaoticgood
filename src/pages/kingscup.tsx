@@ -147,7 +147,7 @@ const kingscup = () => {
                     className={`h-3 w-3 sm:h-4 sm:w-4 ${i < kingsDrawn ? "text-yellow-300" : "text-white/30"}`}
                   />
                 ))}
-                <span className="ml-1 font-arcade">{kingsDrawn}/4</span>
+                {/* <span className="ml-1 font-arcade">{kingsDrawn}/4</span> */}
               </div>
             </div>
           </div>
