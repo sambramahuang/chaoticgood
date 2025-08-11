@@ -63,7 +63,7 @@ type Stage = "settings" | "turnIntro" | "playing" | "turnSummary" | "roundEnd" |
       teamBName: "Team B",
       timerSeconds: 60,
       allowSkips: true,
-      selectedCategories: ["internetSlang" as CategoryKey],
+      selectedCategories: ["general" as CategoryKey],
       cardCount: 40,
     };
   });
@@ -147,7 +147,7 @@ const handleEndGame = () => {
     teamBName: "Team B",
     timerSeconds: 60,
     allowSkips: true,
-    selectedCategories: ["internetSlang" as CategoryKey],
+    selectedCategories: ["general" as CategoryKey],
     cardCount: 40,
   });
   setStage("settings");

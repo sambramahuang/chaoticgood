@@ -209,6 +209,35 @@ const Index = () => {
               </div>
           </Card>
 
+          <Card className="retro-button bg-gradient-to-b from-black via-black to-orange-900 border-2 border-orange-500 shadow-orange-500 p-8 hover:shadow-orange-500 transition-all duration-200 hover:scale-105 cursor-pointer group relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="text-center space-y-6 relative z-10" onClick={() => navigate("/kingscup")}>
+                <div className="w-20 h-20 bg-orange-900 border-2 border-orange-500 flex items-center justify-center mx-auto group-hover:animate-pulse">
+                  <img 
+                    src="/kingscup.png" 
+                    alt="kings cup icon" 
+                    className="w-12 h-12 mx-auto"
+                  />
+                </div>
+                <div className="space-y-3">
+                  <h2 className="text-2xl font-arcade font-bold uppercase tracking-wider">
+                    <span className="bg-gradient-to-r from-yellow-200 via-orange-400 to-orange-300 bg-clip-text text-transparent">
+                      KING'S CUP
+                    </span>
+                  </h2>
+                  <p className="font-pixel text-[10px] leading-relaxed bg-gradient-to-r from-orange-300 via-yellow-200 to-orange-400 bg-clip-text text-transparent">
+Draw a card, follow the rule, and watch the night spiral into hilarious chaos.                  </p>
+                </div>
+                <Button
+                  variant="gaming"
+                  size="lg"
+                  className="retro-button border-2 border-orange-400 bg-orange-500 text-black hover:bg-orange-600 hover:text-white font-pixel text-xs drop-shadow-[0_0_10px_#fb923c] hover:drop-shadow-[0_0_10px_#fb923c]"
+                >
+                  START
+                </Button>
+              </div>
+          </Card>
+
 
           {/* Fibbage Card */}
           {/* <Card className="retro-button bg-gradient-to-b from-black via-black to-orange-900 border-2 border-orange-500 shadow-orange-500 p-8 hover:shadow-orange-500 transition-all duration-200 hover:scale-105 cursor-pointer group relative overflow-hidden">
