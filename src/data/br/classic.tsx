@@ -89,7 +89,7 @@ export const regularPrompts: string[] = [
 ];
 
 export const circleNamingGames: string[] = [
-  "Farm animals if you repeat or think of one take a penalty _ starts.",
+  "Name farm animals if you repeat or can't think of one take a penalty _ starts.",
   "Name things that last a minute, if you repeat or can't think of one take a penalty. _ starts.",
   "Everybody name redflags, the first person who repeats or can't think of one takes 4 penalities, _ you start.",
   "Everybody name turnoffs, the first person who repeats or can't think of one takes 4 penalities, _ you start.",

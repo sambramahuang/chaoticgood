@@ -155,7 +155,7 @@ const TermsConditions = () => {
                 12. Contact
               </h2>
               <p className="font-sans text-[11px] sm:text-xs text-white">
-                Questions about these Terms? Contact us at: support@example.com
+                Questions about these Terms? Contact us at: playchaoticgood@gmail.com
               </p>
             </section>
           </div>
