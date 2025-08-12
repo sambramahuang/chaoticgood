@@ -2,7 +2,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowLeft, RefreshCw } from "lucide-react";
+import { ArrowLeft, ChevronRight, RefreshCw } from "lucide-react";
 
 const MAX_PLAYERS = 18;
 const MIN_PLAYERS = 2;
@@ -31,6 +31,43 @@ const loaders: Record<CategoryKey, () => Promise<PromptModule>> = {
   boysnight: () => import("@/data/br/boysnight") as unknown as Promise<PromptModule>,
   chaotic: () => import("@/data/br/chaotic") as unknown as Promise<PromptModule>,
   girlsnight: () => import("@/data/br/girlsnight") as unknown as Promise<PromptModule>
+};
+
+const categoryMeta: Record<CategoryKey, {
+  title: string;
+  desc: string;
+  adult?: boolean;
+  iconSrc?: string;   // use if you have assets
+  iconEmoji?: string; // fallback if no asset
+}> = {
+  classic: {
+    title: "CLASSIC",
+    desc: "Classic Prompts.",
+    adult: false,
+    iconSrc: "/icons/classic.png",
+    iconEmoji: "⭐️",
+  },
+  chaotic: {
+    title: "CHAOTIC",
+    desc: "EVEN MORE CHAOTIC PROMPTS. NSFW.",
+    adult: true,
+    iconSrc: "/icons/mixed2.png",
+    iconEmoji: "🤯",
+  },
+  boysnight: {
+    title: "BOY'S NIGHT",
+    desc: "For the bros, crazy questions, dares & chaos.",
+    adult: true,
+    iconSrc: "/icons/boys.png",
+    iconEmoji: "🧏🏻‍♂️",
+  },
+  girlsnight: {
+    title: "GIRL'S NIGHT",
+    desc: "Spicy prompts for the girls.",
+    adult: true,
+    iconSrc: "/icons/girls.png",
+    iconEmoji: "💃🏻",
+  },
 };
 
 const BattleRoyale = () => {
@@ -441,36 +478,55 @@ const BattleRoyale = () => {
       Choose a Category
     </h2>
 
-    {/* Category buttons */}
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-      <Button
-        onClick={() => startNewGame("classic")}
-        className="w-full text-[11px] sm:text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-2 sm:py-3 whitespace-normal break-words text-center leading-tight"
-      >
-        Classic
-      </Button>
+   {/* Category list – compact horizontal retro cards */}
+{/* Category list – compact horizontal retro cards */}
+<div className="space-y-3">
+  {Object.entries(categoryMeta).map(([key, c]) => (
+    <button
+      key={key}
+      onClick={() => startNewGame(key as CategoryKey)}
+      className="w-full rounded-xl border-2 border-orange-500 bg-gradient-to-b from-black via-black to-orange-900
+                 hover:shadow-orange-500 transition-all duration-200 hover:scale-[1.01]
+                 cursor-pointer group relative overflow-hidden text-left"
+    >
+      <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-transparent opacity-0
+                      group-hover:opacity-100 transition-opacity duration-300" />
 
-      <Button
-        onClick={() => startNewGame("chaotic")}
-        className="w-full text-[11px] sm:text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-2 sm:py-3 whitespace-normal break-words text-center leading-tight"
-      >
-        CHAOTIC (18+)
-      </Button>
+      {/* ROW CONTAINER (icon + text + chevron) */}
+      <div className="relative z-10 p-3 sm:p-4 flex items-center gap-3">
+        {/* Icon box */}
+        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded bg-orange-900 border-2 border-orange-500
+                        flex items-center justify-center shrink-0 group-hover:animate-pulse">
+          <span className="text-2xl" aria-hidden>{c.iconEmoji}</span>
+        </div>
 
-      <Button
-        onClick={() => startNewGame("boysnight")}
-        className="w-full text-[11px] sm:text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-2 sm:py-3 whitespace-normal break-words text-center leading-tight"
-      >
-        Boy&apos;s Night (18+)
-      </Button>
+        {/* Text */}
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-2">
+            <h3 className="truncate text-sm sm:text-base font-arcade uppercase tracking-wider">
+              <span className="bg-gradient-to-r from-orange-700 via-orange-600 to-yellow-500 bg-clip-text text-transparent">
+                {c.title}
+              </span>
+            </h3>
+            {c.adult && (
+              <span className="inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-bold
+                               bg-yellow-400 text-black shrink-0">
+                18+
+              </span>
+            )}
+          </div>
+          <p className="mt-0.5 font-pixel text-[10px] sm:text-xs leading-snug
+                        bg-gradient-to-r from-orange-300 via-yellow-200 to-orange-400 bg-clip-text text-transparent line-clamp-2">
+            {c.desc}
+          </p>
+        </div>
 
-      <Button
-        onClick={() => startNewGame("girlsnight")}
-        className="w-full text-[11px] sm:text-sm font-pixel text-white bg-orange-600 hover:bg-orange-400 rounded py-2 sm:py-3 whitespace-normal break-words text-center leading-tight"
-      >
-        Girl&apos;s Night (18+)
-      </Button>
-    </div>
+        {/* Chevron (optional) */}
+        <ChevronRight className="h-5 w-5 opacity-70 group-hover:opacity-100 shrink-0" />
+      </div>
+    </button>
+  ))}
+</div>
 
     {/* Footer actions */}
     <div className="flex justify-between pt-2">
