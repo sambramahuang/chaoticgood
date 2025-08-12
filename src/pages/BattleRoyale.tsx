@@ -74,7 +74,7 @@ const categoryMeta: Record<CategoryKey, {
     title: "TWO PLAYERS",
     desc: "Prompts for exactly two players: 5‑Second Rule, mini‑dares, and curses.",
     adult: true,
-    iconSrc: "/icons/two.png",
+    iconSrc: "/2player.png",
     iconEmoji: "👥",
   },
 };
