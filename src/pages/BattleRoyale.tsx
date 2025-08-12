@@ -47,28 +47,27 @@ const categoryMeta: Record<CategoryKey, {
     title: "CLASSIC",
     desc: "Classic Prompts.",
     adult: false,
-    iconSrc: "/icons/classic.png",
+    iconSrc: "/classic.png",
     iconEmoji: "⭐️",
   },
   chaotic: {
     title: "CHAOTIC",
     desc: "EVEN MORE CHAOTIC PROMPTS. NSFW.",
     adult: true,
-    iconSrc: "/icons/mixed2.png",
+    iconSrc: "/chaotic2.png",
     iconEmoji: "🤯",
   },
   boysnight: {
     title: "BOY'S NIGHT",
     desc: "For the bros, crazy questions, dares & chaos.",
     adult: true,
-    iconSrc: "/icons/boys.png",
-    iconEmoji: "🧏🏻‍♂️",
+    iconSrc: "/boysnight.png",
   },
   girlsnight: {
     title: "GIRL'S NIGHT",
     desc: "Spicy prompts for the girls.",
     adult: true,
-    iconSrc: "/icons/girls.png",
+    iconSrc: "/girlsnight.png",
     iconEmoji: "💃🏻",
   },
   twoplayers: {
@@ -523,7 +522,11 @@ const BattleRoyale = () => {
         {/* Icon box */}
         <div className="w-12 h-12 sm:w-14 sm:h-14 rounded bg-orange-900 border-2 border-orange-500
                         flex items-center justify-center shrink-0 group-hover:animate-pulse">
-          <span className="text-2xl" aria-hidden>{c.iconEmoji}</span>
+          {c.iconSrc ? (
+            <img src={c.iconSrc} alt={`${c.title} icon`} className="w-full h-full object-contain" />
+          ) : (
+            <span className="text-2xl" aria-hidden>{c.iconEmoji}</span>
+          )}
         </div>
 
         {/* Text */}
