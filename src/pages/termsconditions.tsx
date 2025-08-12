@@ -152,7 +152,7 @@ const TermsConditions = () => {
             {/* Privacy Policy */}
 <section>
   <h2 className="font-sans text-sm sm:text-base font-semibold bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">
-    13. Privacy Policy
+    12. Privacy Policy
   </h2>
   <p className="font-sans text-[11px] sm:text-xs text-white mb-2">
     We respect your privacy and are committed to protecting your personal information. 
@@ -203,7 +203,7 @@ const TermsConditions = () => {
             {/* Contact */}
             <section>
               <h2 className="font-sans text-sm sm:text-base font-semibold bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">
-                12. Contact
+                13. Contact
               </h2>
               <p className="font-sans text-[11px] sm:text-xs text-white">
                 Questions about these Terms? Contact us at: playchaoticgood@gmail.com
