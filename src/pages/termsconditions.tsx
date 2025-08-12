@@ -22,7 +22,7 @@ const TermsConditions = () => {
             <ArrowLeft className="h-5 w-5 text-black" />
           </Button>
           <h1 className="justify-self-center font-arcade text-xl sm:text-2xl text-center bg-clip-text text-transparent bg-gradient-to-r from-orange-400 via-yellow-300 to-orange-400 drop-shadow-[0_0_6px_rgba(255,200,100,0.9)]">
-            TERMS & CONDITIONS
+            TERMS AND CONDITIONS
           </h1>
           <div className="justify-self-end" />
         </div>
@@ -149,13 +149,64 @@ const TermsConditions = () => {
               </p>
             </section>
 
+            {/* Privacy Policy */}
+<section>
+  <h2 className="font-sans text-sm sm:text-base font-semibold bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">
+    13. Privacy Policy
+  </h2>
+  <p className="font-sans text-[11px] sm:text-xs text-white mb-2">
+    We respect your privacy and are committed to protecting your personal information. 
+    This Privacy Policy explains how we collect, use, and share information when you use the Service.
+  </p>
+
+  <ul className="list-disc pl-5 space-y-1 font-sans text-[11px] sm:text-xs text-white">
+    <li>
+      <span className="font-semibold">Information We Collect:</span> We may collect information you provide 
+      directly (e.g., email, username, payment details for premium features) and information collected 
+      automatically (e.g., device type, IP address, app usage statistics) via cookies or analytics tools.
+    </li>
+    <li>
+      <span className="font-semibold">Use of Information:</span> To operate and improve the Service, 
+      process transactions, provide customer support, personalize your experience, and ensure compliance 
+      with applicable laws.
+    </li>
+    <li>
+      <span className="font-semibold">Payments:</span> If you make purchases, payment processing is handled 
+      by secure third-party providers (e.g., Stripe). We do not store full credit/debit card information.
+    </li>
+    <li>
+      <span className="font-semibold">Third-Party Services:</span> We may use analytics and advertising 
+      services (e.g., Google Analytics, AdMob) to understand usage and deliver relevant ads. These 
+      third parties may collect data in accordance with their own privacy policies.
+    </li>
+    <li>
+      <span className="font-semibold">Data Sharing:</span> We do not sell your personal data. We may share 
+      information with trusted service providers who assist in operating the Service, or if required by 
+      law or to protect our rights and safety.
+    </li>
+    <li>
+      <span className="font-semibold">Data Retention:</span> We retain your data only as long as necessary 
+      to fulfill the purposes outlined here, unless a longer retention period is required by law.
+    </li>
+    <li>
+      <span className="font-semibold">Your Rights:</span> You may request access, correction, or deletion 
+      of your personal data by contacting us at the email below.
+    </li>
+  </ul>
+
+  <p className="font-sans text-[11px] sm:text-xs text-white mt-2">
+    By using the Service, you consent to this Privacy Policy. We may update it from time to time, and 
+    changes will be posted here with the updated date.
+  </p>
+</section>
+
             {/* Contact */}
             <section>
               <h2 className="font-sans text-sm sm:text-base font-semibold bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent drop-shadow-[0_0_4px_rgba(255,200,100,0.6)]">
                 12. Contact
               </h2>
               <p className="font-sans text-[11px] sm:text-xs text-white">
-                Questions about these Terms? Contact us at: support@example.com
+                Questions about these Terms? Contact us at: playchaoticgood@gmail.com
               </p>
             </section>
           </div>
