@@ -9,7 +9,7 @@ const MIN_PLAYERS = 2;
 const MAX_TURNS = 50; // end after 50 normal prompts (turns)
 
 type Stage = "players" | "category" | "playing";
-type CategoryKey = "classic" |  "chaotic" | "boysnight" | "girlsnight" ; // extend with new categories
+type CategoryKey = "classic" |  "chaotic" | "boysnight" | "girlsnight" | "twoplayers" ; // extend with new categories
 
 export interface VirusEffect {
   prompt: string;
@@ -17,20 +17,23 @@ export interface VirusEffect {
 }
 
 type PromptModule = {
-  regularPrompts: string[];
-  circleNamingGames: string[];
-  memoryChainGames: string[];
-  charadeActionJokeGames: string[];
-  splitTheRoomQuestions: string[];
-  bets: string[];
+  regularPrompts?: string[];
+  circleNamingGames?: string[];
+  memoryChainGames?: string[];
+  charadeActionJokeGames?: string[];
+  splitTheRoomQuestions?: string[];
+  bets?: string[];
+  fiveSecondRulePrompts?: string[]; // optional for special packs like two-player
   virusEffects: VirusEffect[];
+  curseLifteds?: string[]; // lines shown when a curse ends
 };
 
 const loaders: Record<CategoryKey, () => Promise<PromptModule>> = {
   classic: () => import("@/data/br/classic") as unknown as Promise<PromptModule>,
   boysnight: () => import("@/data/br/boysnight") as unknown as Promise<PromptModule>,
   chaotic: () => import("@/data/br/chaotic") as unknown as Promise<PromptModule>,
-  girlsnight: () => import("@/data/br/girlsnight") as unknown as Promise<PromptModule>
+  girlsnight: () => import("@/data/br/girlsnight") as unknown as Promise<PromptModule>,
+  twoplayers: () => import("@/data/br/twoplayer") as unknown as Promise<PromptModule>,
 };
 
 const categoryMeta: Record<CategoryKey, {
@@ -67,6 +70,13 @@ const categoryMeta: Record<CategoryKey, {
     adult: true,
     iconSrc: "/icons/girls.png",
     iconEmoji: "💃🏻",
+  },
+  twoplayers: {
+    title: "TWO PLAYERS",
+    desc: "Prompts for exactly two players: 5‑Second Rule, mini‑dares, and curses.",
+    adult: true,
+    iconSrc: "/icons/two.png",
+    iconEmoji: "👥",
   },
 };
 
@@ -105,6 +115,9 @@ const BattleRoyale = () => {
   const [virusesStarted, setVirusesStarted] = useState(0);
   const [usedVirusIds, setUsedVirusIds] = useState<Set<number>>(new Set());
 
+  // Track the active virus index
+  const [activeVirusIndex, setActiveVirusIndex] = useState<number | null>(null);
+
   // Prompt history for back/forward
   const [history, setHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState<number>(-1); // -1 == nothing yet
@@ -119,13 +132,21 @@ const BattleRoyale = () => {
   // Combine prompts from the loaded pack
   const allPrompts = useMemo(() => {
     if (!pack) return [];
+    const regular = pack.regularPrompts ?? [];
+    const circle = pack.circleNamingGames ?? [];
+    const memory = pack.memoryChainGames ?? [];
+    const charades = pack.charadeActionJokeGames ?? [];
+    const split = pack.splitTheRoomQuestions ?? [];
+    const bets = pack.bets ?? [];
+    const fiveSec = pack.fiveSecondRulePrompts ?? [];
     return [
-      ...pack.regularPrompts,
-      ...pack.circleNamingGames,
-      ...pack.memoryChainGames,
-      ...pack.charadeActionJokeGames,
-      ...pack.splitTheRoomQuestions,
-      ...pack.bets,
+      ...regular,
+      ...circle,
+      ...memory,
+      ...charades,
+      ...split,
+      ...bets,
+      ...fiveSec,
     ];
   }, [pack]);
 
@@ -305,6 +326,7 @@ const BattleRoyale = () => {
     setVirusShown(0);
     setVirusesStarted((n) => n + 1);
     setUsedVirusIds((s) => new Set(s).add(idx));
+    setActiveVirusIndex(idx);
 
     // Immediately show the virus prompt (does NOT consume a normal turn)
     const virusText = `CURSE!: ${injectVirusTextWithOwner(
@@ -335,9 +357,13 @@ const BattleRoyale = () => {
 
     // End active virus (does not consume a normal turn)
     if (activeVirus && virusShown >= virusRounds) {
-      const endText = 'CURSE LIFTED!: ' + injectVirusText(activeVirus.activation);
+      const liftedTemplate = (activeVirusIndex !== null && pack.curseLifteds)
+        ? pack.curseLifteds[activeVirusIndex] || "_ is free from the curse."
+        : "_ is free from the curse.";
+      const endText = 'CURSE LIFTED!: ' + injectVirusText(liftedTemplate);
       pushToHistory(endText);
       setActiveVirus(null);
+      setActiveVirusIndex(null);
       return;
     }
 
